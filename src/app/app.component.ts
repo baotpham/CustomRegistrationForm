@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  title = 'CVCF Youth Retreat 2018 Registration Form';
+
+  constructor(){
+
+  }
 }
