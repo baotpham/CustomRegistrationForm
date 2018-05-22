@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
+@import "~bootflat/bootflat/scss/bootflat"; 
+
+.page-border{
+    @extend .offset-md-3;
+    @extend .col-md-6;
+}
