@@ -1,0 +1,72 @@
+<!-- Attendee Forms -->
+
+<div class="page-border">
+  <div class="form-control">
+    <form #attendeeForm="ngForm" name="attendee_info" id="attendee_info">
+      <div class="FormRow">
+        <div class="MediumFormFieldContainer">
+          <label class="control-label" for="first_name">First Name</label>
+          <input class="form-control" type="text" placeholder="Enter Your First Name" name="first_name" required
+          [(ngModel)]="model.first_name" id="first_name">
+        </div>
+        <div class="MediumFormFieldContainer">
+          <label class="control-label" for="last_name">Last Name</label>
+          <input class="form-control" type="text" placeholder="Enter Your Last Name" name="last_name" required
+          [(ngModel)]="model.last_name" id="last_name">
+        </div>
+      </div>
+      <div class="FormRow">
+        <div class="SmallFormFieldContainer">
+          <label class="control-label" for="t_shirt">T-Shirt Size</label>
+          <select class="form-control" type="text" placeholder="T-Shirt Size" name="t_shirt" id="t_shirt" required
+          [(ngModel)]="model.t_shirt" id="t_shirt">
+            <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
+          </select>
+        </div>
+        <div class="SmallFormFieldContainer">
+          <label class="control-label" for="gender">Gender</label>
+          <input class="form-control" type="text" placeholder="Apache Attack Helicopter" name="gender" required
+          [(ngModel)]="model.gender" id="gender">
+        </div>
+        <div class="SmallFormFieldContainer">
+          <label class="control-label" for="age">Age</label>
+          <input class="form-control" type="text" placeholder="12" name="age" required
+          [(ngModel)]="model.age" id="age">
+        </div>
+      </div>
+      <div class="FormRow">
+        <div class="FormFieldContainer">
+          <label class="control-label" for="medical">Medical Issues/Allergies</label>
+          <textarea class="form-control" type="text" name="medical" placeholder="N/A" rows="5" required
+          [(ngModel)]="model.medical" id="medical"></textarea>
+        </div>
+      </div>
+      <hr>
+      <div class="FormFieldContainer">
+        <ul class="pagination">
+          <li class="active">
+            <a href="#">PREV</a>
+          </li>
+          <li class="user-entry">
+            <a href="#">1</a>
+          </li>
+          <li class="user-entry active">
+            <a href="#">2</a>
+          </li>
+          <li class="user-entry">
+            <a href="#">3</a>
+          </li>
+          <li class="user-entry">
+            <a href="#">4</a>
+          </li>
+          <li class="active">
+            <a href="#">NEXT</a>
+          </li>
+        </ul>
+      </div>
+      <p>By creating an account you agree to our
+        <a href="#">Terms & Privacy</a>.</p>
+      <button type="submit" class="PrimaryButton">Submit</button>
+    </form>
+  </div>
+</div>
