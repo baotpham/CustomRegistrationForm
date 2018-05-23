@@ -7,6 +7,7 @@ $teal: #3d9991;
 .page-border{
     @extend .offset-md-3;
     @extend .col-md-6;
+    padding-bottom: 40px;
 }
 .FormRow{
     @extend .row;
@@ -27,6 +28,12 @@ $teal: #3d9991;
     @extend .offset-md-5;
     font-weight: bold;
     font-size: x-large;
+}
+.divider{
+    @extend .col-md-8;
+    border-width: 5px;
+    color: $teal;
+    background-color: $teal;
 }
 
 // Buttons
