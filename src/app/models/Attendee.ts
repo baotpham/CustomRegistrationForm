@@ -8,9 +8,6 @@ export class Attendee {
         public age: number,
         public medical: string
     ){ 
-
-
-        let person1 = new Attendee('John','Ha', 'Medium', 'Male', 23, 'N/A');
      }
 
      

@@ -3,6 +3,7 @@
 @import "~bootflat/bootflat/scss/bootflat"; 
 
 $teal: #3d9991;
+$white: #fff;
 
 .page-border{
     @extend .offset-md-3;
@@ -52,8 +53,30 @@ $teal: #3d9991;
     @extend .form-group;
     @extend .col-md-4;
 }
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }
+
 
 //Pagination
+.add-entry{
+    color: $teal;
+    font-size: 4rem; 
+    height: 22px;
+    width: 10px;
+    text-size-adjust: auto;
+}
+.add-entry-box{
+    border-color: $teal;
+    border-spacing: 1px;
+    background-color: $white;
+    padding: -10px -11px -11px -11px;
+}
+
 .pagination>li:first-child>a{
     margin-left: 0;
     border-top-left-radius: 4px;
