@@ -7,6 +7,7 @@ $teal: #3d9991;
 .page-border{
     @extend .offset-md-3;
     @extend .col-md-6;
+    margin-bottom: 25px;
 }
 .FormRow{
     @extend .row;
