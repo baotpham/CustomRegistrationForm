@@ -6,42 +6,39 @@
       <div class="FormRow">
         <div class="MediumFormFieldContainer">
           <label class="control-label" for="first_name">First Name</label>
-          <input class="form-control" type="text" placeholder="Enter Your First Name" name="first_name" required
-          [(ngModel)]="model.first_name" id="first_name" #first_name="ngModel">
-          <div [hidden]="first_name.valid || first_name.pristine" class="alert alert-danger">First Name is required</div> 
+          <input class="form-control" type="text" placeholder="Enter Your First Name" name="first_name" required [(ngModel)]="model.first_name"
+            id="first_name" #first_name="ngModel">
+          <div [hidden]="first_name.valid || first_name.pristine" class="alert alert-danger">First Name is required</div>
         </div>
         <div class="MediumFormFieldContainer">
           <label class="control-label" for="last_name">Last Name</label>
-          <input class="form-control" type="text" placeholder="Enter Your Last Name" name="last_name" required
-          [(ngModel)]="model.last_name" id="last_name">
+          <input class="form-control" type="text" placeholder="Enter Your Last Name" name="last_name" required [(ngModel)]="model.last_name"
+            id="last_name">
         </div>
       </div>
       <div class="FormRow">
         <div class="SmallFormFieldContainer">
           <label class="control-label" for="t_shirt">T-Shirt Size</label>
-          <select class="form-control" name="t_shirt" id="t_shirt" required
-          [(ngModel)]="model.t_shirt" id="t_shirt">
+          <select class="form-control" name="t_shirt" id="t_shirt" required [(ngModel)]="model.t_shirt" id="t_shirt">
             <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
           </select>
         </div>
         <div class="SmallFormFieldContainer">
           <label class="control-label" for="gender">Gender</label>
-          <select class="form-control" name="gender" id="gender" required
-          [(ngModel)]="model.gender" id="gender">
+          <select class="form-control" name="gender" id="gender" required [(ngModel)]="model.gender" id="gender">
             <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
           </select>
         </div>
         <div class="SmallFormFieldContainer">
           <label class="control-label" for="age">Age</label>
-          <input class="form-control" type="text" placeholder="12" name="age" required
-          [(ngModel)]="model.age" id="age">
+          <input class="form-control" type="text" placeholder="12" name="age" required [(ngModel)]="model.age" id="age">
         </div>
       </div>
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="medical">Medical Issues/Allergies</label>
-          <textarea class="form-control" type="text" name="medical" placeholder="N/A" rows="5" required
-          [(ngModel)]="model.medical" id="medical"></textarea>
+          <textarea class="form-control" type="text" name="medical" placeholder="N/A" rows="5" required [(ngModel)]="model.medical"
+            id="medical"></textarea>
         </div>
       </div>
       <hr>
@@ -62,13 +59,11 @@
           <li class="user-entry">
             <a href="#">4</a>
           </li>
-          <li class="add-entry-box">
-              <a href="#">
-                <div class="add-entry">
-                  +
-                </div>
+          <li>
+            <a id="add-entry-box" href="#">
+              <i class="fa fa-plus fa-2x add-entry"></i>
             </a>
-            </li>
+          </li> 
           <li class="active">
             <a href="#">NEXT</a>
           </li>
