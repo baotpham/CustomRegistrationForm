@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Attendee } from '../models/Attendee';
+import { Attendee } from '../Models/Attendee';
 
 @Component({
   selector: 'app-attendee-form',
