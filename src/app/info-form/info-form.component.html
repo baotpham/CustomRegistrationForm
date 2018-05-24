@@ -1,4 +1,6 @@
 <!-- Place everything that's in the form but after the attendee stuff here -->
+<form name="form_info" id="form_info">
+
 <div class="title-container">
     <div class="title">
       Personal Contact
@@ -7,7 +9,7 @@
 
 <div class="page-border">
     <div class="form-control">
-      <form name="attendee_info" id="attendee_info">
+    
         <div class="FormRow">
           <div class="FormFieldContainer">
             <label class="control-label" for="address">Address</label>
@@ -23,43 +25,108 @@
         <div class="FormRow">
           <div class="FormFieldContainer">
             <label class="control-label" for="city">City</label>
-            <input class="form-control" type="text" placeholder="City" name="city" required>
+            <input class="form-control" type="text" placeholder="Enter Your City" name="city" required>
           </div>
         </div>  
         <div class="FormRow">
           <div class="MediumFormFieldContainer">
             <label class="control-label" for="state">State</label>
-            <input class="form-control" type="text" placeholder="State" name="state" required>
+            <input class="form-control" type="text" placeholder="Enter Your State" name="state" required>
           </div>
           <div class="MediumFormFieldContainer">
             <label class="control-label" for="zip">Zip Code</label>
-            <input class="form-control" type="text" placeholder="Zip Code" name="zip" required>
+            <input class="form-control" type="text" placeholder=" Enter Your Zip Code" name="zip" required>
           </div>
         </div>  
         <div class="FormRow">
           <div class="FormFieldContainer">
             <label class="control-label" for="email">Email</label>
-            <input class="form-control" type="text" placeholder="Email" name="email" required>
+            <input class="form-control" type="text" placeholder="Enter Your Email" name="email" required>
           </div>
         </div> 
         <div class="FormRow">
           <div class="FormFieldContainer">
-            <label class="control-label" for="churchname">Your Church</label>
-            <input class="form-control" type="text" placeholder="Church Name" name="churchname" required>
+            <label class="control-label" for="your_church">Your Church</label>
+            <input class="form-control" type="text" placeholder="Enter Your Church Name" name="your_church" required>
           </div>
         </div> 
         <div class="FormRow">
           <div class="FormFieldContainer">
-            <label class="control-label" for="churchcontactname">Your Church Point of Contact Name</label>
-            <input class="form-control" type="text" placeholder="Name" name="churchcontactname" required>
+            <label class="control-label" for="your_church_point_of_contact_name">Your Church Point of Contact Name</label>
+            <input class="form-control" type="text" placeholder="Enter Your Church Point of Contact Name" name="cyour_church_point_of_contact_name" required>
           </div>
         </div> 
         <div class="FormRow">
           <div class="FormFieldContainer">
-            <label class="control-label" for="churchcontactnumber">Your Church Point of Contact Number</label>
-            <input class="form-control" type="text" placeholder="Number" name="churchcontactnumber" required>
+            <label class="control-label" for="your_church_point_of_contact_name_number">Your Church Point of Contact Number</label>
+            <input class="form-control" type="text" placeholder="Enter Your Church Point of Contact Phone Number" name="your_church_point_of_contact_name_number" required>
           </div>
         </div> 
-      </form>
     </div>
 </div>
+
+<div class="title-container">
+  <div class="title">
+    Emergency Contact
+  </div>
+</div>
+
+<div class="page-border">
+  <div class="form-control">
+      <div class="FormRow">
+        <div class="FormFieldContainer">
+          <label class="control-label" for="emergency_contact_first_name">First Name</label>
+          <input class="form-control" type="text" placeholder="Enter First Name" name="emergency_contact_first_name" required>
+        </div>
+        <div class="FormFieldContainer">
+          <label class="control-label" for="emergency_contact_last_name">Last Name</label>
+          <input class="form-control" type="text" placeholder="Enter Last Name" name="emergency_contact_last_name" required>
+        </div>
+      </div>
+      <div class="FormRow">
+        <div class="FormFieldContainer">
+          <label class="control-label" for="emergency_contact_phone_number">Phone Number</label>
+          <input class="form-control" type="text" placeholder="Enter Phone Number" name="emergency_contact_phone_number" required>
+        </div>
+      </div>  
+      <div class="FormRow">
+        <div class="FormFieldContainer">
+          <label class="control-label" for="relationship">Relationship</label>
+          <input class="form-control" type="text" placeholder="Relationship" name="relationship" required>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="title-container">
+  <div class="title">
+    Payment
+  </div>
+</div>
+
+<div class="page-border">
+  <div class="form-control">
+      <div class="FormRow">
+        <div class="FormFieldContainer">
+          <label class="control-label" for="card_number">Card Number</label>
+          <input class="form-control" type="text" placeholder="Enter Card Number" name="card_number" required>
+        </div>
+        <div class="FormFieldContainer">
+          <label class="control-label" for="name_on_card">Name on Card</label>
+          <input class="form-control" type="text" placeholder="Enter Name on Card" name="name_on_card" required>
+        </div>
+      </div>
+      <div class="FormRow">
+        <div class="MediumFormFieldContainer">
+          <label class="control-label" for="expiration_date">Expiration Date</label>
+          <input class="form-control" type="text" placeholder="Enter Expiration Date" name="expiration_date" required>
+        </div>
+      </div>  
+        <div class="MediumFormFieldContainer">
+          <label class="control-label" for="security_code">Security Code</label>
+          <input class="form-control" type="text" placeholder="Relationship" name="security_code" required>
+        </div>
+        
+  </div>
+</div>
+</form>
