@@ -13,7 +13,8 @@
         <div class="MediumFormFieldContainer">
           <label class="control-label" for="last_name">Last Name</label>
           <input class="form-control" type="text" placeholder="Enter Your Last Name" name="last_name" required [(ngModel)]="model.last_name"
-            id="last_name">
+            id="last_name" #last_name="ngModel">
+            <div [hidden]="last_name.valid || last_name.pristine" class="alert alert-danger">Last Name is required</div>
         </div>
       </div>
       <div class="FormRow">
@@ -31,14 +32,16 @@
         </div>
         <div class="SmallFormFieldContainer">
           <label class="control-label" for="age">Age</label>
-          <input class="form-control" type="text" placeholder="12" name="age" required [(ngModel)]="model.age" id="age">
+          <input class="form-control" type="text" placeholder="12" name="age" required [(ngModel)]="model.age" id="age" #age="ngModel">
+          <div [hidden]="age.valid || age.pristine" class="alert alert-danger">Age is required</div>
         </div>
       </div>
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="medical">Medical Issues/Allergies</label>
           <textarea class="form-control" type="text" name="medical" placeholder="N/A" rows="5" required [(ngModel)]="model.medical"
-            id="medical"></textarea>
+            id="medical" #medical="ngModel"></textarea>
+            <div [hidden]="medical.valid || medical.pristine" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div>
         </div>
       </div>
       <hr>
@@ -60,7 +63,7 @@
             <a href="#">4</a>
           </li>
           <li>
-            <a id="add-entry-box" href="#">
+            <a id="add-entry-box" href="#" (click)="addAttendee()" >
               <i class="fa fa-plus fa-2x add-entry"></i>
             </a>
           </li> 
