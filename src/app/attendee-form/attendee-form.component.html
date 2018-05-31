@@ -51,7 +51,7 @@
           </li>
           <li class="user-entry" *ngFor="let item of forms; let i = index" ng-init="isActive = false"
           ng-click="isActive = !isActive">
-              <a href="#">{{i}}</a>
+              <a href="#">{{i+1}}</a>
           </li>
           <li>
             <a id="add-entry-box" href="#" (click)="addAttendee()" >
