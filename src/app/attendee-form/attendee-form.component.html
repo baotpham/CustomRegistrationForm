@@ -49,8 +49,7 @@
           <li class="active">
             <a href="#">PREV</a>
           </li>
-          <li class="user-entry" *ngFor="let item of forms; let i = index" ng-init="isActive = false"
-          ng-click="isActive = !isActive">
+          <li class="user-entry" *ngFor="let person of people; let i = index" [class.active]="person === model" (click)="loadAttendee(person);">
               <a href="#">{{i+1}}</a>
           </li>
           <li>
@@ -65,6 +64,9 @@
       </div>
       <button (click)="partialUpdate()">Partial Update</button>
       <button (click)="fullUpdate()">Full Update</button>
+      <button (click)="check()">Check</button>
+      <button (click)="lazyOne()">Lazy One</button>
+      <button (click)="lazyTwo()">Lazy Two</button>
       <button type="submit" class="PrimaryButton" [disabled]="!attendeeForm.valid">Submit</button>
     </form>
 
