@@ -101,13 +101,15 @@ export class AttendeeFormComponent implements OnInit {
   reset() {
     this.attendeeForm.reset();
   }
-  loadAttendee(attendee: Attendee){
-    this.bind(attendee);
 
-    if(this.onPropertyChanged()){
+  loadAttendee(attendee: Attendee, new_index: number){
 
+    if(this.attendeeForm.valid){
+      this.bind(attendee); //binds model to target values
+      this.bindFromModel(); //updates values to model which is also to target values
     }
-
+    this.index = new_index;
+    
     // console.log("Updating index from " + this.index + " to " + new_index);
     // this.index = new_index;
     // console.log("Updated index to: " + this.index);
@@ -116,10 +118,15 @@ export class AttendeeFormComponent implements OnInit {
     // console.log("Model is: " + this.model);
     // console.log("Updating form to this model.");
 
-
     // this.attendeeForm.setValue({ first_name: this.model.first_name, last_name: this.model.last_name, t_shirt: this.model.t_shirt, 
     //   gender: this.model.gender, age: this.model.age, medical: this.model.medical});
-    this.bindFromModel();
+  }
+
+  deleteAttendee(){
+    console.log("current index is: " + this.index);
+    if(this.index>=0){
+      this.people.splice(this.index, 1);
+    }
   }
 
   check(){
@@ -128,10 +135,6 @@ export class AttendeeFormComponent implements OnInit {
     }
     console.log(this.people.toString);
     console.log(this.people.length);
-  }
-  onPropertyChanged(){
-
-    return true;
   }
 
   bind(attendee: Attendee){

@@ -44,6 +44,12 @@ $red: #a94442;
     border-radius: 30px;
     padding: 6px 24px;
 }
+.DeleteButton {
+    @extend .btn;
+    @extend .btn-danger;
+    border-radius: 30px;
+    padding: 6px 24px;
+}
 
 
 // Form Control

@@ -49,7 +49,7 @@
           <li class="active">
             <a href="#">PREV</a>
           </li>
-          <li class="user-entry" *ngFor="let person of people; let i = index" [class.active]="person === model" (click)="loadAttendee(person);">
+          <li class="user-entry" *ngFor="let person of people; let i = index" [class.active]="person === model" (click)="loadAttendee(person, i);">
               <a href="#">{{i+1}}</a>
           </li>
           <li>
@@ -67,6 +67,8 @@
       <button (click)="check()">Check</button>
       <button (click)="lazyOne()">Lazy One</button>
       <button (click)="lazyTwo()">Lazy Two</button>
+      <button (click)="deleteAttendee()" class="DeleteButton">Delete Attendee</button>
+      <button (click)="saveChanges()" class="PrimaryButton">Save Changes</button>
       <button type="submit" class="PrimaryButton" [disabled]="!attendeeForm.valid">Submit</button>
     </form>
 
