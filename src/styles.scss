@@ -32,7 +32,8 @@ $white: #fff;
 }
 
 // Buttons
-.PrimaryButton {
+.PrimaryButton, .PrimaryButton:disabled,
+.PrimaryButton[disabled] {
     @extend .btn;
     @extend .btn-primary;
     background-color: $teal;
@@ -40,6 +41,7 @@ $white: #fff;
     border-radius: 30px;
     padding: 6px 24px;
 }
+
 
 // Form Control
 .FormFieldContainer{
@@ -94,6 +96,12 @@ $white: #fff;
     border: 1px solid #ddd;
     border-radius: 20px;
     font-size: 16px;
+    border-color: $teal;
+}
+
+.pagination>li>a:hover {
+    color: #fff;
+    background-color: $teal;
     border-color: $teal;
 }
 
