@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Attendee } from '../Models/Attendee';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder, FormsModule } from '@angular/forms';
 
@@ -17,31 +17,17 @@ export class AttendeeFormComponent implements OnInit {
   age = new FormControl("", Validators.required);
   medical = new FormControl("", Validators.required);
 
-  index = 0;
+  max_index = 0;
+  current_index = 0;
   people = [];
   sizes = ['S', 'M', 'L', 'XL', 'XXL'];
   genders = ['Male', 'Female']
   //model = new Attendee('John','Ha', this.sizes[1], 'Male', 23, 'N/A');
   model = new Attendee("", "", "", "", 0, "");
+  currentAttendee: Attendee;
 
   // Makes sure form is binding with model correctly when "{{diagnostic}}" is placed in form.
   // get diagnostic() { return JSON.stringify(this.model); }
-
-  addAttendee() {
-    if (this.attendeeForm.valid) {
-      console.log(this.first_name.value);
-      console.log(this.last_name.value);
-      console.log(this.t_shirt.value);
-      console.log(this.gender.value);
-      console.log(this.age.value);
-      console.log(this.medical.value);
-      this.bindToModel();
-      this.people.push(new Attendee(this.first_name.value, this.last_name.value,this.t_shirt.value,
-        this.gender.value,this.age.value,this.medical.value));
-      console.log("Adding new attendee.");
-      this.attendeeForm.reset();
-    }
-  }
 
   constructor(fb: FormBuilder) {
     this.attendeeForm = fb.group({
@@ -55,89 +41,131 @@ export class AttendeeFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.max_index = 0;
+    this.current_index = 0;
+    this.people.push(new Attendee("", "", "", "", null, ""));
+    this.currentAttendee = this.people[this.current_index];
+    //this.loadAttendee(this.people[this.current_index], this.current_index);
   }
 
-
-  bindToModel(){
-    this.model.first_name = this.first_name.value;
-    this.model.last_name = this.last_name.value;
-    this.model.t_shirt = this.t_shirt.value;
-    this.model.gender = this.gender.value;
-    this.model.age = this.age.value;
-    this.model.medical = this.medical.value;
-  }
-
-  bindFromModel(){
-    this.first_name.setValue(this.model.first_name);
-    this.last_name.setValue(this.model.last_name);
-    this.t_shirt.setValue(this.model.t_shirt);
-    this.gender.setValue(this.model.gender);
-    this.age.setValue(this.model.age);
-    this.medical.setValue(this.model.medical);
-  }
-  
   onSubmit() {
     console.log("model-based form submitted");
     console.log(this.attendeeForm);
   }
 
+
+  //Helper buttons
   fullUpdate() {
-    this.attendeeForm.setValue({ first_name: 'Partial', last_name: 'monkey', t_shirt: 'M', gender: 'Male', 
-      age: 12, medical: 'yes' });
+    this.attendeeForm.setValue({
+      first_name: 'Partial', last_name: 'monkey', t_shirt: 'M', gender: 'Male',
+      age: 12, medical: 'yes'
+    });
   }
   lazyOne() {
-    this.attendeeForm.setValue({ first_name: '1', last_name: '1', t_shirt: 'S', gender: 'Male', 
-      age: 1, medical: '1' });
+    this.attendeeForm.setValue({
+      first_name: '1', last_name: '1', t_shirt: 'S', gender: 'Male',
+      age: 1, medical: '1'
+    });
   }
   lazyTwo() {
-    this.attendeeForm.setValue({ first_name: '2', last_name: '2', t_shirt: 'M', gender: 'Female', 
-      age: 2, medical: '2' });
+    this.attendeeForm.setValue({
+      first_name: '2', last_name: '2', t_shirt: 'M', gender: 'Female',
+      age: 2, medical: '2'
+    });
   }
 
   partialUpdate() {
-    this.attendeeForm.patchValue({ age: this.index});
+    this.attendeeForm.patchValue({ age: this.max_index });
     console.log("hi");
   }
-  reset() {
-    this.attendeeForm.reset();
-  }
 
-  loadAttendee(attendee: Attendee, new_index: number){
-
-    if(this.attendeeForm.valid){
-      this.bind(attendee); //binds model to target values
-      this.bindFromModel(); //updates values to model which is also to target values
-    }
-    this.index = new_index;
-    
-    // console.log("Updating index from " + this.index + " to " + new_index);
-    // this.index = new_index;
-    // console.log("Updated index to: " + this.index);
-
-    // this.model=this.forms[new_index];
-    // console.log("Model is: " + this.model);
-    // console.log("Updating form to this model.");
-
-    // this.attendeeForm.setValue({ first_name: this.model.first_name, last_name: this.model.last_name, t_shirt: this.model.t_shirt, 
-    //   gender: this.model.gender, age: this.model.age, medical: this.model.medical});
-  }
-
-  deleteAttendee(){
-    console.log("current index is: " + this.index);
-    if(this.index>=0){
-      this.people.splice(this.index, 1);
-    }
-  }
-
-  check(){
-    for (let entry of this.people){
+  check() {
+    for (let entry of this.people) {
       console.log(entry);
     }
     console.log(this.people.toString);
     console.log(this.people.length);
   }
 
-  bind(attendee: Attendee){
+
+  //CRUD Options
+  //Add attendee by creating a new attendee and navigating to it.
+  //Previous form must be valid before moving on.
+  //Must show active on new form.
+  addAttendee() {
+    if (this.attendeeForm.valid) {
+      
+      //Save previous form info
+      this.bindFormToList(this.current_index);
+
+      //Once information is saved, then clears the page
+      this.people.push(new Attendee("", "", "", "", null, ""));
+      this.attendeeForm.reset();
+      console.log("Adding new attendee.");
+
+      //Update variables to look at new Attendee
+      this.max_index++;
+      this.current_index = this.max_index;
+      this.currentAttendee = this.people[this.max_index];
+      this.loadAttendee(this.people[this.max_index], this.max_index);
+    }
+  }
+
+  //Must navigate to specific attendee and update active pagination
+  loadAttendee(attendee: Attendee, new_index: number) {
+
+    //Save current attendee before moving on
+    this.bindFormToList(this.current_index);
+
+    //Sets new current attendee for active setting
+    this.currentAttendee = attendee;
+
+    //Pull in target attendee data and put into form
+    this.bindListToForm(new_index); 
+
+    //Updates current index to the attendee we're loading
+    this.current_index = new_index;
+  }
+
+  //Deletes attendee from current list
+  deleteAttendee() {
+    console.log("current index is: " + this.current_index);
+    if (this.current_index >= 0) {
+      this.people.splice(this.current_index, 1);
+    }
+  }
+
+  //Binding
+  //Updates the list's values with the contents of the form
+  bindFormToList(index: number) {
+    // console.log(this.first_name.value);
+    // console.log(this.people[index].first_name);
+    // console.log(this.last_name.value);
+    // console.log(this.people[index].last_name);
+    // console.log(this.t_shirt.value);
+    // console.log(this.people[index].t_shirt);
+    // console.log(this.gender.value);
+    // console.log(this.people[index].gender);
+    this.people[index].first_name = this.first_name.value;
+    this.people[index].last_name = this.last_name.value;
+    this.people[index].t_shirt = this.t_shirt.value;
+    this.people[index].gender = this.gender.value;
+    this.people[index].age = this.age.value;
+    this.people[index].medical = this.medical.value;
+  }
+
+  //Updates the form's values with the contents from the list
+  bindListToForm(index: number) {
+    this.first_name.setValue(this.people[index].first_name);
+    this.last_name.setValue(this.people[index].last_name);
+    this.t_shirt.setValue(this.people[index].t_shirt);
+    this.gender.setValue(this.people[index].gender);
+    this.age.setValue(this.people[index].age);
+    this.medical.setValue(this.people[index].medical);
+  }
+
+  //updates malleable model to target attendee info
+  bindToTarget(attendee: Attendee) {
     this.model.first_name = attendee.first_name;
     this.model.last_name = attendee.last_name;
     this.model.t_shirt = attendee.t_shirt;
