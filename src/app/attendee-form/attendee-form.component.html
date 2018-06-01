@@ -63,12 +63,12 @@
           </li>
         </ul>
       </div>
-      <button (click)="partialUpdate()">Partial Update</button>
-      <button (click)="fullUpdate()">Full Update</button>
-      <button (click)="check()">Check</button>
-      <button (click)="lazyOne()">Lazy One</button>
-      <button (click)="lazyTwo()">Lazy Two</button>
-      <button (click)="deleteAttendee()" class="DeleteButton">Delete Attendee</button>
+      <button type="button" (click)="partialUpdate()">Partial Update</button>
+      <button type="button" (click)="fullUpdate()">Full Update</button>
+      <button type="button" (click)="check()">Check</button>
+      <button type="button" (click)="lazyOne()">Lazy One</button>
+      <button type="button" (click)="lazyTwo()">Lazy Two</button>
+      <button type="button" (click)="deleteAttendee()" class="DeleteButton">Delete Attendee</button>
       <button type="submit" class="PrimaryButton" [disabled]="!attendeeForm.valid">Submit</button>
     </form>
 
