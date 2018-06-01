@@ -2,7 +2,77 @@
 
 <div class="page-border">
   <div class="form-control">
-    <form #attendeeForm="ngForm" name="attendee_info" id="attendee_info">
+
+    <form [formGroup]="attendeeForm" (ngSubmit)="onSubmit()">
+      <div class="FormRow">
+        <div class="MediumFormFieldContainer">
+          <label class="control-label">First Name</label>
+          <input class="form-control" type="text" formControlName="first_name" placeholder="Enter Your First Name" required>
+          <div [hidden]="first_name.valid || first_name.pristine" class="alert alert-danger">First Name is required</div>
+        </div>
+        <div class="MediumFormFieldContainer">
+          <label class="control-label">Last Name</label>
+          <input class="form-control" type="text" formControlName="last_name" placeholder="Enter Your Last Name" required>
+          <div [hidden]="last_name.valid || last_name.pristine" class="alert alert-danger">Last Name is required</div>
+        </div>
+      </div>
+      <div class="FormRow">
+        <div class="SmallFormFieldContainer">
+          <label class="control-label">T-Shirt Size</label>
+          <select class="form-control" formControlName="t_shirt" required>
+            <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
+          </select>
+        </div>
+        <div class="SmallFormFieldContainer">
+          <label class="control-label">Gender</label>
+          <select class="form-control" formControlName="gender" required>
+            <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+          </select>
+        </div>
+        <div class="SmallFormFieldContainer">
+          <label class="control-label">Age</label>
+          <input class="form-control" type="number" formControlName="age" placeholder="12" required>
+          <div [hidden]="age.valid || age.pristine" class="alert alert-danger">Age is required</div>
+        </div>
+      </div>
+      <div class="FormRow">
+        <div class="FormFieldContainer">
+          <label class="control-label">Medical Issues/Allergies</label>
+          <textarea class="form-control" type="text" formControlName="medical" placeholder="N/A" rows="5" required></textarea>
+          <div [hidden]="medical.valid || medical.pristine" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div>
+        </div>
+      </div>
+
+      <hr>
+      <div class="FormFieldContainer">
+        <ul class="pagination">
+          <li class="active">
+            <a href="#">PREV</a>
+          </li>
+          <li class="user-entry" *ngFor="let person of people; let i = index"
+          [ngClass]="{'active': currentAttendee === person}" (click)="loadAttendee(person, i);">
+              <a href="#{{i+1}}">{{i+1}}</a>
+          </li>
+          <li>
+            <a id="add-entry-box" href="#" (click)="addAttendee()" >
+              <i class="fa fa-plus fa-2x add-entry"></i>
+            </a>
+          </li> 
+          <li class="active">
+            <a href="#">NEXT</a>
+          </li>
+        </ul>
+      </div>
+      <button (click)="partialUpdate()">Partial Update</button>
+      <button (click)="fullUpdate()">Full Update</button>
+      <button (click)="check()">Check</button>
+      <button (click)="lazyOne()">Lazy One</button>
+      <button (click)="lazyTwo()">Lazy Two</button>
+      <button (click)="deleteAttendee()" class="DeleteButton">Delete Attendee</button>
+      <button type="submit" class="PrimaryButton" [disabled]="!attendeeForm.valid">Submit</button>
+    </form>
+
+    <!-- <form name="{{attendeeForm}}" ng-repeat="attendeeForm in forms" (ngSubmit)="onSubmit" #attendeeForm="ngForm" name="attendee_info" id="attendee_info">
       <div class="FormRow">
         <div class="MediumFormFieldContainer">
           <label class="control-label" for="first_name">First Name</label>
@@ -13,7 +83,8 @@
         <div class="MediumFormFieldContainer">
           <label class="control-label" for="last_name">Last Name</label>
           <input class="form-control" type="text" placeholder="Enter Your Last Name" name="last_name" required [(ngModel)]="model.last_name"
-            id="last_name">
+            id="last_name" #last_name="ngModel">
+            <div [hidden]="last_name.valid || last_name.pristine" class="alert alert-danger">Last Name is required</div>
         </div>
       </div>
       <div class="FormRow">
@@ -31,14 +102,16 @@
         </div>
         <div class="SmallFormFieldContainer">
           <label class="control-label" for="age">Age</label>
-          <input class="form-control" type="text" placeholder="12" name="age" required [(ngModel)]="model.age" id="age">
+          <input class="form-control" type="text" placeholder="12" name="age" required [(ngModel)]="model.age" id="age" #age="ngModel">
+          <div [hidden]="age.valid || age.pristine" class="alert alert-danger">Age is required</div>
         </div>
       </div>
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="medical">Medical Issues/Allergies</label>
           <textarea class="form-control" type="text" name="medical" placeholder="N/A" rows="5" required [(ngModel)]="model.medical"
-            id="medical"></textarea>
+            id="medical" #medical="ngModel"></textarea>
+            <div [hidden]="medical.valid || medical.pristine" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div>
         </div>
       </div>
       <hr>
@@ -60,7 +133,7 @@
             <a href="#">4</a>
           </li>
           <li>
-            <a id="add-entry-box" href="#">
+            <a id="add-entry-box" href="#" (click)="addAttendee()" >
               <i class="fa fa-plus fa-2x add-entry"></i>
             </a>
           </li> 
@@ -72,6 +145,6 @@
       <p>By creating an account you agree to our
         <a href="#">Terms & Privacy</a>.</p>
       <button type="submit" class="PrimaryButton">Submit</button>
-    </form>
+    </form> -->
   </div>
 </div>
