@@ -15,7 +15,24 @@
     Total Registers:
   </div>
 </div>
+<form [formGroup]="registration_form" (ngSubmit)="onSubmit()">
+  <!-- <div formArrayName="attendees">
+    <div *ngFor="let attendee of registration_form.controls.attendees.controls; let i=index" class="panel panel-default">
+      <div class="panel-heading">
+          <span>Address {{i + 1}}</span>
+          <span class="glyphicon glyphicon-remove pull-right" *ngIf="registration_form.controls.attendees.controls.length > 1" (click)="removeAddress(i)"></span>
+      </div>
+      <div class="pand-body" [formGroupName]="i">
+        <app-attendee-form [attendeeFormGroup]="registration_form.controls.attendees.controls[i]"></app-attendee-form>
+      </div>
+    </div>
+  </div> -->
+  <app-attendee-form [attendeeFormGroup]="registration_form.controls.attendees"></app-attendee-form>
+  <app-info-form [infoFormGroup]="registration_form.controls.info"></app-info-form>
 
-<app-attendee-form></app-attendee-form>
-
-<!-- <app-info-form></app-info-form> -->
+  <div class="page-border">
+    <div class="form-control">
+      <button type="submit" class="PrimaryButton" [disabled]="!registration_form">Submit</button>
+    </div>
+  </div>
+</form>

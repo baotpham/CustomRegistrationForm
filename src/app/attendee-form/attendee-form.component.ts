@@ -8,8 +8,10 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder, F
   styleUrls: ['./attendee-form.component.scss']
 })
 export class AttendeeFormComponent implements OnInit {
-  attendeeForm: FormGroup;
+  @Input() attendeeFormGroup : FormArray;
+  attendeeForm : FormGroup;
 
+  // Personal Info
   first_name = new FormControl("", Validators.required);
   last_name = new FormControl("", Validators.required);
   t_shirt = new FormControl("", Validators.required);
@@ -41,20 +43,21 @@ export class AttendeeFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.attendeeForm = new FormGroup();
+    // this.attendeeForm.addControl('first_name', new FormControl("", Validators.required));
+    // this.attendeeForm.addControl('last_name', new FormControl("", Validators.required));
+    // this.attendeeForm.addControl('t_shirt', new FormControl("", Validators.required));
+    // this.attendeeForm.addControl('gender', new FormControl("", Validators.required));
+    // this.attendeeForm.addControl('age', new FormControl("", Validators.required));
+    // this.attendeeForm.addControl('medical', new FormControl("", Validators.required));
+
     this.max_index = 0;
     this.current_index = 0;
     this.people.push(new Attendee("", "", "", "", null, ""));
     this.currentAttendee = this.people[this.current_index];
-    //this.loadAttendee(this.people[this.current_index], this.current_index);
   }
 
-  onSubmit() {
-    console.log("model-based form submitted");
-    console.log(this.attendeeForm);
-  }
-
-
-  //Helper buttons
+  // Helper buttons
   fullUpdate() {
     this.attendeeForm.setValue({
       first_name: 'Partial', last_name: 'monkey', t_shirt: 'M', gender: 'Male',
@@ -176,15 +179,4 @@ export class AttendeeFormComponent implements OnInit {
     this.age.setValue(this.currentAttendee.age);
     this.medical.setValue(this.currentAttendee.medical);
   }
-
-  //updates malleable model to target attendee info
-  bindToTarget(attendee: Attendee) {
-    this.model.first_name = attendee.first_name;
-    this.model.last_name = attendee.last_name;
-    this.model.t_shirt = attendee.t_shirt;
-    this.model.gender = attendee.gender;
-    this.model.age = attendee.age;
-    this.model.medical = attendee.medical;
-  }
-
 }
