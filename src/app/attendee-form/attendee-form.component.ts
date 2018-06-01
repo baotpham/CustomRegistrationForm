@@ -95,6 +95,7 @@ export class AttendeeFormComponent implements OnInit {
   addAttendee() {
     if (this.attendeeForm.valid) {
       
+      console.log(this.current_index);
       //Save previous form info
       this.bindFormToList(this.current_index);
 
@@ -107,19 +108,21 @@ export class AttendeeFormComponent implements OnInit {
       this.max_index++;
       this.current_index = this.max_index;
       this.currentAttendee = this.people[this.max_index];
-      this.loadAttendee(this.people[this.max_index], this.max_index);
+      //this.loadAttendee(this.people[this.max_index], this.max_index);
     }
   }
 
   //Must navigate to specific attendee and update active pagination
   loadAttendee(attendee: Attendee, new_index: number) {
 
+    console.log("saving old attendee data before moving on");
     //Save current attendee before moving on
     this.bindFormToList(this.current_index);
 
     //Sets new current attendee for active setting
     this.currentAttendee = attendee;
 
+    console.log("pulls in target attendee data into form");
     //Pull in target attendee data and put into form
     this.bindListToForm(new_index); 
 
@@ -130,22 +133,32 @@ export class AttendeeFormComponent implements OnInit {
   //Deletes attendee from current list
   deleteAttendee() {
     console.log("current index is: " + this.current_index);
-    if (this.current_index >= 0) {
+    if (this.current_index > 0) {
+
+      //Deletes Attendee from list
       this.people.splice(this.current_index, 1);
+      this.max_index--;
+      
+      //Resets current attendee and index to the first one
+      this.current_index = 0;
+      this.currentAttendee = this.people[this.current_index];
+      this.bindListToForm(this.current_index);
+
+    }
+    else{
+      console.log("Cannot delete first index.");
     }
   }
 
   //Binding
   //Updates the list's values with the contents of the form
   bindFormToList(index: number) {
-    // console.log(this.first_name.value);
-    // console.log(this.people[index].first_name);
-    // console.log(this.last_name.value);
-    // console.log(this.people[index].last_name);
-    // console.log(this.t_shirt.value);
-    // console.log(this.people[index].t_shirt);
-    // console.log(this.gender.value);
-    // console.log(this.people[index].gender);
+
+    console.log(this.people[index]);
+    console.log(this.first_name.value);
+    console.log(this.last_name.value);
+    console.log(this.t_shirt.value);
+    console.log(this.gender.value);
     this.people[index].first_name = this.first_name.value;
     this.people[index].last_name = this.last_name.value;
     this.people[index].t_shirt = this.t_shirt.value;
@@ -156,12 +169,12 @@ export class AttendeeFormComponent implements OnInit {
 
   //Updates the form's values with the contents from the list
   bindListToForm(index: number) {
-    this.first_name.setValue(this.people[index].first_name);
-    this.last_name.setValue(this.people[index].last_name);
-    this.t_shirt.setValue(this.people[index].t_shirt);
-    this.gender.setValue(this.people[index].gender);
-    this.age.setValue(this.people[index].age);
-    this.medical.setValue(this.people[index].medical);
+    this.first_name.setValue(this.currentAttendee.first_name);
+    this.last_name.setValue(this.currentAttendee.last_name);
+    this.t_shirt.setValue(this.currentAttendee.t_shirt);
+    this.gender.setValue(this.currentAttendee.gender);
+    this.age.setValue(this.currentAttendee.age);
+    this.medical.setValue(this.currentAttendee.medical);
   }
 
   //updates malleable model to target attendee info
