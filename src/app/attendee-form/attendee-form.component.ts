@@ -8,14 +8,15 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder, F
   styleUrls: ['./attendee-form.component.scss']
 })
 export class AttendeeFormComponent implements OnInit {
-  attendeeForm: FormGroup;
+  @Input() attendeeFormGroup : FormGroup;
 
-  first_name = new FormControl("", Validators.required);
-  last_name = new FormControl("", Validators.required);
-  t_shirt = new FormControl("", Validators.required);
-  gender = new FormControl("", Validators.required);
-  age = new FormControl("", Validators.required);
-  medical = new FormControl("", Validators.required);
+  // Personal Info
+  // first_name = new FormControl("", Validators.required);
+  // last_name = new FormControl("", Validators.required);
+  // t_shirt = new FormControl("", Validators.required);
+  // gender = new FormControl("", Validators.required);
+  // age = new FormControl("", Validators.required);
+  // medical = new FormControl("", Validators.required);
 
   max_index = 0;
   current_index = 0;
@@ -30,52 +31,53 @@ export class AttendeeFormComponent implements OnInit {
   // get diagnostic() { return JSON.stringify(this.model); }
 
   constructor(fb: FormBuilder) {
-    this.attendeeForm = fb.group({
-      "first_name": this.first_name,
-      "last_name": this.last_name,
-      "t_shirt": this.t_shirt,
-      "gender": this.gender,
-      "age": this.age,
-      "medical": this.medical
-    });
+    // this.attendeeFormGroup = fb.group({
+    //   "first_name": this.first_name,
+    //   "last_name": this.last_name,
+    //   "t_shirt": this.t_shirt,
+    //   "gender": this.gender,
+    //   "age": this.age,
+    //   "medical": this.medical
+    // });
   }
 
   ngOnInit() {
+
+    this.attendeeFormGroup.addControl('first_name', new FormControl("", Validators.required));
+    this.attendeeFormGroup.addControl('last_name', new FormControl("", Validators.required));
+    this.attendeeFormGroup.addControl('t_shirt', new FormControl("", Validators.required));
+    this.attendeeFormGroup.addControl('gender', new FormControl("", Validators.required));
+    this.attendeeFormGroup.addControl('age', new FormControl("", Validators.required));
+    this.attendeeFormGroup.addControl('medical', new FormControl("", Validators.required));
+
     this.max_index = 0;
     this.current_index = 0;
     this.people.push(new Attendee("", "", "", "", null, ""));
     this.currentAttendee = this.people[this.current_index];
-    //this.loadAttendee(this.people[this.current_index], this.current_index);
   }
-
-  onSubmit() {
-    console.log("model-based form submitted");
-    console.log(this.attendeeForm);
-  }
-
 
   //Helper buttons
   fullUpdate() {
-    this.attendeeForm.setValue({
+    this.attendeeFormGroup.setValue({
       first_name: 'Partial', last_name: 'monkey', t_shirt: 'M', gender: 'Male',
       age: 12, medical: 'yes'
     });
   }
   lazyOne() {
-    this.attendeeForm.setValue({
+    this.attendeeFormGroup.setValue({
       first_name: '1', last_name: '1', t_shirt: 'S', gender: 'Male',
       age: 1, medical: '1'
     });
   }
   lazyTwo() {
-    this.attendeeForm.setValue({
+    this.attendeeFormGroup.setValue({
       first_name: '2', last_name: '2', t_shirt: 'M', gender: 'Female',
       age: 2, medical: '2'
     });
   }
 
   partialUpdate() {
-    this.attendeeForm.patchValue({ age: this.max_index });
+    this.attendeeFormGroup.patchValue({ age: this.max_index });
     console.log("hi");
   }
 
@@ -93,7 +95,7 @@ export class AttendeeFormComponent implements OnInit {
   //Previous form must be valid before moving on.
   //Must show active on new form.
   addAttendee() {
-    if (this.attendeeForm.valid) {
+    if (this.attendeeFormGroup.valid) {
       
       console.log(this.current_index);
       //Save previous form info
@@ -101,7 +103,7 @@ export class AttendeeFormComponent implements OnInit {
 
       //Once information is saved, then clears the page
       this.people.push(new Attendee("", "", "", "", null, ""));
-      this.attendeeForm.reset();
+      this.attendeeFormGroup.reset();
       console.log("Adding new attendee.");
 
       //Update variables to look at new Attendee
@@ -154,37 +156,26 @@ export class AttendeeFormComponent implements OnInit {
   //Updates the list's values with the contents of the form
   bindFormToList(index: number) {
 
-    console.log(this.people[index]);
-    console.log(this.first_name.value);
-    console.log(this.last_name.value);
-    console.log(this.t_shirt.value);
-    console.log(this.gender.value);
-    this.people[index].first_name = this.first_name.value;
-    this.people[index].last_name = this.last_name.value;
-    this.people[index].t_shirt = this.t_shirt.value;
-    this.people[index].gender = this.gender.value;
-    this.people[index].age = this.age.value;
-    this.people[index].medical = this.medical.value;
+    // console.log(this.people[index]);
+    // console.log(this.first_name.value);
+    // console.log(this.last_name.value);
+    // console.log(this.t_shirt.value);
+    // console.log(this.gender.value);
+    // this.people[index].first_name = this.first_name.value;
+    // this.people[index].last_name = this.last_name.value;
+    // this.people[index].t_shirt = this.t_shirt.value;
+    // this.people[index].gender = this.gender.value;
+    // this.people[index].age = this.age.value;
+    // this.people[index].medical = this.medical.value;
   }
 
   //Updates the form's values with the contents from the list
   bindListToForm(index: number) {
-    this.first_name.setValue(this.currentAttendee.first_name);
-    this.last_name.setValue(this.currentAttendee.last_name);
-    this.t_shirt.setValue(this.currentAttendee.t_shirt);
-    this.gender.setValue(this.currentAttendee.gender);
-    this.age.setValue(this.currentAttendee.age);
-    this.medical.setValue(this.currentAttendee.medical);
+    // this.first_name.setValue(this.currentAttendee.first_name);
+    // this.last_name.setValue(this.currentAttendee.last_name);
+    // this.t_shirt.setValue(this.currentAttendee.t_shirt);
+    // this.gender.setValue(this.currentAttendee.gender);
+    // this.age.setValue(this.currentAttendee.age);
+    // this.medical.setValue(this.currentAttendee.medical);
   }
-
-  //updates malleable model to target attendee info
-  bindToTarget(attendee: Attendee) {
-    this.model.first_name = attendee.first_name;
-    this.model.last_name = attendee.last_name;
-    this.model.t_shirt = attendee.t_shirt;
-    this.model.gender = attendee.gender;
-    this.model.age = attendee.age;
-    this.model.medical = attendee.medical;
-  }
-
 }
