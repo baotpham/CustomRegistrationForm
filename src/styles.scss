@@ -26,12 +26,15 @@ $red: #a94442;
     @extend .offset-md-1;
     @extend .col-md-3;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 26px;
+    border-bottom: 5px solid teal;
+    padding: 0px;
 }
 .total-info{
     @extend .offset-md-5;
     font-weight: bold;
     font-size: x-large;
+    padding: 0px;
 }
 
 // Buttons
