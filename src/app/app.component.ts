@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,8 @@ export class AppComponent {
   });
   title = 'CVCF Youth Retreat 2018 Registration Form';
 
+
+
   constructor(private fb: FormBuilder){ }
 
   ngOnInit() {
@@ -21,8 +23,22 @@ export class AppComponent {
     //   attendees: FormArray,
     //   info: FormGroup
     // });
+    // const control = <FormArray>this.registration_form.controls['attendees'];
+    // const formthing = this.registration_form.controls.attendees;
+    // control.push(formthing);
+
+    
+    // const control = <FormArray>this.registration_form.controls['attendees'];
+    // control.push(new FormGroup({
+    //   first_name : new FormControl("", Validators.required),
+    //   last_name : new FormControl("", Validators.required),
+    //   t_shirt : new FormControl("", Validators.required),
+    //   gender : new FormControl("", Validators.required),
+    //   age : new FormControl("", Validators.required),
+    //   medical : new FormControl("", Validators.required)
+    // }));
   }
   onSubmit(){
-    console.log(this.registration_form.controls.info.value);
+    console.log(this.registration_form.controls['attendees']);
   }
 }
