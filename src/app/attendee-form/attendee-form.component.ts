@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Attendee } from '../models/Attendee';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder, FormsModule, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-attendee-form',
@@ -54,6 +54,7 @@ export class AttendeeFormComponent implements OnInit {
     this.max_index = 0;
     this.current_index = 0;
     this.people.push(new Attendee("", "", "", "", null, ""));
+    this.attendeeFormGroup.push(this.attendeeForm);
     this.currentAttendee = this.people[this.current_index];
   }
 
@@ -112,6 +113,7 @@ export class AttendeeFormComponent implements OnInit {
       this.current_index = this.max_index;
       this.currentAttendee = this.people[this.max_index];
       //this.loadAttendee(this.people[this.max_index], this.max_index);
+      console.log(this.attendeeFormGroup.value);
     }
   }
 
@@ -168,6 +170,7 @@ export class AttendeeFormComponent implements OnInit {
     this.people[index].gender = this.gender.value;
     this.people[index].age = this.age.value;
     this.people[index].medical = this.medical.value;
+    
   }
 
   //Updates the form's values with the contents from the list
