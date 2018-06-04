@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AttendeeFormComponent implements OnInit {
   attendeeForm: FormGroup;
-  attendeeOtherInfoForm: FormGRoup;
+  attendeeOtherInfoForm: FormGroup;
 
   first_name  = new FormControl("", Validators.required);
   last_name   = new FormControl("", Validators.required);
@@ -82,20 +82,20 @@ export class AttendeeFormComponent implements OnInit {
     });
 
     this.attendeeOtherInfoForm = fb.group({
-      "your_church"                         : this.your_church
-      "your_church_point_of_contact_name"   : this.your_church_point_of_contact_name
-      "your_church_point_of_contact_number" : this.your_church_point_of_contact_number
+      "your_church"                         : this.your_church,
+      "your_church_point_of_contact_name"   : this.your_church_point_of_contact_name,
+      "your_church_point_of_contact_number" : this.your_church_point_of_contact_number,
 
       //emergency info
-      "emergency_contact_first_name"        : this.emergency_contact_first_name
-      "emergency_contact_last_name"         : this.emergency_contact_last_name
-      "emergency_contact_phone_number"      : this.emergency_contact_phone_number
-      "emergency_contact_relationship"      : this.emergency_contact_relationship
+      "emergency_contact_first_name"        : this.emergency_contact_first_name,
+      "emergency_contact_last_name"         : this.emergency_contact_last_name,
+      "emergency_contact_phone_number"      : this.emergency_contact_phone_number,
+      "emergency_contact_relationship"      : this.emergency_contact_relationship,
 
       //payment info
-      "card_number"                         : this.card_number
-      "name_on_card"                        : this.name_on_card
-      "expiration_date"                     : this.expiration_date
+      "card_number"                         : this.card_number,
+      "name_on_card"                        : this.name_on_card,
+      "expiration_date"                     : this.expiration_date,
       "security_code"                       : this.security_code
     });
   }
