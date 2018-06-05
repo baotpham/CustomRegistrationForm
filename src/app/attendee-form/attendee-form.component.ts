@@ -2,7 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Attendee } from '../Models/Attendee';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder, FormsModule } from '@angular/forms';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/xml',
+    'Authorization': 'my-auth-token'
+  })
+};
 
 @Component({
   selector: 'app-attendee-form',
@@ -122,34 +129,43 @@ export class AttendeeFormComponent implements OnInit {
         this.http.post(
           "https://docs.google.com/forms/d/e/1FAIpQLSdpCxARcwWV5BeH5kjj45vVzJgrdOca4e78vq2KHPB2epx8yw/formResponse",
           {
-            "entry.736264477": attendee.first_name,
-            "entry.1216232379": attendee.last_name,
-            "entry.1922331484": attendee.t_shirt,
-            "entry.1808161308": attendee.gender,
-            "entry.982307170": attendee.age,
-            "entry.237564014": attendee.medical,
-            "entry.475860172": attendee.address,
-            "entry.1132819387": attendee.address_2,
-            "entry.882873948": attendee.city,
-            "entry.1300146252": attendee.state,
-            "entry.1995735036": attendee.zip_code,
-            "entry.1163380930": attendee.email,
+            "entry.736264477": attendee.first_name.value,
+            "entry.1216232379": attendee.last_name.value,
+            "entry.1922331484": attendee.t_shirt.value,
+            "entry.1808161308": attendee.gender.value,
+            "entry.982307170": attendee.age.value,
+            "entry.237564014": attendee.medical.value,
+            "entry.475860172": attendee.address.value,
+            "entry.1132819387": attendee.address_2.value,
+            "entry.882873948": attendee.city.value,
+            "entry.1300146252": attendee.state.value,
+            "entry.1995735036": attendee.zip_code.value,
+            "entry.1163380930": attendee.email.value,
 
-            "entry.1814348022": this.your_church,
-            "entry.1795731922": this.your_church_point_of_contact_name,
-            "entry.42598533": this.your_church_point_of_contact_number,
+            "entry.1814348022": this.your_church.value,
+            "entry.1795731922": this.your_church_point_of_contact_name.value,
+            "entry.42598533": this.your_church_point_of_contact_number.value,
 
             //emergency info
-            "entry.1822987082": this.emergency_contact_first_name,
-            "entry.854313620": this.emergency_contact_last_name,
-            "entry.1752027412": this.emergency_contact_phone_number,
-            "entry.516070659": this.emergency_contact_relationship,
+            "entry.1822987082": attendee.emergency_contact_first_name.value,
+            "entry.854313620": attendee.emergency_contact_last_name.value,
+            "entry.1752027412": attendee.emergency_contact_phone_number.value,
+            "entry.516070659": attendee.emergency_contact_relationship.value,
 
             //payment info
             "entry.345154263": "",
             "entry.1114223182": ""
           }
-        );
+        ).subscribe((val) => {
+          console.log("POST call successful value returned in body", 
+                      val);
+      },
+      response => {
+          console.log("POST call in error", response);
+      },
+      () => {
+          console.log("The POST observable is now completed.");
+      });
       });
     }else{
       alert("Please fill out every field");
