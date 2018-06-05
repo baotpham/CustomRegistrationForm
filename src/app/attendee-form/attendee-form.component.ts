@@ -6,8 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/xml',
-    'Authorization': 'my-auth-token'
+    'Content-Type':  'application/json'
+    // 'Authorization': 'my-auth-token'
   })
 };
 
@@ -116,6 +116,7 @@ export class AttendeeFormComponent implements OnInit {
 
   onSubmit() {
     console.log("model-based form submitted");
+    console.log(this.people.toString());
     // console.log("attendees", this.attendeeForm);
     // console.log("other info", this.attendeeOtherInfoForm);
 
@@ -126,36 +127,44 @@ export class AttendeeFormComponent implements OnInit {
       
       this.people.forEach((attendee) => {
         console.log("attendee", attendee);
+        console.log(attendee.first_name);
+        console.log(this.your_church);
+        console.log(attendee.emergency_contact_phone_number);
         this.http.post(
           "https://docs.google.com/forms/d/e/1FAIpQLSdpCxARcwWV5BeH5kjj45vVzJgrdOca4e78vq2KHPB2epx8yw/formResponse",
           {
-            "entry.736264477": attendee.first_name.value,
-            "entry.1216232379": attendee.last_name.value,
-            "entry.1922331484": attendee.t_shirt.value,
-            "entry.1808161308": attendee.gender.value,
-            "entry.982307170": attendee.age.value,
-            "entry.237564014": attendee.medical.value,
-            "entry.475860172": attendee.address.value,
-            "entry.1132819387": attendee.address_2.value,
-            "entry.882873948": attendee.city.value,
-            "entry.1300146252": attendee.state.value,
-            "entry.1995735036": attendee.zip_code.value,
-            "entry.1163380930": attendee.email.value,
+            "entry.736264477": attendee.first_name,
+            "entry.1216232379": attendee.last_name,
+            "entry.1922331484": attendee.t_shirt,
+            "entry.1808161308": attendee.gender,
+            "entry.982307170": attendee.age,
+            "entry.237564014": attendee.medical,
+            "entry.475860172": attendee.address,
+            "entry.1132819387": attendee.address_2,
+            "entry.882873948": attendee.city,
+            "entry.1300146252": attendee.state,
+            "entry.1995735036": attendee.zip_code,
+            "entry.1163380930": attendee.email,
 
-            "entry.1814348022": this.your_church.value,
-            "entry.1795731922": this.your_church_point_of_contact_name.value,
-            "entry.42598533": this.your_church_point_of_contact_number.value,
+            // "entry.1814348022": this.your_church.value,
+            // "entry.1795731922": this.your_church_point_of_contact_name.value,
+            // "entry.42598533": this.your_church_point_of_contact_number.value,
+
+            "entry.1814348022": "boop",
+            "entry.1795731922": "schoop",
+            "entry.42598533": "da whoop",
 
             //emergency info
-            "entry.1822987082": attendee.emergency_contact_first_name.value,
-            "entry.854313620": attendee.emergency_contact_last_name.value,
-            "entry.1752027412": attendee.emergency_contact_phone_number.value,
-            "entry.516070659": attendee.emergency_contact_relationship.value,
+            "entry.1822987082": attendee.emergency_contact_first_name,
+            "entry.854313620": attendee.emergency_contact_last_name,
+            "entry.1752027412": attendee.emergency_contact_phone_number,
+            "entry.516070659": attendee.emergency_contact_relationship,
 
             //payment info
-            "entry.345154263": "",
-            "entry.1114223182": ""
-          }
+            "entry.345154263": "200",
+            "entry.1114223182": "yes"
+          },
+             {responseType: 'text'}
         ).subscribe((val) => {
           console.log("POST call successful value returned in body", 
                       val);
