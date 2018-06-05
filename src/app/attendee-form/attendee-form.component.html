@@ -1,6 +1,18 @@
 <!-- Attendee Forms -->
 <form [formGroup]="attendeeForm" (ngSubmit)="onSubmit()">
+
+  <div class="title-container">
+    <div class="title">
+      Registers Info
+    </div>
+  </div>
+
   <div class="page-border">
+
+    <div class="total-info">
+      Total Registers: <span *ngIf="people.length != undefined">{{people.length}}</span> <span *ngIf="people.length == undefined">0</span>
+    </div>
+
     <div class="form-control">
       <div class="FormRow">
         <div class="MediumFormFieldContainer">
@@ -40,46 +52,6 @@
           <div [hidden]="medical.valid || medical.pristine" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div>
         </div>
       </div>
-
-      <hr>
-      <div class="FormFieldContainer">
-        <ul class="pagination">
-          <li class="active">
-            <a href="#">PREV</a>
-          </li>
-          <li class="user-entry" *ngFor="let person of people; let i = index" [ngClass]="{'active': currentAttendee === person}" (click)="loadAttendee(person, i);">
-            <a href="#{{i+1}}">{{i+1}}</a>
-          </li>
-          <li>
-            <a id="add-entry-box" href="#" (click)="addAttendee()">
-              <i class="fa fa-plus fa-2x add-entry"></i>
-            </a>
-          </li>
-          <li class="active">
-            <a href="#">NEXT</a>
-          </li>
-        </ul>
-      </div>
-      <button type="button" (click)="partialUpdate()">Partial Update</button>
-      <button type="button" (click)="fullUpdate()">Full Update</button>
-      <button type="button" (click)="check()">Check</button>
-      <button type="button" (click)="lazyOne()">Lazy One</button>
-      <button type="button" (click)="lazyTwo()">Lazy Two</button>
-      <button type="button" (click)="deleteAttendee()" class="DeleteButton">Delete Attendee</button>
-      <button type="submit" class="PrimaryButton" [disabled]="!attendeeForm.valid">Submit</button>
-    </div>
-  </div>
-
-
-  <div class="title-container">
-    <div class="title">
-      Personal Contact
-    </div>
-  </div>
-
-  <div class="page-border">
-    <div class="form-control">
-
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label">Address</label>
@@ -89,31 +61,99 @@
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label">Address 2</label>
-          <input class="form-control" type="text" placeholder="N/A" name="address" required>
+          <input class="form-control" type="text" placeholder="N/A" name="address_2" formControlName="address_2" required>
         </div>
       </div>
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="city">City</label>
-          <input class="form-control" type="text" placeholder="Enter Your City" name="city" required>
+          <input class="form-control" type="text" placeholder="Enter Your City" name="city" formControlName="city" required>
         </div>
       </div>
       <div class="FormRow">
         <div class="MediumFormFieldContainer">
           <label class="control-label" for="state">State</label>
-          <input class="form-control" type="text" placeholder="Enter Your State" name="state" required>
+          <!-- <input class="form-control" type="text" placeholder="Enter Your State" name="state" formControlName="state" required> -->
+          <select class="form-control" formControlName="state" required>
+            <option *ngFor="let state of states" [value]="state">{{state}}</option>
+          </select>
         </div>
         <div class="MediumFormFieldContainer">
           <label class="control-label" for="zip">Zip Code</label>
-          <input class="form-control" type="number" placeholder=" Enter Your Zip Code" name="zip" required>
+          <input class="form-control" type="number" placeholder=" Enter Your Zip Code" name="zip_code" formControlName="zip_code" required>
         </div>
       </div>
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="email">Email</label>
-          <input class="form-control" type="email" placeholder="Enter Your Email" name="email" required>
+          <input class="form-control" type="email" placeholder="Enter Your Email" name="email" formControlName="email" required>
         </div>
       </div>
+
+
+      <h3 style="margin-top:20px;">Emergency Contact</h3>
+      <div class="FormRow">
+        <div class="FormFieldContainer">
+          <label class="control-label" for="emergency_contact_first_name">First Name</label>
+          <input class="form-control" type="text" placeholder="Enter First Name" name="emergency_contact_first_name" formControlName="emergency_contact_first_name" required>
+        </div>
+        <div class="FormFieldContainer">
+          <label class="control-label" for="emergency_contact_last_name">Last Name</label>
+          <input class="form-control" type="text" placeholder="Enter Last Name" name="emergency_contact_last_name" formControlName="emergency_contact_last_name" required>
+        </div>
+      </div>
+      <div class="FormRow">
+        <div class="FormFieldContainer">
+          <label class="control-label" for="emergency_contact_phone_number">Phone Number</label>
+          <input class="form-control" type="number" placeholder="Enter Phone Number" name="emergency_contact_phone_number" formControlName="emergency_contact_phone_number" required>
+        </div>
+      </div>
+      <div class="FormRow">
+        <div class="FormFieldContainer">
+          <label class="control-label" for="emergency_contact_relationship">Relationship</label>
+          <input class="form-control" type="text" placeholder="Relationship" name="emergency_contact_relationship" formControlName="emergency_contact_relationship" required>
+        </div>
+      </div>
+
+      <hr>
+      <div class="FormFieldContainer">
+        <ul class="pagination">
+          <!-- <li class="active"> -->
+          <!-- <a href="#">PREV</a> -->
+          <!-- </li> -->
+          <li class="user-entry" *ngFor="let person of people; let i = index" [ngClass]="{'active': currentAttendee === person}" (click)="loadAttendee(person, i);">
+            <button type="button" *ngIf="people.length > 1" class="DeleteButton" (click)="deleteAttendee(i)">-</button>
+            <a href="#{{i+1}}">{{i+1}}</a>
+          </li>
+          <li>
+            <a id="add-entry-box" href="#" (click)="addAttendee()">
+              <i class="fa fa-plus fa-2x add-entry"></i>
+            </a>
+          </li>
+          <!-- <li class="active"> -->
+          <!-- <a href="#">NEXT</a> -->
+          <!-- </li> -->
+        </ul>
+      </div>
+      <button type="button" (click)="partialUpdate()">Partial Update</button>
+      <button type="button" (click)="fullUpdate()">Full Update</button>
+      <button type="button" (click)="check()">Check</button>
+      <button type="button" (click)="lazyOne()">Lazy One</button>
+      <button type="button" (click)="lazyTwo()">Lazy Two</button>
+      <!-- <button type="button" (click)="deleteAttendee()" class="DeleteButton">Delete Attendee</button> -->
+    </div>
+  </div>
+
+
+  <div class="title-container">
+    <div class="title">
+      <!-- Church Contact -->
+      Contact
+    </div>
+  </div>
+
+  <div class="page-border">
+    <div class="form-control">
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="your_church">Your Church</label>
@@ -123,52 +163,18 @@
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="your_church_point_of_contact_name">Your Church Point of Contact Name</label>
-          <input class="form-control" type="text" placeholder="Enter Your Church Point of Contact Name" name="your_church_point_of_contact_name"
-            required>
+          <input class="form-control" type="text" placeholder="Enter Your Church Point of Contact Name" name="your_church_point_of_contact_name" required>
         </div>
       </div>
       <div class="FormRow">
         <div class="FormFieldContainer">
-          <label class="control-label" for="your_church_point_of_contact_name_number">Your Church Point of Contact Number</label>
-          <input class="form-control" type="number" placeholder="Enter Your Church Point of Contact Phone Number" name="your_church_point_of_contact_name_number"
-            required>
+          <label class="control-label" for="your_church_point_of_contact_number">Your Church Point of Contact Number</label>
+          <input class="form-control" type="number" placeholder="Enter Your Church Point of Contact Phone Number" name="your_church_point_of_contact_number" required>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="title-container">
-    <div class="title">
-      Emergency Contact
-    </div>
-  </div>
-
-  <div class="page-border">
-    <div class="form-control">
-      <div class="FormRow">
-        <div class="FormFieldContainer">
-          <label class="control-label" for="emergency_contact_first_name">First Name</label>
-          <input class="form-control" type="text" placeholder="Enter First Name" name="emergency_contact_first_name" required>
-        </div>
-        <div class="FormFieldContainer">
-          <label class="control-label" for="emergency_contact_last_name">Last Name</label>
-          <input class="form-control" type="text" placeholder="Enter Last Name" name="emergency_contact_last_name" required>
-        </div>
-      </div>
-      <div class="FormRow">
-        <div class="FormFieldContainer">
-          <label class="control-label" for="emergency_contact_phone_number">Phone Number</label>
-          <input class="form-control" type="number" placeholder="Enter Phone Number" name="emergency_contact_phone_number" required>
-        </div>
-      </div>
-      <div class="FormRow">
-        <div class="FormFieldContainer">
-          <label class="control-label" for="relationship">Relationship</label>
-          <input class="form-control" type="text" placeholder="Relationship" name="relationship" required>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="title-container">
     <div class="title">
@@ -201,4 +207,9 @@
       </div>
     </div>
   </div>
+
+  <div class="submit-button-container">
+    <button type="submit" class="PrimaryButton" [disabled]="!attendeeForm.valid">Submit</button>
+  </div>
+
 </form>
