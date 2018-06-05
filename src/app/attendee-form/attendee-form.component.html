@@ -1,5 +1,5 @@
 <!-- Attendee Forms -->
-<form [formGroup]="attendeeForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="attendeeForm" (ngSubmit)="onSubmit()" #checkout="ngForm" class="checkout">
 
   <div class="title-container">
     <div class="title">
@@ -10,7 +10,9 @@
   <div class="page-border">
 
     <div class="total-info">
-      Total Registers: <span *ngIf="people.length != undefined">{{people.length}}</span> <span *ngIf="people.length == undefined">0</span>
+      Total Registers:
+      <span *ngIf="people.length != undefined">{{people.length}}</span>
+      <span *ngIf="people.length == undefined">0</span>
     </div>
 
     <div class="form-control">
@@ -95,23 +97,27 @@
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="emergency_contact_first_name">First Name</label>
-          <input class="form-control" type="text" placeholder="Enter First Name" name="emergency_contact_first_name" formControlName="emergency_contact_first_name" required>
+          <input class="form-control" type="text" placeholder="Enter First Name" name="emergency_contact_first_name" formControlName="emergency_contact_first_name"
+            required>
         </div>
         <div class="FormFieldContainer">
           <label class="control-label" for="emergency_contact_last_name">Last Name</label>
-          <input class="form-control" type="text" placeholder="Enter Last Name" name="emergency_contact_last_name" formControlName="emergency_contact_last_name" required>
+          <input class="form-control" type="text" placeholder="Enter Last Name" name="emergency_contact_last_name" formControlName="emergency_contact_last_name"
+            required>
         </div>
       </div>
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="emergency_contact_phone_number">Phone Number</label>
-          <input class="form-control" type="number" placeholder="Enter Phone Number" name="emergency_contact_phone_number" formControlName="emergency_contact_phone_number" required>
+          <input class="form-control" type="number" placeholder="Enter Phone Number" name="emergency_contact_phone_number" formControlName="emergency_contact_phone_number"
+            required>
         </div>
       </div>
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="emergency_contact_relationship">Relationship</label>
-          <input class="form-control" type="text" placeholder="Relationship" name="emergency_contact_relationship" formControlName="emergency_contact_relationship" required>
+          <input class="form-control" type="text" placeholder="Relationship" name="emergency_contact_relationship" formControlName="emergency_contact_relationship"
+            required>
         </div>
       </div>
 
@@ -163,13 +169,15 @@
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="your_church_point_of_contact_name">Your Church Point of Contact Name</label>
-          <input class="form-control" type="text" placeholder="Enter Your Church Point of Contact Name" name="your_church_point_of_contact_name" required>
+          <input class="form-control" type="text" placeholder="Enter Your Church Point of Contact Name" name="your_church_point_of_contact_name"
+            required>
         </div>
       </div>
       <div class="FormRow">
         <div class="FormFieldContainer">
           <label class="control-label" for="your_church_point_of_contact_number">Your Church Point of Contact Number</label>
-          <input class="form-control" type="number" placeholder="Enter Your Church Point of Contact Phone Number" name="your_church_point_of_contact_number" required>
+          <input class="form-control" type="number" placeholder="Enter Your Church Point of Contact Phone Number" name="your_church_point_of_contact_number"
+            required>
         </div>
       </div>
     </div>
@@ -184,26 +192,12 @@
 
   <div class="page-border">
     <div class="form-control">
-      <div class="FormRow">
-        <div class="FormFieldContainer">
-          <label class="control-label" for="card_number">Card Number</label>
-          <input class="form-control" type="text" placeholder="Enter Card Number" name="card_number" required>
-        </div>
-        <div class="FormFieldContainer">
-          <label class="control-label" for="name_on_card">Name on Card</label>
-          <input class="form-control" type="text" placeholder="Enter Name on Card" name="name_on_card" required>
-        </div>
-      </div>
-      <div class="FormRow">
-        <div class="MediumFormFieldContainer">
-          <label class="control-label" for="expiration_date">Expiration Date</label>
-          <input class="form-control" type="text" placeholder="Enter Expiration Date" name="expiration_date" required>
-        </div>
 
-        <div class="MediumFormFieldContainer">
-          <label class="control-label" for="security_code">Security Code</label>
-          <input class="form-control" type="text" placeholder="CCV" name="security_code" required>
-        </div>
+      <label for="card-info" id="card-title">Card Information</label>
+      <div class="form-row">
+        <div id="card-info" #cardInfo></div>
+
+        <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
       </div>
     </div>
   </div>
