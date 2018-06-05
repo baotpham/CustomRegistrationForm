@@ -12,7 +12,11 @@ export class Attendee {
         public city: string,
         public state: string,
         public zip_code: string,
-        public email: string
+        public email: string,
+        public emergency_contact_first_name: string,
+        public emergency_contact_last_name: string,
+        public emergency_contact_phone_number: string,
+        public emergency_contact_relationship: string
     ){
      }
 

@@ -11,7 +11,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AttendeeFormComponent implements OnInit {
   attendeeForm: FormGroup;
-  attendeeOtherInfoForm: FormGroup;
 
   first_name  = new FormControl("", Validators.required);
   last_name   = new FormControl("", Validators.required);
@@ -25,20 +24,6 @@ export class AttendeeFormComponent implements OnInit {
   state       = new FormControl("", Validators.required);
   zip_code    = new FormControl("", Validators.required);
   email       = new FormControl("", Validators.required);
-
-  max_index = 0;
-  current_index = 0;
-  people = [];
-  sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-  genders = ['Male', 'Female'];
-  states = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "FL", "GA", "HI",
-            "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI",
-            "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV",
-            "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT",
-            "VA", "VT", "WA", "WI", "WV", "WY"];
-
-  //model = new Attendee('John','Ha', this.sizes[1], 'Male', 23, 'N/A', 'address', 'address_2', 'city', 'state', zip_code, email);
-  model = new Attendee("", "", "", "", 0, "", "", "" , "", "" , "" ,"");
 
   //church info
   your_church                         = new FormControl("", Validators.required);
@@ -56,6 +41,22 @@ export class AttendeeFormComponent implements OnInit {
   name_on_card                        = new FormControl("", Validators.required);
   expiration_date                     = new FormControl("", Validators.required);
   security_code                       = new FormControl("", Validators.required);
+
+  max_index = 0;
+  current_index = 0;
+  people = [];
+  sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  genders = ['Male', 'Female'];
+  states = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "FL", "GA", "HI",
+            "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI",
+            "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV",
+            "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT",
+            "VA", "VT", "WA", "WI", "WV", "WY"];
+
+  //model = new Attendee('John','Ha', this.sizes[1], 'Male', 23, 'N/A', 'address', 'address_2', 'city', 'state', zip_code, email);
+  model = new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "");
+
+
 
   fee: number;
   isPaid: boolean;
@@ -78,13 +79,10 @@ export class AttendeeFormComponent implements OnInit {
       "city"        : this.city,
       "state"       : this.state,
       "zip_code"    : this.zip_code,
-      "email"       : this.email
-    });
-
-    this.attendeeOtherInfoForm = fb.group({
-      "your_church"                         : this.your_church,
-      "your_church_point_of_contact_name"   : this.your_church_point_of_contact_name,
-      "your_church_point_of_contact_number" : this.your_church_point_of_contact_number,
+      "email"       : this.email,
+      // "your_church"                         : this.your_church,
+      // "your_church_point_of_contact_name"   : this.your_church_point_of_contact_name,
+      // "your_church_point_of_contact_number" : this.your_church_point_of_contact_number,
 
       //emergency info
       "emergency_contact_first_name"        : this.emergency_contact_first_name,
@@ -93,19 +91,20 @@ export class AttendeeFormComponent implements OnInit {
       "emergency_contact_relationship"      : this.emergency_contact_relationship,
 
       //payment info
-      "card_number"                         : this.card_number,
-      "name_on_card"                        : this.name_on_card,
-      "expiration_date"                     : this.expiration_date,
-      "security_code"                       : this.security_code
+      // "card_number"                         : this.card_number,
+      // "name_on_card"                        : this.name_on_card,
+      // "expiration_date"                     : this.expiration_date,
+      // "security_code"                       : this.security_code
     });
   }
 
   ngOnInit() {
     this.max_index = 0;
     this.current_index = 0;
-    this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,""));
+    this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", ""));
+    console.log("PEOPLE", this.people);
     // this.currentAttendee = this.people[this.current_index];
-    //this.loadAttendee(this.people[this.current_index], this.current_index);
+    // this.loadAttendee(this.people[this.current_index], this.current_index);
   }
 
   onSubmit() {
@@ -114,6 +113,10 @@ export class AttendeeFormComponent implements OnInit {
     // console.log("other info", this.attendeeOtherInfoForm);
 
     if(this.attendeeForm.valid){
+
+      //add the last person to the list
+      this.bindFormToList(this.current_index);
+      
       this.people.forEach((attendee) => {
         console.log("attendee", attendee);
         this.http.post(
@@ -159,7 +162,8 @@ export class AttendeeFormComponent implements OnInit {
     this.attendeeForm.setValue({
       first_name: 'Partial', last_name: 'monkey', t_shirt: 'M', gender: 'Male',
       age: 12, medical: 'yes', address: '123 Adams Ave', address_2: "N/A", city: "Phila",
-      state: "PA", zip_code: "12312312", email: "test@test.com"
+      state: "PA", zip_code: "12312312", email: "test@test.com", emergency_contact_first_name: "Test",
+      emergency_contact_last_name: "Testest", emergency_contact_phone_number: "12312312", emergency_contact_relationship: "asdfasd"
     });
   }
   lazyOne() {
@@ -199,12 +203,11 @@ export class AttendeeFormComponent implements OnInit {
   addAttendee() {
     if (this.attendeeForm.valid) {
 
-      console.log(this.current_index);
       //Save previous form info
       this.bindFormToList(this.current_index);
 
       //Once information is saved, then clears the page
-      this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,""));
+      this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", ""));
       this.attendeeForm.reset();
       console.log("Adding new attendee.");
 
@@ -235,27 +238,9 @@ export class AttendeeFormComponent implements OnInit {
   }
 
   //Deletes attendee from current list
-  // deleteAttendee() {
-  //   console.log("current index is: " + this.current_index);
-  //   if (this.current_index > 0) {
-  //
-  //     //Deletes Attendee from list
-  //     this.people.splice(this.current_index, 1);
-  //     this.max_index--;
-  //
-  //     //Resets current attendee and index to the first one
-  //     this.current_index = 0;
-  //     this.currentAttendee = this.people[this.current_index];
-  //     this.bindListToForm(this.current_index);
-  //
-  //   }
-  //   else{
-  //     console.log("Cannot delete first index.");
-  //   }
-  // }
   deleteAttendee(index) {
     console.log("current index is: " + index);
-    if (index > 0) {
+    if (index >= 0) {
 
       //Deletes Attendee from list
       this.people.splice(index, 1);
@@ -294,6 +279,10 @@ export class AttendeeFormComponent implements OnInit {
     this.people[index].state        = this.state.value;
     this.people[index].zip_code     = this.zip_code.value;
     this.people[index].email        = this.email.value;
+    this.people[index].emergency_contact_first_name        = this.emergency_contact_first_name.value;
+    this.people[index].emergency_contact_last_name         = this.emergency_contact_last_name.value;
+    this.people[index].emergency_contact_phone_number      = this.emergency_contact_phone_number.value;
+    this.people[index].emergency_contact_relationship      = this.emergency_contact_relationship.value;
   }
 
   //Updates the form's values with the contents from the list
@@ -310,6 +299,10 @@ export class AttendeeFormComponent implements OnInit {
     this.state.setValue(this.currentAttendee.state);
     this.zip_code.setValue(this.currentAttendee.zip_code);
     this.email.setValue(this.currentAttendee.email);
+    this.emergency_contact_first_name.setValue(this.currentAttendee.emergency_contact_first_name);
+    this.emergency_contact_last_name.setValue(this.currentAttendee.emergency_contact_last_name);
+    this.emergency_contact_phone_number.setValue(this.currentAttendee.emergency_contact_phone_number);
+    this.emergency_contact_relationship.setValue(this.currentAttendee.emergency_contact_relationship);
   }
 
   //updates malleable model to target attendee info
@@ -326,5 +319,9 @@ export class AttendeeFormComponent implements OnInit {
     this.model.state        = attendee.state;
     this.model.zip_code     = attendee.zip_code;
     this.model.email        = attendee.email;
+    this.model.emergency_contact_first_name        = attendee.emergency_contact_first_name;
+    this.model.emergency_contact_last_name        = attendee.emergency_contact_last_name;
+    this.model.emergency_contact_phone_number        = attendee.emergency_contact_phone_number;
+    this.model.emergency_contact_relationship        = attendee.emergency_contact_relationship;
   }
 }
