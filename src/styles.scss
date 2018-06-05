@@ -160,7 +160,6 @@ $red: #a94442;
 //Card Formatting
 .StripeElement {
     display: block;
-    margin: .5rem 1rem 0rem 6rem;
     background-color: white;
     padding: 8px 12px;
     border-radius: 4px;
@@ -168,7 +167,6 @@ $red: #a94442;
     box-shadow: 0 1px 3px 0 #212529;
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
-    width: 80%;
 }
   
 .StripeElement--focus {
@@ -181,6 +179,10 @@ $red: #a94442;
   
 .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
+}
+
+.CardRow{
+    @extend .col-md-12;
 }
 
 #card-title {

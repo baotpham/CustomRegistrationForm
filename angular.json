@@ -39,7 +39,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
-              "https://js.stripe.com/v3/"
+              "node_modules/stripe/lib/stripe.js"
             ]
           },
           "configurations": {
@@ -94,7 +94,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
-              "https://js.stripe.com/v3/"
+              "node_modules/stripe/lib/stripe.js"
             ],
             "assets": [
               "src/favicon.ico",

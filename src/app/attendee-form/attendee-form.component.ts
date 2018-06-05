@@ -162,6 +162,15 @@ export class AttendeeFormComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       console.log('Success!', token);
       // ...send the token to the your backend to process the charge
+      console.log(stripe);
+      console.log(stripe.charges);
+
+      const charge = stripe.charges.create({
+        amount: this.people.length*200,
+        currency: 'usd',
+        description: 'Example charge',
+        source: token,
+      });
     }
 
     console.log("model-based form submitted");
