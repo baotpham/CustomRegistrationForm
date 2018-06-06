@@ -1,10 +1,6 @@
-import { Component, OnInit, Input, AfterViewInit,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
-  ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Attendee } from '../Models/Attendee';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder, FormsModule, NgForm } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder, FormsModule } from '@angular/forms';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -20,8 +16,7 @@ const httpOptions = {
   templateUrl: './attendee-form.component.html',
   styleUrls: ['./attendee-form.component.scss']
 })
-export class AttendeeFormComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('cardInfo') cardInfo: ElementRef;
+export class AttendeeFormComponent implements OnInit {
   attendeeForm: FormGroup;
 
   first_name  = new FormControl("", Validators.required);
@@ -68,10 +63,6 @@ export class AttendeeFormComponent implements OnInit, AfterViewInit, OnDestroy {
   //model = new Attendee('John','Ha', this.sizes[1], 'Male', 23, 'N/A', 'address', 'address_2', 'city', 'state', zip_code, email);
   model = new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "");
 
-  card: any;
-  cardHandler = this.onChange.bind(this);
-  error: string;
-
   fee: number;
   isPaid: boolean;
 
@@ -80,7 +71,7 @@ export class AttendeeFormComponent implements OnInit, AfterViewInit, OnDestroy {
   // Makes sure form is binding with model correctly when "{{diagnostic}}" is placed in form.
   // get diagnostic() { return JSON.stringify(this.model); }
 
-  constructor(fb: FormBuilder, private http: HttpClient, private cd: ChangeDetectorRef) {
+  constructor(fb: FormBuilder, private http: HttpClient) {
     this.attendeeForm = fb.group({
       "first_name"  : this.first_name,
       "last_name"   : this.last_name,
@@ -121,58 +112,7 @@ export class AttendeeFormComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.loadAttendee(this.people[this.current_index], this.current_index);
   }
 
-  ngAfterViewInit() {
-    const style = {
-      base: {
-        lineHeight: '24px',
-        fontFamily: 'monospace',
-        fontSmoothing: 'antialiased',
-        fontSize: '19px',
-        '::placeholder': {
-          color: 'purple'
-        }
-      }
-    };
-
-    this.card = elements.create('card');
-    this.card.mount(this.cardInfo.nativeElement);
-
-    this.card.addEventListener('change', this.cardHandler);
-  }
-
-  ngOnDestroy() {
-    this.card.removeEventListener('change', this.cardHandler);
-    this.card.destroy();
-  }
-
-  onChange({ error }) {
-    if (error) {
-      this.error = error.message;
-    } else {
-      this.error = null;
-    }
-    this.cd.detectChanges();
-  }
-
-  async onSubmit(form: NgForm) {
-    const { token, error } = await stripe.createToken(this.card);
-
-    if (error) {
-      console.log('Something is wrong:', error);
-    } else {
-      console.log('Success!', token);
-      // ...send the token to the your backend to process the charge
-      console.log(stripe);
-      console.log(stripe.charges);
-
-      const charge = stripe.charges.create({
-        amount: this.people.length*200,
-        currency: 'usd',
-        description: 'Example charge',
-        source: token,
-      });
-    }
-
+  onSubmit() {
     console.log("model-based form submitted");
     console.log(this.people.toString());
     // console.log("attendees", this.attendeeForm);
