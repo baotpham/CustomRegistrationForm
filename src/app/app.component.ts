@@ -7,10 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  // title = 'CVCF Youth Retreat 2018 Registration Form';
-  title = 'Practice Form';
+  title = 'CVCF Youth Retreat 2018 Registration Form';
+  page = 'attendeesFormPage';
 
   constructor(){
 
+  }
+
+  nextPage(){
+    this.page = this.page == 'attendeesFormPage' ? 'reviewPage' : 'attendeesFormPage';
   }
 }

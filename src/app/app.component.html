@@ -1,12 +1,24 @@
 <div class="page-border">
   <div class="page-header">
-    <!-- <h1>CVCF Youth Retreat 2018</h1>
+    <h1>{{title}}</h1>
     <h2>Walk in Love</h2>
-    <p><i>"And walk in love, as Christ loved us and gave himself up for us, a fragrant offering and sacrifice to God." ~ Ephesians 5:2</i></p> -->
-    <h1>Tutorial Registration Page Here</h1>
+    <p><i>"And walk in love, as Christ loved us and gave himself up for us, a fragrant offering and sacrifice to God." ~ Ephesians 5:2</i></p>
+    <!-- <h1>Tutorial Registration Page Here</h1> -->
   </div>
 </div>
 
-<app-attendee-form></app-attendee-form>
+<button (click)="nextPage()">Next Page</button>
+
+<div [ngSwitch]="page">
+
+  <div *ngSwitchCase="'attendeesFormPage'">
+    <app-attendee-form></app-attendee-form>
+  </div>
+
+  <div *ngSwitchCase="'reviewPage'">
+    <app-review-page></app-review-page>
+  </div>
+
+</div>
 
 <!-- <app-info-form></app-info-form> -->
