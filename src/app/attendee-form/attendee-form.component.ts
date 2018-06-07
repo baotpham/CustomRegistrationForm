@@ -59,14 +59,11 @@ export class AttendeeFormComponent implements OnInit {
             "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT",
             "VA", "VT", "WA", "WI", "WV", "WY"];
 
-  //model = new Attendee('John','Ha', this.sizes[1], 'Male', 23, 'N/A', 'address', 'address_2', 'city', 'state', zip_code, email);
   model = new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "", "", "", "");
-
-  fee: number;
-  isPaid: boolean;
 
   currentAttendee: Attendee;
 
+  shouldSlice: boolean = true;
 
   constructor(fb: FormBuilder, private http: HttpClient, private userService: UserService) {
     this.attendeeForm = fb.group({
@@ -96,8 +93,6 @@ export class AttendeeFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.max_index = 0;
-    this.current_index = 0;
     this.loadAttendees();
   }
 
@@ -110,42 +105,46 @@ export class AttendeeFormComponent implements OnInit {
     console.log("is form valid? ", this.attendeeForm.valid);
 
     if (this.attendeeForm.valid) {
-      var attendee = new Attendee(this.last_name.value,
-                                  this.first_name.value,
-                                  this.t_shirt.value,
-                                  this.gender.value,
-                                  this.age.value,
-                                  this.medical.value,
-                                  this.address.value,
-                                  this.address_2.value,
-                                  this.city.value,
-                                  this.state.value,
-                                  this.zip_code.value,
-                                  this.email.value,
-                                  this.emergency_contact_first_name.value,
-                                  this.emergency_contact_last_name.value,
-                                  this.emergency_contact_phone_number.value,
-                                  this.emergency_contact_relationship.value,
-                                  this.your_church.value,
-                                  this.your_church_point_of_contact_name.value,
-                                  this.your_church_point_of_contact_number.value);
+      var attendee = new Attendee()
+
+      attendee.first_name                           = this.first_name.value,
+      attendee.last_name                            = this.last_name.value,
+      attendee.t_shirt                              = this.t_shirt.value,
+      attendee.gender                               = this.gender.value,
+      attendee.age                                  = this.age.value,
+      attendee.medical                              = this.medical.value,
+      attendee.address                              = this.address.value,
+      attendee.address_2                            = this.address_2.value,
+      attendee.city                                 = this.city.value,
+      attendee.state                                = this.state.value,
+      attendee.zip_code                             = this.zip_code.value,
+      attendee.email                                = this.email.value,
+      attendee.emergency_contact_first_name         = this.emergency_contact_first_name.value,
+      attendee.emergency_contact_last_name          = this.emergency_contact_last_name.value,
+      attendee.emergency_contact_phone_number       = this.emergency_contact_phone_number.value,
+      attendee.emergency_contact_relationship       = this.emergency_contact_relationship.value,
+      attendee.your_church                          = this.your_church.value,
+      attendee.your_church_point_of_contact_name    = this.your_church_point_of_contact_name.value,
+      attendee.your_church_point_of_contact_number  = this.your_church_point_of_contact_number.value);
+
 
       console.log("attendee", attendee);
-      this.userService.addAttendee(attendee);
+      this.userService.addAttendee(this.current_index, attendee);
 
       this.currentAttendee = attendee;
 
-      this.people.splice(this.max_index, 1);
-      this.people.push(attendee);
-      console.log("people", this.people);
+      if(this.shouldSlice) this.people.splice(this.max_index, 1);
 
+      this.people[this.current_index] = attendee;
+
+      console.log("people", this.people);
     }
   }
 
 
   createNewAttendee(){
     if (this.attendeeForm.valid) {
-      this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", ""));
+      this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "", "", "", ""));
       console.log(this.people);
 
       this.max_index++;
@@ -159,6 +158,9 @@ export class AttendeeFormComponent implements OnInit {
       //update current attendee
       this.currentAttendee = this.people[this.max_index];
 
+      //make sure the last index should be deleted since we just added an empty object into people
+      this.shouldSlice = true;
+
       //bind to UI
       this.bindListToForm();
     }
@@ -170,12 +172,24 @@ export class AttendeeFormComponent implements OnInit {
 
     if(attendees.length > 0){
       this.people = attendees;
-      this.currentAttendee = this.people[0];
+
+      this.max_index = this.people.length - 1;
+      this.current_index = this.max_index;
+
+      this.currentAttendee = this.people[this.current_index];
+
+      this.attendeeForm.reset();
+
+      //make sure the last index should not be deleted
+      this.shouldSlice = false;
+
       this.bindListToForm();
       console.log("yes people", this.people);
     }else{
       this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "", "", "", ""));
       this.currentAttendee = this.people[0];
+      this.max_index = 0;
+      this.current_index = 0;
       console.log("no people");
     }
   }
@@ -197,6 +211,9 @@ export class AttendeeFormComponent implements OnInit {
 
     //Updates current index to the attendee we're loading
     this.current_index = new_index;
+
+    //make sure the last index should not be deleted
+    this.shouldSlice = false;
   }
 
 
@@ -265,6 +282,9 @@ export class AttendeeFormComponent implements OnInit {
     this.emergency_contact_last_name.setValue(this.currentAttendee.emergency_contact_last_name);
     this.emergency_contact_phone_number.setValue(this.currentAttendee.emergency_contact_phone_number);
     this.emergency_contact_relationship.setValue(this.currentAttendee.emergency_contact_relationship);
+    this.your_church.setValue(this.currentAttendee.your_church);
+    this.your_church_point_of_contact_name.setValue(this.currentAttendee.your_church_point_of_contact_name);
+    this.your_church_point_of_contact_number.setValue(this.currentAttendee.your_church_point_of_contact_number);
   }
 
 

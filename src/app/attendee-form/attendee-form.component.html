@@ -31,14 +31,16 @@
       <div class="SmallFormFieldContainer">
         <label class="control-label">T-Shirt Size</label>
         <select class="form-control" formControlName="t_shirt" (change)="addAttendee()" required>
-            <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
-          </select>
+          <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
+        </select>
+        <div [hidden]="t_shirt.valid || t_shirt.pristine" class="alert alert-danger">T-shirt size is required</div>
       </div>
       <div class="SmallFormFieldContainer">
         <label class="control-label">Gender</label>
         <select class="form-control" formControlName="gender" (change)="addAttendee()" required>
-            <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
-          </select>
+          <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+        </select>
+        <div [hidden]="gender.valid || gender.pristine" class="alert alert-danger">Gender is required</div>
       </div>
       <div class="SmallFormFieldContainer">
         <label class="control-label">Age</label>

@@ -8,6 +8,11 @@
 
   <div style="height: 100px;"></div>
 
+  <!-- previous button -->
+  <div class="nav-buttons" style="text-align: left;" *ngIf="page == 'reviewPage'">
+    <button class="nav-button" [class.nav-button-active]="page == 'attendeesFormPage'" (click)="switchPage('attendeesFormPage')">Edit</button>
+  </div>
+
   <!-- page content -->
   <div [ngSwitch]="page">
     <div *ngSwitchCase="'attendeesFormPage'">
@@ -28,11 +33,6 @@
 <!-- next button -->
 <div class="nav-buttons" *ngIf="page == 'attendeesFormPage'">
   <button class="nav-button" [class.nav-button-active]="page == 'reviewPage'" (click)="switchPage('reviewPage')">Next</button>
-</div>
-
-<!-- previous button -->
-<div class="nav-buttons" *ngIf="page == 'reviewPage'">
-  <button class="nav-button" [class.nav-button-active]="page == 'attendeesFormPage'" (click)="switchPage('attendeesFormPage')">Previous</button>
 </div>
 
 <!-- spacing -->

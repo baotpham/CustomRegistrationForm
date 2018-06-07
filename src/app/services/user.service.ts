@@ -9,8 +9,8 @@ export class UserService {
 
   constructor() {}
 
-  addAttendee(attendee){
-    this.registers.push(attendee);
+  addAttendee(index, attendee){
+    this.registers[index] = attendee;
   }
 
   removeAttendee(index){

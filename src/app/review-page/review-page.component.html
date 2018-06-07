@@ -1,16 +1,49 @@
 <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout">
-  <div class="page-border">
-    <div class="form-control">
 
-      <label for="card-info" id="card-title">Card Information</label>
-      <div class="CardRow">
-        <div id="card-info" #cardInfo></div>
-
-        <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
-      </div>
-    </div>
-
-    <button class="primary-button" type="submit">Pay $777</button>
+  <div class="total-info">
+    Total Registers:
+    <span *ngIf="registers.length != undefined">{{registers.length}}</span>
+    <span *ngIf="registers.length == undefined">0</span>
   </div>
+
+  <!-- spacing -->
+  <div style="height: 50px;"></div>
+
+  <table>
+    <tr>
+      <th class="col-md-6">Name</th>
+      <th class="col-md-4">Age</th>
+      <th class="col-md-4">Gender</th>
+      <th class="col-md-4">Shirt Size</th>
+    </tr>
+    <tr *ngFor="let attendee of registers">
+      <td class="col-md-6">{{attendee.first_name}} {{attendee.last_name}}</td>
+      <td class="col-md-4">{{attendee.age}}</td>
+      <td class="col-md-4">{{attendee.gender}}</td>
+      <td class="col-md-4">{{attendee.t_shirt}}</td>
+    </tr>
+  </table>
+
+  <!-- spacing -->
+  <div style="height: 70px;"></div>
+
+
+  <div>
+
+    <label for="card-info" id="card-title">Card Information</label>
+    <div class="CardRow">
+      <div id="card-info" #cardInfo></div>
+
+      <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+    </div>
+  </div>
+
+  <!-- spacing -->
+  <div style="height: 70px;"></div>
+
+  <button class="primary-button" type="submit">Pay $777</button>
+
+  <!-- spacing -->
+  <div style="height: 200px;"></div>
 
 </form>
