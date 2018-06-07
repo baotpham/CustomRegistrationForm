@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Attendee } from '../Models/Attendee';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder, FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { UserService } from '../services/user.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,6 +18,8 @@ const httpOptions = {
   templateUrl: './attendee-form.component.html',
   styleUrls: ['./attendee-form.component.scss']
 })
+
+
 export class AttendeeFormComponent implements OnInit {
   attendeeForm: FormGroup;
 
@@ -32,22 +36,17 @@ export class AttendeeFormComponent implements OnInit {
   zip_code    = new FormControl("", Validators.required);
   email       = new FormControl("", Validators.required);
 
-  //church info
-  your_church                         = new FormControl("", Validators.required);
-  your_church_point_of_contact_name   = new FormControl("", Validators.required);
-  your_church_point_of_contact_number = new FormControl("", Validators.required);
-
   //emergency info
   emergency_contact_first_name        = new FormControl("", Validators.required);
   emergency_contact_last_name         = new FormControl("", Validators.required);
   emergency_contact_phone_number      = new FormControl("", Validators.required);
   emergency_contact_relationship      = new FormControl("", Validators.required);
 
-  //payment info
-  card_number                         = new FormControl("", Validators.required);
-  name_on_card                        = new FormControl("", Validators.required);
-  expiration_date                     = new FormControl("", Validators.required);
-  security_code                       = new FormControl("", Validators.required);
+  //church info
+  your_church                         = new FormControl("", Validators.required);
+  your_church_point_of_contact_name   = new FormControl("", Validators.required);
+  your_church_point_of_contact_number = new FormControl("", Validators.required);
+
 
   max_index = 0;
   current_index = 0;
@@ -61,17 +60,15 @@ export class AttendeeFormComponent implements OnInit {
             "VA", "VT", "WA", "WI", "WV", "WY"];
 
   //model = new Attendee('John','Ha', this.sizes[1], 'Male', 23, 'N/A', 'address', 'address_2', 'city', 'state', zip_code, email);
-  model = new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "");
+  model = new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "", "", "", "");
 
   fee: number;
   isPaid: boolean;
 
   currentAttendee: Attendee;
 
-  // Makes sure form is binding with model correctly when "{{diagnostic}}" is placed in form.
-  // get diagnostic() { return JSON.stringify(this.model); }
 
-  constructor(fb: FormBuilder, private http: HttpClient) {
+  constructor(fb: FormBuilder, private http: HttpClient, private userService: UserService) {
     this.attendeeForm = fb.group({
       "first_name"  : this.first_name,
       "last_name"   : this.last_name,
@@ -85,9 +82,6 @@ export class AttendeeFormComponent implements OnInit {
       "state"       : this.state,
       "zip_code"    : this.zip_code,
       "email"       : this.email,
-      // "your_church"                         : this.your_church,
-      // "your_church_point_of_contact_name"   : this.your_church_point_of_contact_name,
-      // "your_church_point_of_contact_number" : this.your_church_point_of_contact_number,
 
       //emergency info
       "emergency_contact_first_name"        : this.emergency_contact_first_name,
@@ -95,127 +89,16 @@ export class AttendeeFormComponent implements OnInit {
       "emergency_contact_phone_number"      : this.emergency_contact_phone_number,
       "emergency_contact_relationship"      : this.emergency_contact_relationship,
 
-      //payment info
-      // "card_number"                         : this.card_number,
-      // "name_on_card"                        : this.name_on_card,
-      // "expiration_date"                     : this.expiration_date,
-      // "security_code"                       : this.security_code
+      "your_church"                         : this.your_church,
+      "your_church_point_of_contact_name"   : this.your_church_point_of_contact_name,
+      "your_church_point_of_contact_number" : this.your_church_point_of_contact_number,
     });
   }
 
   ngOnInit() {
     this.max_index = 0;
     this.current_index = 0;
-    this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", ""));
-    console.log("PEOPLE", this.people);
-    // this.currentAttendee = this.people[this.current_index];
-    // this.loadAttendee(this.people[this.current_index], this.current_index);
-  }
-
-  onSubmit() {
-    console.log("model-based form submitted");
-    console.log(this.people.toString());
-    // console.log("attendees", this.attendeeForm);
-    // console.log("other info", this.attendeeOtherInfoForm);
-
-    if(this.attendeeForm.valid){
-
-      //add the last person to the list
-      this.bindFormToList(this.current_index);
-      
-      this.people.forEach((attendee) => {
-        console.log("attendee", attendee);
-        console.log(attendee.first_name);
-        console.log(this.your_church);
-        console.log(attendee.emergency_contact_phone_number);
-        this.http.post(
-          "https://docs.google.com/forms/d/e/1FAIpQLSdpCxARcwWV5BeH5kjj45vVzJgrdOca4e78vq2KHPB2epx8yw/formResponse",
-          {
-            "entry.736264477": attendee.first_name,
-            "entry.1216232379": attendee.last_name,
-            "entry.1922331484": attendee.t_shirt,
-            "entry.1808161308": attendee.gender,
-            "entry.982307170": attendee.age,
-            "entry.237564014": attendee.medical,
-            "entry.475860172": attendee.address,
-            "entry.1132819387": attendee.address_2,
-            "entry.882873948": attendee.city,
-            "entry.1300146252": attendee.state,
-            "entry.1995735036": attendee.zip_code,
-            "entry.1163380930": attendee.email,
-
-            // "entry.1814348022": this.your_church.value,
-            // "entry.1795731922": this.your_church_point_of_contact_name.value,
-            // "entry.42598533": this.your_church_point_of_contact_number.value,
-
-            "entry.1814348022": "boop",
-            "entry.1795731922": "schoop",
-            "entry.42598533": "da whoop",
-
-            //emergency info
-            "entry.1822987082": attendee.emergency_contact_first_name,
-            "entry.854313620": attendee.emergency_contact_last_name,
-            "entry.1752027412": attendee.emergency_contact_phone_number,
-            "entry.516070659": attendee.emergency_contact_relationship,
-
-            //payment info
-            "entry.345154263": "200",
-            "entry.1114223182": "yes"
-          },
-             {responseType: 'text'}
-        ).subscribe((val) => {
-          console.log("POST call successful value returned in body", 
-                      val);
-      },
-      response => {
-          console.log("POST call in error", response);
-      },
-      () => {
-          console.log("The POST observable is now completed.");
-      });
-      });
-    }else{
-      alert("Please fill out every field");
-    }
-  }
-
-
-  //Helper buttons
-  fullUpdate() {
-    this.attendeeForm.setValue({
-      first_name: 'Partial', last_name: 'monkey', t_shirt: 'M', gender: 'Male',
-      age: 12, medical: 'yes', address: '123 Adams Ave', address_2: "N/A", city: "Phila",
-      state: "PA", zip_code: "12312312", email: "test@test.com", emergency_contact_first_name: "Test",
-      emergency_contact_last_name: "Testest", emergency_contact_phone_number: "12312312", emergency_contact_relationship: "asdfasd"
-    });
-  }
-  lazyOne() {
-    this.attendeeForm.setValue({
-      first_name: '1', last_name: '1', t_shirt: 'S', gender: 'Male',
-      age: 1, medical: '1', address: '123 Adams Ave', address_2: "N/A", city: "Phila",
-      state: "PA", zip_code: "12312312", email: "test@test.com"
-    });
-  }
-  lazyTwo() {
-    this.attendeeForm.setValue({
-      first_name: '2', last_name: '2', t_shirt: 'M', gender: 'Female',
-      age: 2, medical: '2', address: '123 Adams Ave', address_2: "N/A", city: "Phila",
-      state: "PA", zip_code: "12312312", email: "test@test.com"
-    });
-  }
-
-
-  partialUpdate() {
-    this.attendeeForm.patchValue({ age: this.max_index });
-    console.log("hi");
-  }
-
-  check() {
-    for (let entry of this.people) {
-      console.log(entry);
-    }
-    console.log(this.people.toString);
-    console.log(this.people.length);
+    this.loadAttendees();
   }
 
 
@@ -224,41 +107,99 @@ export class AttendeeFormComponent implements OnInit {
   //Previous form must be valid before moving on.
   //Must show active on new form.
   addAttendee() {
+    console.log("is form valid? ", this.attendeeForm.valid);
+
     if (this.attendeeForm.valid) {
+      var attendee = new Attendee(this.last_name.value,
+                                  this.first_name.value,
+                                  this.t_shirt.value,
+                                  this.gender.value,
+                                  this.age.value,
+                                  this.medical.value,
+                                  this.address.value,
+                                  this.address_2.value,
+                                  this.city.value,
+                                  this.state.value,
+                                  this.zip_code.value,
+                                  this.email.value,
+                                  this.emergency_contact_first_name.value,
+                                  this.emergency_contact_last_name.value,
+                                  this.emergency_contact_phone_number.value,
+                                  this.emergency_contact_relationship.value,
+                                  this.your_church.value,
+                                  this.your_church_point_of_contact_name.value,
+                                  this.your_church_point_of_contact_number.value);
 
-      //Save previous form info
-      this.bindFormToList(this.current_index);
+      console.log("attendee", attendee);
+      this.userService.addAttendee(attendee);
 
-      //Once information is saved, then clears the page
-      this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", ""));
-      this.attendeeForm.reset();
-      console.log("Adding new attendee.");
+      this.currentAttendee = attendee;
 
-      //Update variables to look at new Attendee
-      this.max_index++;
-      this.current_index = this.max_index;
-      this.currentAttendee = this.people[this.max_index];
-      //this.loadAttendee(this.people[this.max_index], this.max_index);
+      this.people.splice(this.max_index, 1);
+      this.people.push(attendee);
+      console.log("people", this.people);
+
     }
   }
 
-  //Must navigate to specific attendee and update active pagination
+
+  createNewAttendee(){
+    if (this.attendeeForm.valid) {
+      this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", ""));
+      console.log(this.people);
+
+      this.max_index++;
+      this.current_index = this.max_index;
+
+      //copy church info to every other register. save work for leaders
+      this.people[this.max_index].your_church = this.your_church.value;
+      this.people[this.max_index].your_church_point_of_contact_name = this.your_church_point_of_contact_name.value;
+      this.people[this.max_index].your_church_point_of_contact_number = this.your_church_point_of_contact_number.value;
+
+      //update current attendee
+      this.currentAttendee = this.people[this.max_index];
+
+      //bind to UI
+      this.bindListToForm();
+    }
+  }
+
+
+  loadAttendees(){
+    var attendees = this.userService.getAllRegisters();
+
+    if(attendees.length > 0){
+      this.people = attendees;
+      this.currentAttendee = this.people[0];
+      this.bindListToForm();
+      console.log("yes people", this.people);
+    }else{
+      this.people.push(new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "", "", "", ""));
+      this.currentAttendee = this.people[0];
+      console.log("no people");
+    }
+  }
+
+
+  // Must navigate to specific attendee and update active pagination
   loadAttendee(attendee: Attendee, new_index: number) {
 
     console.log("saving old attendee data before moving on");
     //Save current attendee before moving on
-    this.bindFormToList(this.current_index);
+    // this.bindFormToList(this.current_index);
 
     //Sets new current attendee for active setting
     this.currentAttendee = attendee;
 
     console.log("pulls in target attendee data into form");
     //Pull in target attendee data and put into form
-    this.bindListToForm(new_index);
+    this.bindListToForm();
 
     //Updates current index to the attendee we're loading
     this.current_index = new_index;
   }
+
+
 
   //Deletes attendee from current list
   deleteAttendee(index) {
@@ -272,7 +213,7 @@ export class AttendeeFormComponent implements OnInit {
       //Resets current attendee and index to the first one
       this.current_index = index - 1;
       this.currentAttendee = this.people[this.current_index];
-      this.bindListToForm(this.current_index);
+      this.bindListToForm();
 
     }
     else{
@@ -281,15 +222,13 @@ export class AttendeeFormComponent implements OnInit {
   }
 
 
+
+
+
+
   //Binding
   //Updates the list's values with the contents of the form
   bindFormToList(index: number) {
-    console.log(this.people[index]);
-    console.log(this.first_name.value);
-    console.log(this.last_name.value);
-    console.log(this.t_shirt.value);
-    console.log(this.gender.value);
-
     this.people[index].first_name   = this.first_name.value;
     this.people[index].last_name    = this.last_name.value;
     this.people[index].t_shirt      = this.t_shirt.value;
@@ -309,7 +248,7 @@ export class AttendeeFormComponent implements OnInit {
   }
 
   //Updates the form's values with the contents from the list
-  bindListToForm(index: number) {
+  bindListToForm() {
     this.first_name.setValue(this.currentAttendee.first_name);
     this.last_name.setValue(this.currentAttendee.last_name);
     this.t_shirt.setValue(this.currentAttendee.t_shirt);
@@ -327,6 +266,9 @@ export class AttendeeFormComponent implements OnInit {
     this.emergency_contact_phone_number.setValue(this.currentAttendee.emergency_contact_phone_number);
     this.emergency_contact_relationship.setValue(this.currentAttendee.emergency_contact_relationship);
   }
+
+
+
 
   //updates malleable model to target attendee info
   bindToTarget(attendee: Attendee) {
@@ -346,5 +288,41 @@ export class AttendeeFormComponent implements OnInit {
     this.model.emergency_contact_last_name        = attendee.emergency_contact_last_name;
     this.model.emergency_contact_phone_number        = attendee.emergency_contact_phone_number;
     this.model.emergency_contact_relationship        = attendee.emergency_contact_relationship;
+  }
+
+  //Helper buttons
+  fullUpdate() {
+    this.attendeeForm.setValue({
+      first_name: 'Partial', last_name: 'monkey', t_shirt: 'M', gender: 'Male',
+      age: 12, medical: 'yes', address: '123 Adams Ave', address_2: "N/A", city: "Phila",
+      state: "PA", zip_code: "12312312", email: "test@test.com", emergency_contact_first_name: "Test",
+      emergency_contact_last_name: "Testest", emergency_contact_phone_number: "12312312", emergency_contact_relationship: "asdfasd",
+      your_church: "Bapist", your_church_point_of_contact_name: "asdafsdfasdfa", your_church_point_of_contact_number: "1231231232"
+    });
+  }
+  lazyOne() {
+    this.attendeeForm.setValue({
+      first_name: '1', last_name: '1', t_shirt: 'S', gender: 'Male',
+      age: 1, medical: '1', address: '123 Adams Ave', address_2: "N/A", city: "Phila",
+      state: "PA", zip_code: "12312312", email: "test@test.com"
+    });
+  }
+  lazyTwo() {
+    this.attendeeForm.setValue({
+      first_name: '2', last_name: '2', t_shirt: 'M', gender: 'Female',
+      age: 2, medical: '2', address: '123 Adams Ave', address_2: "N/A", city: "Phila",
+      state: "PA", zip_code: "12312312", email: "test@test.com"
+    });
+  }
+  partialUpdate() {
+    this.attendeeForm.patchValue({ age: this.max_index });
+    console.log("hi");
+  }
+  check() {
+    for (let entry of this.people) {
+      console.log(entry);
+    }
+    console.log(this.people.toString);
+    console.log(this.people.length);
   }
 }

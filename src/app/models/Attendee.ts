@@ -16,7 +16,10 @@ export class Attendee {
         public emergency_contact_first_name: string,
         public emergency_contact_last_name: string,
         public emergency_contact_phone_number: string,
-        public emergency_contact_relationship: string
+        public emergency_contact_relationship: string,
+        public your_church: string,
+        public your_church_point_of_contact_name: string,
+        public your_church_point_of_contact_number: string,
     ){
      }
 

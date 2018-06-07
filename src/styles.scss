@@ -22,17 +22,14 @@ $red: #a94442;
 
 // Titles
 .title-container{
-    @extend .row;
     margin-top: 2rem;
     padding-bottom: 35px;
 }
 .title{
-    @extend .offset-md-1;
     font-weight: 400;
     font-size: 1.8rem;
     padding-left: 0;
     width: 19rem;
-    margin-left: 54px;
     border-bottom: 4px solid $teal;
 }
 .total-info{
@@ -56,8 +53,9 @@ $red: #a94442;
   margin-right: 50px;
   margin-bottom: 100px;
 }
-.PrimaryButton, .PrimaryButton:disabled,
-.PrimaryButton[disabled] {
+
+.primary-button, .primary-button:disabled,
+.primary-button[disabled] {
     @extend .btn;
     @extend .btn-primary;
     background-color: $teal;
@@ -65,8 +63,9 @@ $red: #a94442;
     border-radius: 30px;
     padding: 6px 24px;
     font-size: 1.5rem;
-    // z-index: -1 !important;
+    float: right;
 }
+
 .DeleteButton {
     border-radius: 50%;
     padding: 0;
@@ -151,6 +150,43 @@ $red: #a94442;
     border-color: $teal;
 }
 
+
+.nav-buttons{
+  display: block;
+  text-align: center;
+
+  .nav-button.active{
+    color: $white;
+    background-color: $teal;
+    border: none;
+  }
+
+  .nav-button{
+    padding: 9px 16px;
+    margin-right: 10px;
+    line-height: 1.42857143;
+    // border-bottom: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 16px;
+    border-color: $teal;
+    width: 200px;
+  }
+
+  .nav-button:hover, .nav-button:focus {
+    color: $white;
+    background-color: $teal;
+    border-color: $teal;
+  }
+
+  .nav-button-active{
+    color: $white;
+    background-color: $teal;
+    border-color: $teal;
+  }
+}
+
+
+
 #add-entry-box{
     background-color: $white;
     border-color: $teal;
@@ -168,15 +204,15 @@ $red: #a94442;
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
 }
-  
+
 .StripeElement--focus {
     box-shadow: 0 1px 3px 0 $teal;
 }
-  
+
 .StripeElement--invalid {
     border-color: #fa755a;
 }
-  
+
 .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
 }

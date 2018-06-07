@@ -9,11 +9,14 @@ import {
 
 import { NgForm } from '@angular/forms';
 
+import { UserService } from '../services/user.service';
+
 @Component({
   selector: 'app-review-page',
   templateUrl: './review-page.component.html',
   styleUrls: ['./review-page.component.scss']
 })
+
 export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('cardInfo') cardInfo: ElementRef;
 
@@ -21,10 +24,14 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   cardHandler = this.onChange.bind(this);
   error: string;
 
-  constructor(private cd: ChangeDetectorRef) { }
+  registers: any;
+
+  constructor(private cd: ChangeDetectorRef, private userService: UserService) { }
 
   ngOnInit() {
-
+    //get data from form registrations
+    this.registers = this.userService.getAllRegisters();
+    console.log("Registers: ", this.registers);
   }
 
   ngAfterViewInit() {

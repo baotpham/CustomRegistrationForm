@@ -5,20 +5,38 @@
     <p><i>"And walk in love, as Christ loved us and gave himself up for us, a fragrant offering and sacrifice to God." ~ Ephesians 5:2</i></p> -->
     <h1>Tutorial Registration Page Here</h1>
   </div>
-</div>
 
-<button (click)="nextPage()">Next Page</button>
+  <div style="height: 100px;"></div>
 
-<div [ngSwitch]="page">
+  <!-- page content -->
+  <div [ngSwitch]="page">
+    <div *ngSwitchCase="'attendeesFormPage'">
+      <app-attendee-form></app-attendee-form>
+    </div>
 
-  <div *ngSwitchCase="'attendeesFormPage'">
-    <app-attendee-form></app-attendee-form>
+    <div *ngSwitchCase="'reviewPage'">
+      <app-review-page></app-review-page>
+    </div>
   </div>
 
-  <div *ngSwitchCase="'reviewPage'">
-    <app-review-page></app-review-page>
-  </div>
-
 </div>
+
+
+<!-- spacing -->
+<div style="height: 30px;"></div>
+
+<!-- next button -->
+<div class="nav-buttons" *ngIf="page == 'attendeesFormPage'">
+  <button class="nav-button" [class.nav-button-active]="page == 'reviewPage'" (click)="switchPage('reviewPage')">Next</button>
+</div>
+
+<!-- previous button -->
+<div class="nav-buttons" *ngIf="page == 'reviewPage'">
+  <button class="nav-button" [class.nav-button-active]="page == 'attendeesFormPage'" (click)="switchPage('attendeesFormPage')">Previous</button>
+</div>
+
+<!-- spacing -->
+<div style="height: 200px;"></div>
+
 
 <!-- <app-info-form></app-info-form> -->

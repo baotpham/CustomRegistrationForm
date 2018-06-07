@@ -15,7 +15,7 @@ export class AppComponent {
 
   }
 
-  nextPage(){
-    this.page = this.page == 'attendeesFormPage' ? 'reviewPage' : 'attendeesFormPage';
+  switchPage(page){
+    this.page = page;
   }
 }
