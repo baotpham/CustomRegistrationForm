@@ -8,6 +8,7 @@ import { InfoFormComponent } from './info-form/info-form.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReviewPageComponent } from './review-page/review-page.component';
+import { TransferHttpCacheModule } from '@hapiness/ng-universal-transfer-http';
 
 @NgModule({
   declarations: [
@@ -17,10 +18,11 @@ import { ReviewPageComponent } from './review-page/review-page.component';
     ReviewPageComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'registration-form-id'}),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TransferHttpCacheModule
   ],
   providers: [],
   bootstrap: [AppComponent]

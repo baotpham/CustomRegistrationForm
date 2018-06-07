@@ -92,6 +92,9 @@ export class AttendeeFormComponent implements OnInit {
     });
   }
 
+  onSubmit(){
+
+  }
   ngOnInit() {
     this.loadAttendees();
   }
@@ -105,27 +108,27 @@ export class AttendeeFormComponent implements OnInit {
     console.log("is form valid? ", this.attendeeForm.valid);
 
     if (this.attendeeForm.valid) {
-      var attendee = new Attendee()
+      var attendee = new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "", "", "", "");
 
-      attendee.first_name                           = this.first_name.value,
-      attendee.last_name                            = this.last_name.value,
-      attendee.t_shirt                              = this.t_shirt.value,
-      attendee.gender                               = this.gender.value,
-      attendee.age                                  = this.age.value,
-      attendee.medical                              = this.medical.value,
-      attendee.address                              = this.address.value,
-      attendee.address_2                            = this.address_2.value,
-      attendee.city                                 = this.city.value,
-      attendee.state                                = this.state.value,
-      attendee.zip_code                             = this.zip_code.value,
-      attendee.email                                = this.email.value,
-      attendee.emergency_contact_first_name         = this.emergency_contact_first_name.value,
-      attendee.emergency_contact_last_name          = this.emergency_contact_last_name.value,
-      attendee.emergency_contact_phone_number       = this.emergency_contact_phone_number.value,
-      attendee.emergency_contact_relationship       = this.emergency_contact_relationship.value,
-      attendee.your_church                          = this.your_church.value,
-      attendee.your_church_point_of_contact_name    = this.your_church_point_of_contact_name.value,
-      attendee.your_church_point_of_contact_number  = this.your_church_point_of_contact_number.value);
+      attendee.first_name                           = this.first_name.value;
+      attendee.last_name                            = this.last_name.value;
+      attendee.t_shirt                              = this.t_shirt.value;
+      attendee.gender                               = this.gender.value;
+      attendee.age                                  = this.age.value;
+      attendee.medical                              = this.medical.value;
+      attendee.address                              = this.address.value;
+      attendee.address_2                            = this.address_2.value;
+      attendee.city                                 = this.city.value;
+      attendee.state                                = this.state.value;
+      attendee.zip_code                             = this.zip_code.value;
+      attendee.email                                = this.email.value;
+      attendee.emergency_contact_first_name         = this.emergency_contact_first_name.value;
+      attendee.emergency_contact_last_name          = this.emergency_contact_last_name.value;
+      attendee.emergency_contact_phone_number       = this.emergency_contact_phone_number.value;
+      attendee.emergency_contact_relationship       = this.emergency_contact_relationship.value;
+      attendee.your_church                          = this.your_church.value;
+      attendee.your_church_point_of_contact_name    = this.your_church_point_of_contact_name.value;
+      attendee.your_church_point_of_contact_number  = this.your_church_point_of_contact_number.value;
 
 
       console.log("attendee", attendee);
