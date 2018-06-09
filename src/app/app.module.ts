@@ -8,13 +8,15 @@ import { InfoFormComponent } from './info-form/info-form.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReviewPageComponent } from './review-page/review-page.component';
+import { ThankyoupageComponent } from './thankyoupage/thankyoupage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AttendeeFormComponent,
     InfoFormComponent,
-    ReviewPageComponent
+    ReviewPageComponent,
+    ThankyoupageComponent
   ],
   imports: [
     BrowserModule,
