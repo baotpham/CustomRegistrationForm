@@ -10,7 +10,11 @@ import {
 import { NgForm } from '@angular/forms';
 
 import { UserService } from '../services/user.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
+
+import { GoogleService } from '../services/google-service.service';
+
+
 
 @Component({
   selector: 'app-review-page',
@@ -27,8 +31,10 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   registers: any;
 
+  loading: boolean = false;
+
   constructor(private cd: ChangeDetectorRef, private userService: UserService,
-    private http: HttpClient) { }
+    private http: HttpClient, private googleService: GoogleService) { }
 
   ngOnInit() {
     //get data from form registrations
@@ -77,7 +83,10 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       console.log('Success!', token);
       // ...send the token to the your backend to process the charge
-      this.processCharge(token);
+      this.processCharge(token).then(
+        (success) => this.postToGoogle(),
+        (error) => console.error("Stripe process charge error", error)
+      );
 
 
       // const charge = stripe.charges.create({
@@ -90,20 +99,38 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   processCharge(token) {
-    var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/webtask-stripe-payment';
-    console.log(`Processing token: ${JSON.stringify(token)}`);
 
-    const command = {
-      amount: 200,
-      currency: 'usd',
-      description: 'Example charge',
-      source: token
-    };
+    let promise = new Promise((resolve, reject) => {
 
-    this.http.post(task_url, command).subscribe(
-      () => console.log('Success'),
-      error => alert(`Adding task failed with error ${error}`)
-    );
+      var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/webtask-stripe-payment';
+      console.log(`Processing token: ${JSON.stringify(token)}`);
+
+      const command = {
+        amount: 200,
+        currency: 'usd',
+        description: 'Example charge',
+        source: token
+      };
+
+      this.http.post(task_url, command).subscribe(
+        (data) => resolve(data),
+        (error) => reject(error)
+      );
+    });
+
+    return promise;
+  }
+
+
+  postToGoogle(){
+    console.log("posting to google: ", this.registers);
+    this.loading = true;
+
+    //google sheet response is html, but for some reason, http tries to parse json.
+    //this project will reject the html. I think it has to do with http header.
+    this.googleService.post(this.registers).then(
+      () => {this.loading = false},
+      () => {this.loading = false});
   }
 
 }
