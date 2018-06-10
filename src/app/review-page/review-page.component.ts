@@ -10,6 +10,7 @@ import {
 import { NgForm } from '@angular/forms';
 
 import { UserService } from '../services/user.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-review-page',
@@ -26,7 +27,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   registers: any;
 
-  constructor(private cd: ChangeDetectorRef, private userService: UserService) { }
+  constructor(private cd: ChangeDetectorRef, private userService: UserService,
+    private http: HttpClient) { }
 
   ngOnInit() {
     //get data from form registrations
@@ -75,13 +77,33 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       console.log('Success!', token);
       // ...send the token to the your backend to process the charge
-      const charge = stripe.charges.create({
-        amount: 200,
-        currency: 'usd',
-        description: 'Example charge',
-        source: token,
-      });
+      this.processCharge(token);
+
+
+      // const charge = stripe.charges.create({
+      //   amount: 200,
+      //   currency: 'usd',
+      //   description: 'Example charge',
+      //   source: token,
+      // });
     }
+  }
+
+  processCharge(token) {
+    var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/webtask-stripe-payment';
+    console.log(`Processing token: ${JSON.stringify(token)}`);
+
+    const command = {
+      amount: 200,
+      currency: 'usd',
+      description: 'Example charge',
+      source: token
+    };
+
+    this.http.post(task_url, command).subscribe(
+      () => console.log('Success'),
+      error => alert(`Adding task failed with error ${error}`)
+    );
   }
 
 }
