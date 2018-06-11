@@ -124,13 +124,13 @@ $red: #a94442;
 //     border-bottom-right-radius: 4px;
 // }
 
-.pagination>.active>a{
+.pagination>.active>.pagination-button, .pagination>.active>a{
     color: $white;
     background-color: $teal;
     border-color: $teal;
     border-radius: 30px;
 }
-.pagination>li>a{
+.pagination>li>.pagination-button, .pagination>li>a{
     position: relative;
     float: left;
     padding: 9px 16px;
@@ -145,10 +145,12 @@ $red: #a94442;
     z-index: 0;
 }
 
+.pagination>li>.pagination-button:hover, .pagination>li>.pagination-button:focus,
 .pagination>li>a:hover, .pagination>li>a:focus {
     color: #fff;
     background-color: $teal;
     border-color: $teal;
+    cursor: pointer;
 }
 
 
