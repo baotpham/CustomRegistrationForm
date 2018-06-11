@@ -1,3 +1,11 @@
+<!-- spacing -->
+<div style="height: 30px;"></div>
+
+<!-- Previous Button -->
+<div class="nav-buttons" style="text-align: left;">
+  <button class="nav-button" routerLink="/form">Edit</button>
+</div>
+
 <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout">
 
   <div class="total-info">
@@ -51,7 +59,7 @@
   <!-- spacing -->
   <div style="height: 70px;"></div>
 
-  <button class="primary-button" type="submit">Pay $777</button>
+  <button class="primary-button" type="submit" routerLink="/thank-you">Pay ${{registers.length * 155}}</button>
 
   <!-- spacing -->
   <div style="height: 200px;"></div>

@@ -4,7 +4,8 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  EventEmitter, Output
 } from '@angular/core';
 
 import { NgForm } from '@angular/forms';
@@ -24,6 +25,8 @@ import { GoogleService } from '../services/google-service.service';
 
 export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('cardInfo') cardInfo: ElementRef;
+
+  @Output() completed = new EventEmitter<string>();
 
   card: any;
   cardHandler = this.onChange.bind(this);
@@ -78,7 +81,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onSubmit(form: NgForm) {
-    const { token, error } = await stripe.createToken(this.card);
+    // const { token, error } = await stripe.createToken(this.card);
 
     if (error) {
       console.log('Something is wrong:', error);
