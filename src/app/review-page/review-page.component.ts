@@ -103,7 +103,6 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   processCharge(token) {
     var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/webtask-stripe-payment';
     // var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/stripe-payment';
-    console.log(`Processing token: ${JSON.stringify(token)}`);
 
     let promise = new Promise((resolve, reject) => {
     const command = {
@@ -113,16 +112,6 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
       source: token,
       receipt_email: this.email
     };
-
-      var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/webtask-stripe-payment';
-      console.log(`Processing token: ${JSON.stringify(token)}`);
-
-      const command = {
-        amount: 200,
-        currency: 'usd',
-        description: 'Example charge',
-        source: token
-      };
 
       this.http.post(task_url, command).subscribe(
         (data) => resolve(data),
