@@ -80,6 +80,12 @@ $red: #a94442;
     line-height: 5px;
 }
 
+.return-to-cvcf{
+    @extend .primary-button;
+    float: unset;
+    vertical-align: middle;
+    position: relative;
+}
 
 // Form Control
 .FormFieldContainer{
