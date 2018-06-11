@@ -109,7 +109,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     let promise = new Promise((resolve, reject) => {
     const command = {
-      amount: 20000, //$200.00
+      amount: 15500, //$155.00
       currency: 'usd',
       description: 'Registration cost for ' + this.registers.length,
       source: token,
