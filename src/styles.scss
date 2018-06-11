@@ -237,3 +237,42 @@ $red: #a94442;
     text-align: center;
     display: block;
 }
+// End of Card formatting 
+
+// Email Styling
+.EmailGroup {
+    display: inline-flex;
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 3px 0 #212529;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+    background: transparent;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.EmailGroup:focus {
+    box-shadow: 0 1px 3px 0 $teal;
+}
+
+.EmailGroup:invalid {
+    border-color: #fa755a;
+}
+
+.EmailGroup:webkit-autofill {
+    background-color: #fefde5 !important;
+}
+.field{
+    width: 100%;
+    background: transparent;
+    font-weight: 300;
+    border: 0;
+    color: #31325F;
+    outline: none;
+    padding-right: 10px;
+    padding-left: 10px;
+    cursor: text;
+}

@@ -27,6 +27,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   registers: any;
 
+  email = '';
+
   constructor(private cd: ChangeDetectorRef, private userService: UserService,
     private http: HttpClient) { }
 
@@ -91,19 +93,25 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   processCharge(token) {
     var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/webtask-stripe-payment';
+    // var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/stripe-payment';
     console.log(`Processing token: ${JSON.stringify(token)}`);
 
     const command = {
-      amount: 200,
+      amount: 20000, //$200.00
       currency: 'usd',
-      description: 'Example charge',
-      source: token
+      description: 'Registration cost for ' + this.registers.length,
+      source: token,
+      receipt_email: this.email
     };
 
     this.http.post(task_url, command).subscribe(
       () => console.log('Success'),
       error => alert(`Adding task failed with error ${error}`)
     );
+  }
+
+  onKey(value: string){
+    this.email = value;
   }
 
 }
