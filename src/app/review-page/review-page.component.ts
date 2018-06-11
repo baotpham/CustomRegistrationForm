@@ -81,7 +81,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onSubmit(form: NgForm) {
-    // const { token, error } = await stripe.createToken(this.card);
+    const { token, error } = await stripe.createToken(this.card);
 
     if (error) {
       console.log('Something is wrong:', error);
