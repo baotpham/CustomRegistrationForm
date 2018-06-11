@@ -18,4 +18,7 @@ export class AppComponent {
   switchPage(page){
     this.page = page;
   }
+  onCompleted(completed: string){
+    completed ? this.page = completed : this.page = "attendeesFormPage";
+  }
 }

@@ -4,7 +4,8 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  EventEmitter, Output
 } from '@angular/core';
 
 import { NgForm } from '@angular/forms';
@@ -19,6 +20,8 @@ import { UserService } from '../services/user.service';
 
 export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('cardInfo') cardInfo: ElementRef;
+
+  @Output() completed = new EventEmitter<string>();
 
   card: any;
   cardHandler = this.onChange.bind(this);
@@ -68,20 +71,20 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onSubmit(form: NgForm) {
-    const { token, error } = await stripe.createToken(this.card);
+    // const { token, error } = await stripe.createToken(this.card);
 
-    if (error) {
-      console.log('Something is wrong:', error);
-    } else {
-      console.log('Success!', token);
-      // ...send the token to the your backend to process the charge
-      const charge = stripe.charges.create({
-        amount: 200,
-        currency: 'usd',
-        description: 'Example charge',
-        source: token,
-      });
-    }
+    // if (error) {
+    //   console.log('Something is wrong:', error);
+    // } else {
+    //   console.log('Success!', token);
+    //   // ...send the token to the your backend to process the charge
+    //   const charge = stripe.charges.create({
+    //     amount: 200,
+    //     currency: 'usd',
+    //     description: 'Example charge',
+    //     source: token,
+    //   });
+    // }
   }
 
 }

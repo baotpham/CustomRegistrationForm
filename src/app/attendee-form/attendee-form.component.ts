@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Attendee } from '../models/Attendee';
+import { Attendee } from '../Models/Attendee';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
