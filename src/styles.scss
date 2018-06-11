@@ -60,12 +60,20 @@ $red: #a94442;
 .primary-button[disabled] {
     @extend .btn;
     @extend .btn-primary;
-    background-color: $teal;
-    border-color: $teal;
+    background-color:teal;
+    border-color: teal;
+    color: white;
     border-radius: 30px;
     padding: 6px 24px;
     font-size: 1.5rem;
     float: right;
+}
+.primary-button:hover{
+   
+    background-color:rgb(4, 155, 29);
+    border-color: green;
+    color: white;
+    
 }
 
 .DeleteButton {
@@ -246,14 +254,16 @@ $red: #a94442;
 #card-title {
     text-align: center;
     display: block;
+    font-weight: bold;
 }
 // End of Card formatting 
 
 // Email Styling
 .EmailGroup {
+    @extend .col-md-12;
     display: inline-flex;
     background-color: white;
-    padding: 8px 12px;
+    padding:3px 12px;
     border-radius: 4px;
     border: 1px solid transparent;
     box-shadow: 0 1px 3px 0 #212529;
@@ -262,7 +272,8 @@ $red: #a94442;
     background: transparent;
     width: 100%;
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 15px;
+    
 }
 .EmailGroup:focus {
     box-shadow: 0 1px 3px 0 $teal;
