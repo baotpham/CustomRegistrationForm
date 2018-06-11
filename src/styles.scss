@@ -82,6 +82,12 @@ $red: #a94442;
     line-height: 5px;
 }
 
+.return-to-cvcf{
+    @extend .primary-button;
+    float: unset;
+    vertical-align: middle;
+    position: relative;
+}
 
 // Form Control
 .FormFieldContainer{
@@ -126,13 +132,13 @@ $red: #a94442;
 //     border-bottom-right-radius: 4px;
 // }
 
-.pagination>.active>a{
+.pagination>.active>.pagination-button, .pagination>.active>a{
     color: $white;
     background-color: $teal;
     border-color: $teal;
     border-radius: 30px;
 }
-.pagination>li>a{
+.pagination>li>.pagination-button, .pagination>li>a{
     position: relative;
     float: left;
     padding: 9px 16px;
@@ -147,10 +153,12 @@ $red: #a94442;
     z-index: 0;
 }
 
+.pagination>li>.pagination-button:hover, .pagination>li>.pagination-button:focus,
 .pagination>li>a:hover, .pagination>li>a:focus {
     color: #fff;
     background-color: $teal;
     border-color: $teal;
+    cursor: pointer;
 }
 
 
@@ -277,4 +285,20 @@ $red: #a94442;
     padding-right: 10px;
     padding-left: 10px;
     cursor: text;
+}
+//Thank you page
+
+.h3 {
+    padding-top: 200px;
+}
+.ty-header {
+	text-align: center;
+	padding-top: 10px;	
+}
+
+img {
+	padding-top: 7;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

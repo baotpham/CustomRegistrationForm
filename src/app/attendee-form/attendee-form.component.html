@@ -3,7 +3,7 @@
 
   <div class="title-container">
     <div class="title">
-      Registers Info
+      Registration Info
     </div>
   </div>
 
@@ -14,22 +14,24 @@
     <span *ngIf="people.length == undefined">0</span>
   </div>
 
-  <button type="button" (click)="partialUpdate()">Partial Update</button>
+  <!-- <button type="button" (click)="partialUpdate()">Partial Update</button>
   <button type="button" (click)="fullUpdate()">Full Update</button>
   <button type="button" (click)="check()">Check</button>
   <button type="button" (click)="lazyOne()">Lazy One</button>
-  <button type="button" (click)="lazyTwo()">Lazy Two</button>
+  <button type="button" (click)="lazyTwo()">Lazy Two</button> -->
 
   <div class="form-control">
     <div class="FormRow">
       <div class="MediumFormFieldContainer">
         <label class="control-label">First Name</label>
-        <input class="form-control" type="text" formControlName="first_name" placeholder="Enter Your First Name" (change)="addAttendee()" required>
+        <input class="form-control" type="text" formControlName="first_name" placeholder="Enter Your First Name" (change)="addAttendee()"
+          required>
         <div [hidden]="first_name.valid || first_name.pristine" class="alert alert-danger">First Name is required</div>
       </div>
       <div class="MediumFormFieldContainer">
         <label class="control-label">Last Name</label>
-        <input class="form-control" type="text" formControlName="last_name" placeholder="Enter Your Last Name" (change)="addAttendee()" required>
+        <input class="form-control" type="text" formControlName="last_name" placeholder="Enter Your Last Name" (change)="addAttendee()"
+          required>
         <div [hidden]="last_name.valid || last_name.pristine" class="alert alert-danger">Last Name is required</div>
       </div>
     </div>
@@ -57,26 +59,30 @@
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label">Medical Issues/Allergies</label>
-        <textarea class="form-control" type="text" formControlName="medical" placeholder="N/A" rows="5" (change)="addAttendee()" required></textarea>
+        <textarea class="form-control" type="text" formControlName="medical" placeholder="N/A" rows="5" (change)="addAttendee()"
+          required></textarea>
         <div [hidden]="medical.valid || medical.pristine" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div>
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label">Address</label>
-        <input class="form-control" type="text" placeholder="Enter Your Address" formControlName="address" (change)="addAttendee()" required>
+        <input class="form-control" type="text" placeholder="Enter Your Address" formControlName="address" (change)="addAttendee()"
+          required>
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label">Address 2</label>
-        <input class="form-control" type="text" placeholder="N/A" name="address_2" formControlName="address_2" (change)="addAttendee()" required>
+        <input class="form-control" type="text" placeholder="N/A" name="address_2" formControlName="address_2" (change)="addAttendee()"
+          required>
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="city">City</label>
-        <input class="form-control" type="text" placeholder="Enter Your City" name="city" formControlName="city" (change)="addAttendee()" required>
+        <input class="form-control" type="text" placeholder="Enter Your City" name="city" formControlName="city" (change)="addAttendee()"
+          required>
       </div>
     </div>
     <div class="FormRow">
@@ -84,18 +90,20 @@
         <label class="control-label" for="state">State</label>
         <!-- <input class="form-control" type="text" placeholder="Enter Your State" name="state" formControlName="state" required> -->
         <select class="form-control" formControlName="state" (change)="addAttendee()" required>
-            <option *ngFor="let state of states" [value]="state">{{state}}</option>
-          </select>
+          <option *ngFor="let state of states" [value]="state">{{state}}</option>
+        </select>
       </div>
       <div class="MediumFormFieldContainer">
         <label class="control-label" for="zip">Zip Code</label>
-        <input class="form-control" type="number" placeholder=" Enter Your Zip Code" name="zip_code" formControlName="zip_code" (change)="addAttendee()" required>
+        <input class="form-control" type="number" placeholder=" Enter Your Zip Code" name="zip_code" formControlName="zip_code" (change)="addAttendee()"
+          required>
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="email">Email</label>
-        <input class="form-control" type="email" placeholder="Enter Your Email" name="email" formControlName="email" (change)="addAttendee()" required>
+        <input class="form-control" type="email" placeholder="Enter Your Email" name="email" formControlName="email" (change)="addAttendee()"
+          required>
       </div>
     </div>
 
@@ -104,23 +112,27 @@
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="emergency_contact_first_name">First Name</label>
-        <input class="form-control" type="text" placeholder="Enter First Name" name="emergency_contact_first_name" formControlName="emergency_contact_first_name" (change)="addAttendee()" required>
+        <input class="form-control" type="text" placeholder="Enter First Name" name="emergency_contact_first_name" formControlName="emergency_contact_first_name"
+          (change)="addAttendee()" required>
       </div>
       <div class="FormFieldContainer">
         <label class="control-label" for="emergency_contact_last_name">Last Name</label>
-        <input class="form-control" type="text" placeholder="Enter Last Name" name="emergency_contact_last_name" formControlName="emergency_contact_last_name" (change)="addAttendee()" required>
+        <input class="form-control" type="text" placeholder="Enter Last Name" name="emergency_contact_last_name" formControlName="emergency_contact_last_name"
+          (change)="addAttendee()" required>
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="emergency_contact_phone_number">Phone Number</label>
-        <input class="form-control" type="number" placeholder="Enter Phone Number" name="emergency_contact_phone_number" formControlName="emergency_contact_phone_number" (change)="addAttendee()" required>
+        <input class="form-control" type="number" placeholder="Enter Phone Number" name="emergency_contact_phone_number" formControlName="emergency_contact_phone_number"
+          (change)="addAttendee()" required>
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="emergency_contact_relationship">Relationship</label>
-        <input class="form-control" type="text" placeholder="Relationship" name="emergency_contact_relationship" formControlName="emergency_contact_relationship" (change)="addAttendee()" required>
+        <input class="form-control" type="text" placeholder="Relationship" name="emergency_contact_relationship" formControlName="emergency_contact_relationship"
+          (change)="addAttendee()" required>
       </div>
     </div>
 
@@ -128,19 +140,22 @@
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="your_church">Your Church</label>
-        <input class="form-control" type="text" placeholder="Enter Your Church Name" name="your_church" formControlName="your_church" (change)="addAttendee()" required>
+        <input class="form-control" type="text" placeholder="Enter Your Church Name" name="your_church" formControlName="your_church"
+          (change)="addAttendee()" required>
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="your_church_point_of_contact_name">Your Church Point of Contact Name</label>
-        <input class="form-control" type="text" placeholder="Enter Your Church Point of Contact Name" name="your_church_point_of_contact_name" formControlName="your_church_point_of_contact_name" (change)="addAttendee()" required>
+        <input class="form-control" type="text" placeholder="Enter Your Church Point of Contact Name" name="your_church_point_of_contact_name"
+          formControlName="your_church_point_of_contact_name" (change)="addAttendee()" required>
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="your_church_point_of_contact_number">Your Church Point of Contact Number</label>
-        <input class="form-control" type="number" placeholder="Enter Your Church Point of Contact Phone Number" name="your_church_point_of_contact_number" formControlName="your_church_point_of_contact_number" (change)="addAttendee()" required>
+        <input class="form-control" type="number" placeholder="Enter Your Church Point of Contact Phone Number" name="your_church_point_of_contact_number"
+          formControlName="your_church_point_of_contact_number" (change)="addAttendee()" required>
       </div>
     </div>
 
@@ -152,12 +167,12 @@
         <!-- </li> -->
         <li class="user-entry" *ngFor="let person of people; let i = index" [ngClass]="{'active': currentAttendee === person}" (click)="loadAttendee(person, i);">
           <button type="button" *ngIf="people.length > 1" class="DeleteButton" (click)="deleteAttendee(i)">-</button>
-          <a href="#{{i+1}}">{{i+1}}</a>
+          <div class="pagination-button">{{i+1}}</div>
         </li>
         <li>
-          <a id="add-entry-box" href="#" (click)="createNewAttendee()">
-              <i class="fa fa-plus fa-2x add-entry"></i>
-            </a>
+          <a id="add-entry-box" (click)="createNewAttendee()">
+            <i class="fa fa-plus fa-2x add-entry"></i>
+          </a>
         </li>
         <!-- <li class="active"> -->
         <!-- <a href="#">NEXT</a> -->
@@ -219,3 +234,11 @@
     </div>
   </div> -->
 </form>
+
+<!-- spacing -->
+<div style="height: 30px;"></div>
+
+<!-- next button -->
+<div class="nav-buttons">
+  <button class="nav-button" routerLink="/review">Next</button>
+</div>

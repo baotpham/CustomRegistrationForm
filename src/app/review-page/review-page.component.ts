@@ -4,9 +4,11 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  EventEmitter, Output
 } from '@angular/core';
 
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { UserService } from '../services/user.service';
@@ -25,6 +27,8 @@ import { GoogleService } from '../services/google-service.service';
 export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('cardInfo') cardInfo: ElementRef;
 
+  @Output() completed = new EventEmitter<string>();
+
   card: any;
   cardHandler = this.onChange.bind(this);
   error: string;
@@ -36,7 +40,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   email = '';
 
   constructor(private cd: ChangeDetectorRef, private userService: UserService,
-    private http: HttpClient, private googleService: GoogleService) { }
+    private http: HttpClient, private googleService: GoogleService,
+    private router: Router) { }
 
   ngOnInit() {
     //get data from form registrations
@@ -83,20 +88,14 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     if (error) {
       console.log('Something is wrong:', error);
     } else {
-      console.log('Success!', token);
+      console.log('Success!');
       // ...send the token to the your backend to process the charge
       this.processCharge(token).then(
         (success) => this.postToGoogle(),
         (error) => console.error("Stripe process charge error", error)
       );
 
-
-      // const charge = stripe.charges.create({
-      //   amount: 200,
-      //   currency: 'usd',
-      //   description: 'Example charge',
-      //   source: token,
-      // });
+      this.router.navigate(['/', 'thank-you']);
     }
   }
 
@@ -106,9 +105,9 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     let promise = new Promise((resolve, reject) => {
     const command = {
-      amount: 20000, //$200.00
+      amount: 15500 * this.registers.length, //$155.00
       currency: 'usd',
-      description: 'Registration cost for ' + this.registers.length,
+      description: 'Registration cost for ' + this.email,
       source: token,
       receipt_email: this.email
     };
