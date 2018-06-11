@@ -107,7 +107,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     const command = {
       amount: 15500 * this.registers.length, //$155.00
       currency: 'usd',
-      description: 'Registration cost for ' + this.registers.length + ' person/people',
+      description: 'Registration cost for ' + this.email,
       source: token,
       receipt_email: this.email
     };
