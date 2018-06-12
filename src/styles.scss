@@ -28,26 +28,43 @@ $red: #a94442;
     color: white;   
     
   }
-
+.bg-image{
+    position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+}
+.bg-image img{
+    position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
+  opacity: .3;
+}
   .page{
-      background-color: $light-teal;
+      background-color: white;
       height: 200%;
   }
 
-.checkout{
-    background-color: $light-teal !important;
+// .checkout{
+//     background-color: $light-teal !important;
     
-}
-.form-control{
-    background-color: $light-teal !important;     
-    input, select, textarea{
-        background-color: $lightest-teal !important; 
-    }
-}
+// }
+// .form-control{
+//     background-color: $light-teal !important;     
+//     input, select, textarea{
+//         background-color: $lightest-teal !important; 
+//     }
+// }
 
 .FormRow{
     @extend .row;
-    background-color: $light-teal;
+    // background-color: $light-teal;
 }
 
 // Titles
