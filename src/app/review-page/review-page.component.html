@@ -44,14 +44,11 @@
 
       <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
     </div>
+
+    <label class="email-info">Email</label>
     <div class='CardRow row'>
       <div class="EmailGroup">
-        <div class="col-md-1">
-          <span>Email</span>
-        </div>
-        <div class="col-md-11">
           <input #email (keyup)="onKey(email.value)" id="email" name="email" class="field" placeholder="jane.doe@example.com" ngModel email required/>
-        </div>
       </div>
     </div>
   </div>

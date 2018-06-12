@@ -83,20 +83,20 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onSubmit(form: NgForm) {
-    const { token, error } = await stripe.createToken(this.card);
+    // const { token, error } = await stripe.createToken(this.card);
 
-    if (error) {
-      console.log('Something is wrong:', error);
-    } else {
-      console.log('Success!');
-      // ...send the token to the your backend to process the charge
-      this.processCharge(token).then(
-        (success) => this.postToGoogle(),
-        (error) => console.error("Stripe process charge error", error)
-      );
+    // if (error) {
+    //   console.log('Something is wrong:', error);
+    // } else {
+    //   console.log('Success!');
+    //   // ...send the token to the your backend to process the charge
+    //   this.processCharge(token).then(
+    //     (success) => this.postToGoogle(),
+    //     (error) => console.error("Stripe process charge error", error)
+    //   );
 
       this.router.navigate(['/', 'thank-you']);
-    }
+    // }
   }
 
   processCharge(token) {
