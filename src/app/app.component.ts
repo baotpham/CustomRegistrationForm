@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  title = 'CVCF Youth Retreat 2018 Registration Form';
-  // title = 'Practice Form';
+  titleOne = 'CVCF Youth Retreat 2018';
+  titleTwo = 'Registration Form';
   page = 'attendeesFormPage';
 
   constructor(){
