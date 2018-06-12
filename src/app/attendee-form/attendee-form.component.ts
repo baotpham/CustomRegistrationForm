@@ -30,11 +30,11 @@ export class AttendeeFormComponent implements OnInit {
   age         = new FormControl("", Validators.required);
   medical     = new FormControl("", Validators.required);
   address     = new FormControl("", Validators.required);
-  address_2   = new FormControl("", Validators.required);
+  address_2   = new FormControl("");
   city        = new FormControl("", Validators.required);
   state       = new FormControl("", Validators.required);
   zip_code    = new FormControl("", Validators.required);
-  email       = new FormControl("", Validators.required);
+  email       = new FormControl("");
 
   //emergency info
   emergency_contact_first_name        = new FormControl("", Validators.required);
@@ -43,9 +43,10 @@ export class AttendeeFormComponent implements OnInit {
   emergency_contact_relationship      = new FormControl("", Validators.required);
 
   //church info
-  your_church                         = new FormControl("", Validators.required);
-  your_church_point_of_contact_name   = new FormControl("", Validators.required);
-  your_church_point_of_contact_number = new FormControl("", Validators.required);
+  your_churches                       = new FormControl("", Validators.required);
+  your_church                         = new FormControl("");
+  your_church_point_of_contact_name   = new FormControl("");
+  your_church_point_of_contact_number = new FormControl("");
 
 
   max_index = 0;
@@ -58,6 +59,10 @@ export class AttendeeFormComponent implements OnInit {
             "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV",
             "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT",
             "VA", "VT", "WA", "WI", "WV", "WY"];
+  church_list = ["Other", "MD - Lanham", "MD - Living Faith", "MD - Baltimore", "MD - Germantown",
+              "PA - Philadelphia", "PA - Pittsburgh", "VA - Grace", "VA - Hyvong",
+              "VA - Methodist Church","FL - Orlando","KY - Kentucky","NC - North Carolina",
+              "N/A"];
 
   model = new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "", "", "", "");
 
@@ -86,6 +91,7 @@ export class AttendeeFormComponent implements OnInit {
       "emergency_contact_phone_number"      : this.emergency_contact_phone_number,
       "emergency_contact_relationship"      : this.emergency_contact_relationship,
 
+      "your_churches"                       : this.your_churches,
       "your_church"                         : this.your_church,
       "your_church_point_of_contact_name"   : this.your_church_point_of_contact_name,
       "your_church_point_of_contact_number" : this.your_church_point_of_contact_number,
@@ -104,6 +110,7 @@ export class AttendeeFormComponent implements OnInit {
   addAttendee() {
     console.log("is form valid? ", this.attendeeForm.valid);
 
+    this.checkChurch();
     if (this.attendeeForm.valid) {
       var attendee = new Attendee("", "", "", "", null, "", "", "" , "", "" , "" ,"", "", "", "", "", "", "", "");
 
@@ -163,6 +170,7 @@ export class AttendeeFormComponent implements OnInit {
 
       //bind to UI
       this.bindListToForm();
+      this.your_churches.setValue("Other");
     }
   }
 
@@ -240,7 +248,16 @@ export class AttendeeFormComponent implements OnInit {
 
 
 
-
+  //Checks if Other or N/A church is selected
+  checkChurch(){
+    console.log(this.your_churches);
+    if(this.your_churches.value == 'N/A'){
+      this.your_church.setValue("");
+    }
+    else if(!(this.your_churches.value == 'Other')){
+      this.your_church.setValue(this.your_churches.value);
+    }
+  }
 
 
   //Binding
@@ -266,6 +283,7 @@ export class AttendeeFormComponent implements OnInit {
 
   //Updates the form's values with the contents from the list
   bindListToForm() {
+    this.checkChurch();
     this.first_name.setValue(this.currentAttendee.first_name);
     this.last_name.setValue(this.currentAttendee.last_name);
     this.t_shirt.setValue(this.currentAttendee.t_shirt);
