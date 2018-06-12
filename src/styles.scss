@@ -4,7 +4,7 @@
 
 // Colors
 $lightest-teal: #fff0e8;
-$light-teal: #fabd9a;
+$light-teal: #ffdac4;
 $teal: #f36f24;
 $white: #fff;
 $green: #42A948;
@@ -30,19 +30,27 @@ $red: #a94442;
   }
 
   .page{
-      background-color: $light-teal;
+      background-color: $white;
       height: 200%;
   }
 
 .checkout{
     background-color: $light-teal !important;
-    
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 15px;
+    border: solid $teal;
+    border-width: 2px;  
+    border-style: outset;
+    border-image: initial;  
 }
+
 .form-control{
     background-color: $light-teal !important;     
     input, select, textarea{
         background-color: $lightest-teal !important; 
     }
+    border: 0 !important;
 }
 
 .FormRow{
@@ -52,7 +60,7 @@ $red: #a94442;
 
 // Titles
 .title-container{
-    margin-top: 2rem;
+    margin-top: 1.75rem;
     padding-bottom: 35px;
 }
 .title{
@@ -86,6 +94,9 @@ $red: #a94442;
   margin-bottom: 100px;
 }
 
+.pay-button{
+    margin-top: 30px;
+}
 .primary-button, .primary-button:disabled,
 .primary-button[disabled] {
     padding: 9px 16px;
@@ -247,6 +258,13 @@ $red: #a94442;
     background-color: $teal;
     border-color: $teal;
   }
+  .next-button{
+      float: right;
+      margin-bottom: 50px;
+  }
+  .edit-button{
+      margin-bottom: 15px;
+  }
 }
 
 .review-registers{
@@ -349,7 +367,7 @@ $red: #a94442;
 .ty-header {
 	text-align: center;
     padding-top: 20px;	
-    font-size: 60px;
+    font-size: 50px;
 }
 .ty-info {
 	text-align: center;

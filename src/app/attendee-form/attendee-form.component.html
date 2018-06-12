@@ -1,18 +1,19 @@
+
+<div class="title-container">
+  <div class="title">
+    Registration Info
+  </div>
+</div>
+
+
+<div class="total-info">
+  Total Registers:
+  <span *ngIf="people.length != undefined">{{people.length}}</span>
+  <span *ngIf="people.length == undefined">0</span>
+</div>
+
 <!-- Attendee Forms -->
 <form [formGroup]="attendeeForm" (ngSubmit)="onSubmit()" #checkout="ngForm" class="checkout">
-
-  <div class="title-container">
-    <div class="title">
-      Registration Info
-    </div>
-  </div>
-
-
-  <div class="total-info">
-    Total Registers:
-    <span *ngIf="people.length != undefined">{{people.length}}</span>
-    <span *ngIf="people.length == undefined">0</span>
-  </div>
 
   <!-- <button type="button" (click)="partialUpdate()">Partial Update</button>
   <button type="button" (click)="fullUpdate()">Full Update</button>
@@ -248,5 +249,5 @@
 
 <!-- next button -->
 <div class="nav-buttons">
-  <button class="nav-button" routerLink="/review">Next</button>
+  <button class="nav-button next-button" routerLink="/review">Next</button>
 </div>

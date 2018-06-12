@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { UserService } from '../services/user.service';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { GoogleService } from '../services/google-service.service';
 
@@ -47,6 +47,9 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //get data from form registrations
     this.registers = this.userService.getAllRegisters();
     console.log("Registers: ", this.registers);
+
+    //scrolls to top of screen
+    window.scrollTo(0, 0);
   }
 
   ngAfterViewInit() {
@@ -104,13 +107,13 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/stripe-payment';
 
     let promise = new Promise((resolve, reject) => {
-    const command = {
-      amount: 15500 * this.registers.length, //$155.00
-      currency: 'usd',
-      description: 'Registration cost for ' + this.email,
-      source: token,
-      receipt_email: this.email
-    };
+      const command = {
+        amount: 15500 * this.registers.length, //$155.00
+        currency: 'usd',
+        description: 'Registration cost for ' + this.email,
+        source: token,
+        receipt_email: this.email
+      };
 
       this.http.post(task_url, command).subscribe(
         (data) => resolve(data),
@@ -121,20 +124,20 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     return promise;
   }
 
-  onKey(value: string){
+  onKey(value: string) {
     this.email = value;
   }
 
 
-  postToGoogle(){
+  postToGoogle() {
     console.log("posting to google: ", this.registers);
     this.loading = true;
 
     //google sheet response is html, but for some reason, http tries to parse json.
     //this project will reject the html. I think it has to do with http header.
     this.googleService.post(this.registers).then(
-      () => {this.loading = false},
-      () => {this.loading = false});
+      () => { this.loading = false },
+      () => { this.loading = false });
   }
 
 }

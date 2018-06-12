@@ -3,19 +3,19 @@
 
 <!-- Previous Button -->
 <div class="nav-buttons" style="text-align: left;">
-  <button class="nav-button" routerLink="/form">Edit</button>
+  <button class="nav-button edit-button" routerLink="/form">Edit</button>
 </div>
 
-<form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout">
+<div class="total-info">
+  Total Registers:
+  <span *ngIf="registers.length != undefined">{{registers.length}}</span>
+  <span *ngIf="registers.length == undefined">0</span>
+</div>
 
-  <div class="total-info">
-    Total Registers:
-    <span *ngIf="registers.length != undefined">{{registers.length}}</span>
-    <span *ngIf="registers.length == undefined">0</span>
-  </div>
-
-  <!-- spacing -->
-  <div style="height: 50px;"></div>
+<form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)">
+  <div class="checkout">
+<!-- spacing -->
+<div style="height: 25px;"></div>
 
   <table>
     <tr>
@@ -55,8 +55,10 @@
 
   <!-- spacing -->
   <div style="height: 70px;"></div>
+</div>
 
-  <button class="primary-button" type="submit">Pay ${{registers.length * 155}}</button>
+
+  <button class="primary-button pay-button" type="submit">Pay ${{registers.length * 155}}</button>
 
   <!-- spacing -->
   <div style="height: 200px;"></div>
