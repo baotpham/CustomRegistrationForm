@@ -10,6 +10,9 @@ $white: #fff;
 $green: #42A948;
 $red: #a94442;
 
+* {
+    font-family: 'Song Myung', serif;
+}
 .page-border{
     @extend .offset-md-3;
     @extend .col-md-6;
