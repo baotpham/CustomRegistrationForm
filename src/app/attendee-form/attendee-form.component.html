@@ -26,13 +26,13 @@
         <label class="control-label">First Name</label>
         <input class="form-control" type="text" formControlName="first_name" placeholder="Enter Your First Name" (change)="addAttendee()"
           required>
-        <div [hidden]="first_name.valid || first_name.pristine" class="alert alert-danger">First Name is required</div>
+        <!-- <div [hidden]="first_name.valid || first_name.pristine" class="alert alert-danger">First Name is required</div> -->
       </div>
       <div class="MediumFormFieldContainer">
         <label class="control-label">Last Name</label>
         <input class="form-control" type="text" formControlName="last_name" placeholder="Enter Your Last Name" (change)="addAttendee()"
           required>
-        <div [hidden]="last_name.valid || last_name.pristine" class="alert alert-danger">Last Name is required</div>
+        <!-- <div [hidden]="last_name.valid || last_name.pristine" class="alert alert-danger">Last Name is required</div> -->
       </div>
     </div>
     <div class="FormRow">
@@ -41,19 +41,19 @@
         <select class="form-control" formControlName="t_shirt" (change)="addAttendee()" required>
           <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
         </select>
-        <div [hidden]="t_shirt.valid || t_shirt.pristine" class="alert alert-danger">T-shirt size is required</div>
+        <!-- <div [hidden]="t_shirt.valid || t_shirt.pristine" class="alert alert-danger">T-shirt size is required</div> -->
       </div>
       <div class="SmallFormFieldContainer">
         <label class="control-label">Gender</label>
         <select class="form-control" formControlName="gender" (change)="addAttendee()" required>
           <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
         </select>
-        <div [hidden]="gender.valid || gender.pristine" class="alert alert-danger">Gender is required</div>
+        <!-- <div [hidden]="gender.valid || gender.pristine" class="alert alert-danger">Gender is required</div> -->
       </div>
       <div class="SmallFormFieldContainer">
         <label class="control-label">Age</label>
         <input class="form-control" type="number" formControlName="age" placeholder="12" (change)="addAttendee()" required>
-        <div [hidden]="age.valid || age.pristine" class="alert alert-danger">Age is required</div>
+        <!-- <div [hidden]="age.valid || age.pristine" class="alert alert-danger">Age is required</div> -->
       </div>
     </div>
     <div class="FormRow">
@@ -61,7 +61,7 @@
         <label class="control-label">Medical Issues/Allergies</label>
         <textarea class="form-control" type="text" formControlName="medical" placeholder="N/A" rows="5" (change)="addAttendee()"
           required></textarea>
-        <div [hidden]="medical.valid || medical.pristine" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div>
+        <!-- <div [hidden]="medical.valid || medical.pristine" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div> -->
       </div>
     </div>
     <div class="FormRow">
@@ -74,8 +74,7 @@
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label">Address 2</label>
-        <input class="form-control" type="text" placeholder="N/A" name="address_2" formControlName="address_2" (change)="addAttendee()"
-          required>
+        <input class="form-control non-required" type="text" placeholder="N/A" name="address_2" formControlName="address_2" (change)="addAttendee()">
       </div>
     </div>
     <div class="FormRow">
@@ -102,8 +101,8 @@
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="email">Email</label>
-        <input class="form-control" type="email" placeholder="Enter Your Email" name="email" formControlName="email" (change)="addAttendee()"
-          required>
+        <input class="form-control non-required" type="email" placeholder="Enter Your Email" name="email" formControlName="email"
+          (change)="addAttendee()">
       </div>
     </div>
 
@@ -139,23 +138,32 @@
     <h3 style="margin-top:20px;">Church Contact</h3>
     <div class="FormRow">
       <div class="FormFieldContainer">
-        <label class="control-label" for="your_church">Your Church</label>
-        <input class="form-control" type="text" placeholder="Enter Your Church Name" name="your_church" formControlName="your_church"
-          (change)="addAttendee()" required>
+        <label class="control-label" for="your_churches">Your Church</label>
+        <!-- <input class="form-control" type="text" placeholder="Enter Your State" name="state" formControlName="state" required> -->
+        <select class="form-control" formControlName="your_churches" (change)="addAttendee()" required>
+          <option *ngFor="let your_churches of church_list" [value]="your_churches">{{your_churches}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="FormRow">
+      <div class="FormFieldContainer">
+        <label class="control-label" for="your_church">Your Church: If you chose "Other"</label>
+        <input class="form-control non-required" type="text" placeholder="Enter Your Church Name" name="your_church" formControlName="your_church"
+          (change)="addAttendee()">
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="your_church_point_of_contact_name">Your Church Point of Contact Name</label>
-        <input class="form-control" type="text" placeholder="Enter Your Church Point of Contact Name" name="your_church_point_of_contact_name"
-          formControlName="your_church_point_of_contact_name" (change)="addAttendee()" required>
+        <input class="form-control non-required" type="text" placeholder="Enter Your Church Point of Contact Name" name="your_church_point_of_contact_name"
+          formControlName="your_church_point_of_contact_name" (change)="addAttendee()">
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="your_church_point_of_contact_number">Your Church Point of Contact Number</label>
-        <input class="form-control" type="number" placeholder="Enter Your Church Point of Contact Phone Number" name="your_church_point_of_contact_number"
-          formControlName="your_church_point_of_contact_number" (change)="addAttendee()" required>
+        <input class="form-control non-required" type="number" placeholder="Enter Your Church Point of Contact Phone Number" name="your_church_point_of_contact_number"
+          formControlName="your_church_point_of_contact_number" (change)="addAttendee()">
       </div>
     </div>
 
