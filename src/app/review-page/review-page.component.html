@@ -20,12 +20,16 @@
   <table>
     <tr>
       <th class="col-md-6">Name</th>
+      <th class="col-md-6">Days Attending</th>
+      <th class="col-md-4">Cost</th>
       <th class="col-md-4">Age</th>
       <th class="col-md-4">Gender</th>
       <th class="col-md-4">Shirt Size</th>
     </tr>
     <tr *ngFor="let attendee of registers">
       <td class="col-md-6">{{attendee.first_name}} {{attendee.last_name}}</td>
+      <td class="col-md-6">{{attendee.days_attending}}</td>
+      <td class="col-md-4">{{attendee.cost | currency }}</td>
       <td class="col-md-4">{{attendee.age}}</td>
       <td class="col-md-4">{{attendee.gender}}</td>
       <td class="col-md-4">{{attendee.t_shirt}}</td>

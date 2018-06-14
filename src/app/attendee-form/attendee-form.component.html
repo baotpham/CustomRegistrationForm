@@ -172,8 +172,8 @@
       <div class="FormFieldContainer radio">
         <div *ngFor="let day of attendeeForm.controls['days'].controls; let i=index">
           <div class="checkbox">
-            <input class="icheckbox_flat" id="flat-checkbox-2" type="checkbox" [formControl]="day" />
-            <label>{{days_attending[i].name}}</label>
+            <input class="icheckbox_flat" id="flat-checkbox-2" type="checkbox" [formControl]="day" (change)="addAttendee()" />
+            <label>{{days_chosen[i].name}}</label>
           </div>
         </div>
       </div>

@@ -20,12 +20,8 @@ export class Attendee {
         public your_church: string,
         public your_church_point_of_contact_name: string,
         public your_church_point_of_contact_number: string,
-        // public days: [
-        //     { name: string, selected: boolean, id: number },
-        //     { name: string, selected: boolean, id: number },
-        //     { name: string, selected: boolean, id: number },
-        //     { name: string, selected: boolean, id: number }
-        // ]
+        public days_attending: string,
+        public cost: number
     ) {
     }
 

@@ -38,6 +38,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   loading: boolean = false;
 
   email = '';
+  // total_cost: currency;
 
   constructor(private cd: ChangeDetectorRef, private userService: UserService,
     private http: HttpClient, private googleService: GoogleService,
@@ -50,6 +51,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //scrolls to top of screen
     window.scrollTo(0, 0);
+
+
   }
 
   ngAfterViewInit() {
