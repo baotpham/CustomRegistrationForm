@@ -31,14 +31,18 @@ export class GoogleService {
                     `&entry.1300146252=${registers[i].state}`+
                     `&entry.1995735036=${registers[i].zip_code}`+
                     `&entry.1163380930=${registers[i].email}`+
-                    `&entry.1814348022=${registers[i].emergency_contact_first_name}`+
-                    `&entry.1795731922=${registers[i].emergency_contact_last_name}`+
-                    `&entry.42598533=${registers[i].emergency_contact_phone_number}`+
-                    `&entry.1822987082=${registers[i].emergency_contact_relationship}`+
-                    `&entry.854313620=${registers[i].your_church}`+
-                    `&entry.1752027412=${registers[i].your_church_point_of_contact_name}`+
-                    `&entry.516070659=${registers[i].your_church_point_of_contact_number}`+
-                    `&entry.345154263=155`+
+
+                    `&entry.1814348022=${registers[i].your_church}`+
+                    `&entry.1795731922=${registers[i].your_church_point_of_contact_name}`+
+                    `&entry.42598533=${registers[i].your_church_point_of_contact_number}`+
+                    
+                    `&entry.1822987082=${registers[i].emergency_contact_first_name}`+
+                    `&entry.854313620=${registers[i].emergency_contact_last_name}`+
+                    `&entry.1752027412=${registers[i].emergency_contact_phone_number}`+
+                    `&entry.516070659=${registers[i].emergency_contact_relationship}`+
+
+                    `&entry.1868024724=${registers[i].days_attending}`+
+                    `&entry.345154263=${registers[i].cost}`+
                     `&entry.1114223182=Yes`;
 
         this.http.post(this.url, body,
