@@ -1,4 +1,3 @@
-
 <div class="title-container">
   <div class="title">
     Registration Info
@@ -20,8 +19,9 @@
   <button type="button" (click)="check()">Check</button>
   <button type="button" (click)="lazyOne()">Lazy One</button>
   <button type="button" (click)="lazyTwo()">Lazy Two</button> -->
-
   <div class="form-control">
+    <h3>Personal Info</h3>
+
     <div class="FormRow">
       <div class="MediumFormFieldContainer">
         <label class="control-label">First Name</label>
@@ -107,7 +107,6 @@
       </div>
     </div>
 
-
     <h3 style="margin-top:20px;">Emergency Contact</h3>
     <div class="FormRow">
       <div class="FormFieldContainer">
@@ -167,6 +166,20 @@
           formControlName="your_church_point_of_contact_number" (change)="addAttendee()">
       </div>
     </div>
+
+    <h3 style="margin-top:20px;">Days Attending</h3>
+    <div class="FormRow">
+      <div class="FormFieldContainer radio">
+        <div *ngFor="let day of attendeeForm.controls['days'].controls; let i=index">
+          <div class="checkbox">
+            <input class="icheckbox_flat" id="flat-checkbox-2" type="checkbox" [formControl]="day" />
+            <label>{{days_attending[i].name}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    Selected:
+    <strong>{{ attendeeForm.get('days').value }}</strong>
 
     <hr>
     <div class="FormFieldContainer">

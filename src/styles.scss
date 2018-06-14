@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~bootstrap/scss/bootstrap";
 @import "~bootflat/bootflat/scss/bootflat";
-
 // Colors
 $lightest-teal: #fff0e8;
 $light-teal: #ffdac4;
@@ -9,106 +9,111 @@ $teal: #f36f24;
 $white: #fff;
 $green: #42A948;
 $red: #a94442;
-
 * {
     font-family: 'Song Myung', serif;
 }
-.page-border{
+
+.page-border {
     @extend .offset-md-3;
     @extend .col-md-6;
     margin-bottom: 25px;
 }
-.page-header{
+
+.page-header {
     text-align: center;
     background-color: $teal;
     @extend .offset-md-0;
     @extend .col-md-12;
     padding-bottom: 10px;
     padding-top: 10px;
-    color: white;   
-    
-  }
+    color: white;
+}
 
-  .page{
-      background-color: $white;
-      height: 200%;
-  }
+.page {
+    background-color: $white;
+    height: 200%;
+}
 
-.checkout{
+.checkout {
     background-color: $light-teal !important;
     border-radius: 15px;
     padding: 15px;
     margin-top: 15px;
     border: solid $teal;
-    border-width: 2px;  
+    border-width: 2px;
     border-style: outset;
-    border-image: initial;  
+    border-image: initial;
 }
 
-.form-control{
-    background-color: $light-teal !important;     
-    input, select, textarea{
-        background-color: $lightest-teal !important; 
+.form-control {
+    background-color: $light-teal !important;
+    input,
+    select,
+    textarea {
+        background-color: $lightest-teal !important;
     }
     border: 0 !important;
-
-    .ng-valid[required], .ng-valid.required  {
-        border-left: 5px solid $green !important; /* green */
-      }
-    
-      .ng-invalid:not(form)  {
-        border-left: 5px solid $red !important; /* red */
-      }
-      .non-required{
-        border-left: 5px solid $green !important; /* green */
-      }
+    .ng-valid[required],
+    .ng-valid.required {
+        border-left: 5px solid $green !important;
+        /* green */
+    }
+    .ng-invalid:not(form) {
+        border-left: 5px solid $red !important;
+        /* red */
+    }
+    .non-required {
+        border-left: 5px solid $green !important;
+        /* green */
+    }
 }
 
-.FormRow{
+.FormRow {
     @extend .row;
     background-color: $light-teal;
 }
 
 // Titles
-.title-container{
+.title-container {
     margin-top: 1.75rem;
     padding-bottom: 35px;
 }
-.title{
+
+.title {
     font-weight: 400;
     font-size: 1.8rem;
     padding-left: 0;
     width: 19rem;
     border-bottom: 4px solid $teal;
 }
-.total-info{
+
+.total-info {
     @extend .offset-md-6;
     font-weight: 400;
     font-size: x-large;
     margin-bottom: 20px;
     text-align: right;
-
-    span{
-      font-weight: 600;
-      font-size: 2rem;
-      color: $teal;
-      margin-left: 20px;
+    span {
+        font-weight: 600;
+        font-size: 2rem;
+        color: $teal;
+        margin-left: 20px;
     }
 }
 
 // Buttons
-
-
-.submit-button-container{
-  text-align: right;
-  margin-right: 50px;
-  margin-bottom: 100px;
+.submit-button-container {
+    text-align: right;
+    margin-right: 50px;
+    margin-bottom: 100px;
 }
 
-.pay-button{
+.pay-button {
     margin-top: 30px;
 }
-.primary-button, .primary-button:disabled,
+
+.primary-button,
+.primary-button:disabled,
 .primary-button[disabled] {
     padding: 9px 16px;
     margin-right: 10px;
@@ -117,12 +122,13 @@ $red: #a94442;
     font-size: 1.5rem;
     border-color: $teal;
     width: 200px;
-    background-color: $lightest-teal;   
+    background-color: $lightest-teal;
     float: right;
     font-weight: bold;
     color: black;
 }
-.primary-button:hover{
+
+.primary-button:hover {
     color: $white;
     background-color: $teal;
     border-color: $teal;
@@ -142,53 +148,71 @@ $red: #a94442;
     line-height: 5px;
 }
 
-.LinkButton{
+.LinkButton {
     @extend .primary-button;
     float: unset;
     vertical-align: middle;
     position: relative;
     font-weight: unset;
     border: solid $teal;
-    border-width: 2px;  
+    border-width: 2px;
     border-style: outset;
-    border-image: initial;  
+    border-image: initial;
     font-size: 1.3rem;
     margin-right: unset;
-
     .LinkButton:hover {
         @extend .primary-button:hover;
     }
 }
 
 // Form Control
-.FormFieldContainer{
+.FormFieldContainer {
     @extend .form-group;
     @extend .col-md-12;
 }
-.MediumFormFieldContainer{
+
+.MediumFormFieldContainer {
     @extend .form-group;
     @extend .col-md-6;
 }
-.SmallFormFieldContainer{
+
+.SmallFormFieldContainer {
     @extend .form-group;
     @extend .col-md-4;
 }
-.ng-valid[required], .ng-valid.required  {
-    border-left: 5px solid $green; /* green */
-  }
 
-  .ng-invalid:not(form)  {
-    border-left: 5px solid $red; /* red */
-  }
-  .non-required{
-    border-left: 5px solid $green !important; /* green */
-  }
+.ng-valid[required],
+.ng-valid.required {
+    border-left: 5px solid $green;
+    /* green */
+}
 
+.ng-invalid:not(form) {
+    border-left: 5px solid $red;
+    /* red */
+}
+
+.non-required {
+    border-left: 5px solid $green !important;
+    /* green */
+}
+
+.icheckbox_flat {
+    background-image: url("assets/check_flat/default.png") !important;
+}
+
+.checkbox {
+    padding-left: 15px;
+} //remove the up and down buttons for number fields    
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 //Pagination
-.add-entry{
+.add-entry {
     color: $teal;
-    
 }
 
 // .pagination>li:first-child>a{
@@ -206,14 +230,16 @@ $red: #a94442;
 //     border-top-right-radius: 4px;
 //     border-bottom-right-radius: 4px;
 // }
-
-.pagination>.active>.pagination-button, .pagination>.active>a{
+.pagination>.active>.pagination-button,
+.pagination>.active>a {
     color: $white;
     background-color: $teal;
     border-color: $teal;
     border-radius: 30px;
 }
-.pagination>li>.pagination-button, .pagination>li>a{
+
+.pagination>li>.pagination-button,
+.pagination>li>a {
     position: relative;
     float: left;
     padding: 9px 16px;
@@ -228,71 +254,65 @@ $red: #a94442;
     z-index: 0;
 }
 
-.pagination>li>.pagination-button:hover, .pagination>li>.pagination-button:focus,
-.pagination>li>a:hover, .pagination>li>a:focus {
+.pagination>li>.pagination-button:hover,
+.pagination>li>.pagination-button:focus,
+.pagination>li>a:hover,
+.pagination>li>a:focus {
     color: #fff;
     background-color: $teal;
     border-color: $teal;
     cursor: pointer;
 }
 
-
-.nav-buttons{
-  display: block;
-  text-align: center;
-
-  .nav-button.active{
-    color: $white;
-    background-color: $teal;
-    border: none;
-  }
-
-  .nav-button{
-    padding: 9px 16px;
-    margin-right: 10px;
-    line-height: 1.42857143;
-    border-radius: 30px;
-    font-size: 16px;
-    border-color: $teal;
-    width: 200px;
-    background-color: $lightest-teal;   
-  }
-
-  .nav-button:hover, .nav-button:focus {
-    color: $white;
-    background-color: $teal;
-    border-color: $teal;
-  }
-
-  .nav-button-active{
-    color: $white;
-    background-color: $teal;
-    border-color: $teal;
-  }
-  .next-button{
-      float: right;
-      margin-bottom: 50px;
-  }
-  .edit-button{
-      margin-bottom: 15px;
-  }
+.nav-buttons {
+    display: block;
+    text-align: center;
+    .nav-button.active {
+        color: $white;
+        background-color: $teal;
+        border: none;
+    }
+    .nav-button {
+        padding: 9px 16px;
+        margin-right: 10px;
+        line-height: 1.42857143;
+        border-radius: 30px;
+        font-size: 16px;
+        border-color: $teal;
+        width: 200px;
+        background-color: $lightest-teal;
+    }
+    .nav-button:hover,
+    .nav-button:focus {
+        color: $white;
+        background-color: $teal;
+        border-color: $teal;
+    }
+    .nav-button-active {
+        color: $white;
+        background-color: $teal;
+        border-color: $teal;
+    }
+    .next-button {
+        float: right;
+        margin-bottom: 50px;
+    }
+    .edit-button {
+        margin-bottom: 15px;
+    }
 }
 
-.review-registers{
-  font-size: 1.4rem;
-  text-decoration: none;
-
-  b{
-
-  }
-
-  span{
-    float: right;
-    margin-left: 20px;
-  }
+.review-registers {
+    font-size: 1.4rem;
+    text-decoration: none;
+    b {}
+    span {
+        float: right;
+        margin-left: 20px;
+    }
 }
 
-#add-entry-box{
+#add-entry-box {
     background-color: $lightest-teal;
     border-color: $teal;
     padding: 4px 8px;
@@ -322,7 +342,7 @@ $red: #a94442;
     background-color: #fefde5 !important;
 }
 
-.CardRow{
+.CardRow {
     @extend .col-md-12;
 }
 
@@ -331,10 +351,10 @@ $red: #a94442;
     display: block;
     font-weight: bold;
 }
-// End of Card formatting 
 
+// End of Card formatting 
 // Email Styling
-.email-info{
+.email-info {
     text-align: center;
     display: block;
     font-weight: bold;
@@ -345,7 +365,7 @@ $red: #a94442;
     @extend .col-md-12;
     background-color: $white !important;
     display: inline-flex;
-    padding:5px 12px;
+    padding: 5px 12px;
     border-radius: 4px;
     border: 1px solid transparent;
     box-shadow: 0 1px 3px 0 #212529;
@@ -353,13 +373,14 @@ $red: #a94442;
     transition: box-shadow 150ms ease;
     background: transparent;
     width: 105%;
-    margin-left: 15px;  
+    margin-left: 15px;
 }
+
 .EmailGroup:focus {
     box-shadow: 0 1px 3px 0 $teal;
 }
 
-.field{
+.field {
     width: 100%;
     background: transparent;
     font-weight: 300;
@@ -370,26 +391,26 @@ $red: #a94442;
     padding-left: 10px;
     cursor: text;
 }
-//Thank you page
 
+//Thank you page
 .h3 {
     padding-top: 200px;
 }
+
 .ty-header {
-	text-align: center;
-    padding-top: 20px;	
+    text-align: center;
+    padding-top: 20px;
     font-size: 50px;
 }
+
 .ty-info {
-	text-align: center;
-	padding-top: 20px;	
+    text-align: center;
+    padding-top: 20px;
 }
 
-.LinkContainer{
+.LinkContainer {
     padding-top: 70px;
     margin-left: 45px;
 }
 
-img {
-    
-}
+img {}
