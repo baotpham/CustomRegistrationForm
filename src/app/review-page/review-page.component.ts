@@ -53,13 +53,15 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     window.scrollTo(0, 0);
 
     //Calculates total for registers
-    for(var i = 0; i<this.registers.length; i++){
-      console.log("Old total is: " + this.total_cost);
-      console.log("Adding " + this.registers[i].cost);
-      this.total_cost += this.registers[i].cost;
-      console.log("New total is: " + this.total_cost);
-    }
-    console.log(this.total_cost);
+    this.total_cost = this.registers.length * 155;
+
+    // for(var i = 0; i<this.registers.length; i++){
+    //   console.log("Old total is: " + this.total_cost);
+    //   console.log("Adding " + this.registers[i].cost);
+    //   this.total_cost += this.registers[i].cost;
+    //   console.log("New total is: " + this.total_cost);
+    // }
+    // console.log(this.total_cost);
 
   }
 
@@ -121,7 +123,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     let promise = new Promise((resolve, reject) => {
       const command = {
-        amount: this.total_cost * 100,
+        // amount: this.total_cost * 100,
+        amount: this.total_cost,
         currency: 'usd',
         description: 'Registration cost for ' + this.email,
         source: token,

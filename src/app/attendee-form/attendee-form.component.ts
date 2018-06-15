@@ -298,28 +298,28 @@ export class AttendeeFormComponent implements OnInit {
 
   numDaysCheck(){
     var dates = this.attendeeForm.get('days').value;
-    this.cost = 0;
+    // this.cost = 0;
+    this.cost = 155;
     this.days_attending = "";
 
     if(dates[0]){
-      this.cost += 25; //Price for attending Friday
+      // this.cost += 25; //Price for attending Friday
       this.days_attending += "Friday, ";
     }
     if(dates[1]){
-      this.cost += 52.5; //Price for attending Saturday
+      // this.cost += 52.5; //Price for attending Saturday
       this.days_attending += "Saturday, ";
     }
     if(dates[2]){
-      this.cost += 52.5; //Price for attending Sunday
+      // this.cost += 52.5; //Price for attending Sunday
       this.days_attending += "Sunday, ";
     }
     if(dates[3]){
-      this.cost += 25; //Price for attending Monday
+      // this.cost += 25; //Price for attending Monday
       this.days_attending += "Monday";
     }
     console.log(this.cost);
     console.log(this.days_attending);
-    console.log("being called in numdayscheck");
   }
 
   rebindDaysCheck(){
