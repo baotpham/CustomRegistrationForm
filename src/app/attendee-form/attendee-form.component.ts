@@ -114,6 +114,7 @@ export class AttendeeFormComponent implements OnInit {
 
   ngOnInit() {
     this.loadAttendees();
+    this.checkChurch();
   }
 
   //CRUD Options
@@ -200,6 +201,7 @@ export class AttendeeFormComponent implements OnInit {
 
   loadAttendees() {
     var attendees = this.userService.getAllRegisters();
+    console.log(attendees);
 
     if (attendees.length > 0) {
       this.people = attendees;
@@ -215,6 +217,7 @@ export class AttendeeFormComponent implements OnInit {
       this.shouldSlice = false;
 
       this.bindListToForm();
+
       console.log("yes people", this.people);
     } else {
       this.people.push(new Attendee("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null));
@@ -275,12 +278,21 @@ export class AttendeeFormComponent implements OnInit {
 
   //Checks if Other or N/A church is selected
   checkChurch() {
-    console.log(this.your_churches);
     if (this.your_churches.value == 'N/A') {
       this.your_church.setValue("");
     }
     else if (!(this.your_churches.value == 'Other')) {
       this.your_church.setValue(this.your_churches.value);
+    }
+    //Makes sure the list is always set to what's in the Church Name box
+    //If not, then is set to Other
+    if(this.church_list.includes(this.your_church.value, 0)){
+      this.your_churches.setValue(this.your_church.value);
+      console.log(this.your_churches.value);
+      console.log(this.your_church.value);
+    }
+    if(this.your_churches.value == "" || this.your_churches.value == null){
+      this.your_churches.setValue("Other");
     }
   }
 
@@ -383,6 +395,7 @@ export class AttendeeFormComponent implements OnInit {
     this.your_church.setValue(this.currentAttendee.your_church);
     this.your_church_point_of_contact_name.setValue(this.currentAttendee.your_church_point_of_contact_name);
     this.your_church_point_of_contact_number.setValue(this.currentAttendee.your_church_point_of_contact_number);
+    this.rebindDaysCheck();
   }
 
   //updates malleable model to target attendee info
