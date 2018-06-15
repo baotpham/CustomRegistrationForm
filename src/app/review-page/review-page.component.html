@@ -62,7 +62,7 @@
 </div>
 
 
-  <button class="primary-button pay-button" type="submit">Pay {{total_cost | currency}}</button>
+  <button [disabled]='isDisabled()' class="primary-button pay-button" type="submit">Pay {{total_cost | currency}}</button>
 
   <!-- spacing -->
   <div style="height: 200px;"></div>

@@ -39,6 +39,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   email = '';
   total_cost = 0;
+  button_disabled = false;
 
   constructor(private cd: ChangeDetectorRef, private userService: UserService,
     private http: HttpClient, private googleService: GoogleService,
@@ -53,7 +54,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     window.scrollTo(0, 0);
 
     //Calculates total for registers
-    this.total_cost = this.registers.length * 15500;
+    this.total_cost = this.registers.length * 155;
 
     // for(var i = 0; i<this.registers.length; i++){
     //   console.log("Old total is: " + this.total_cost);
@@ -63,6 +64,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // }
     // console.log(this.total_cost);
 
+    this.button_disabled = false;
   }
 
   ngAfterViewInit() {
@@ -99,10 +101,12 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onSubmit(form: NgForm) {
+    this.button_disabled = true;
     const { token, error } = await stripe.createToken(this.card);
 
     if (error) {
       console.log('Something is wrong:', error);
+      this.button_disabled = false;
     } else {
       console.log('Success!');
       // ...send the token to the your backend to process the charge
@@ -122,8 +126,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     let promise = new Promise((resolve, reject) => {
       const command = {
-        // amount: this.total_cost * 100,
-        amount: this.total_cost,
+        amount: this.total_cost * 100,
         currency: 'usd',
         description: 'Registration cost for ' + this.email,
         source: token,
@@ -153,6 +156,9 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.googleService.post(this.registers).then(
       () => { this.loading = false },
       () => { this.loading = false });
+  }
+  isDisabled(){
+    return this.button_disabled;
   }
 
 }
