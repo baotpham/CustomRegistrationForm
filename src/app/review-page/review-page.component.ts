@@ -113,7 +113,6 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.router.navigate(['/', 'thank-you']);
     }
-    this.postToGoogle();
   }
 
   processCharge(token) {
