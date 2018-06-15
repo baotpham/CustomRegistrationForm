@@ -3,6 +3,8 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~bootflat/bootflat/scss/bootflat";
 // Colors
+$disabled-color-bg: #fff5f0;
+$disabled-color-text: rgb(138, 138, 138);
 $lightest-teal: #fff0e8;
 $light-teal: #ffdac4;
 $teal: #f36f24;
@@ -112,9 +114,7 @@ $red: #a94442;
     margin-top: 30px;
 }
 
-.primary-button,
-.primary-button:disabled,
-.primary-button[disabled] {
+.primary-button{
     padding: 9px 16px;
     margin-right: 10px;
     line-height: 1.42857143;
@@ -126,6 +126,14 @@ $red: #a94442;
     float: right;
     font-weight: bold;
     color: black;
+}
+.primary-button:disabled,
+.primary-button[disabled],
+.primary-button[disabled]:hover {
+    @extend .primary-button;
+    background-color: $disabled-color-bg;
+    color: $disabled-color-text;
+    border-color: $disabled-color-bg;
 }
 
 .primary-button:hover {
