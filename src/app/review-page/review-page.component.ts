@@ -53,7 +53,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     window.scrollTo(0, 0);
 
     //Calculates total for registers
-    this.total_cost = this.registers.length * 155;
+    this.total_cost = this.registers.length * 15500;
 
     // for(var i = 0; i<this.registers.length; i++){
     //   console.log("Old total is: " + this.total_cost);
