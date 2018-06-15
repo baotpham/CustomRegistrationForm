@@ -12,7 +12,7 @@
 </div>
 
 <!-- Attendee Forms -->
-<form [formGroup]="attendeeForm" (ngSubmit)="onSubmit()" #checkout="ngForm" class="checkout">
+<form [formGroup]="attendeeForm" #checkout="ngForm" class="checkout">
 
   <!-- <button type="button" (click)="partialUpdate()">Partial Update</button>
   <button type="button" (click)="fullUpdate()">Full Update</button>
@@ -170,7 +170,7 @@
     <h3 style="margin-top:20px;">Days Attending</h3>
     <div class="FormRow">
       <div class="FormFieldContainer radio">
-        <div *ngFor="let day of attendeeForm.controls['days'].controls; let i=index">
+        <div *ngFor="let day of attendeeForm.get('days')['controls']; let i=index">
           <div class="checkbox">
             <input class="icheckbox_flat" id="flat-checkbox-2" type="checkbox" [formControl]="day" (change)="addAttendee()" />
             <label>{{days_chosen[i].name}}</label>
