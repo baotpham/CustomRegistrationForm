@@ -38,7 +38,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   loading: boolean = false;
 
   email = '';
-  // total_cost: currency;
+  total_cost = 0;
 
   constructor(private cd: ChangeDetectorRef, private userService: UserService,
     private http: HttpClient, private googleService: GoogleService,
@@ -52,6 +52,14 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //scrolls to top of screen
     window.scrollTo(0, 0);
 
+    //Calculates total for registers
+    for(var i = 0; i<this.registers.length; i++){
+      console.log("Old total is: " + this.total_cost);
+      console.log("Adding " + this.registers[i].cost);
+      this.total_cost += this.registers[i].cost;
+      console.log("New total is: " + this.total_cost);
+    }
+    console.log(this.total_cost);
 
   }
 
@@ -89,6 +97,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onSubmit(form: NgForm) {
+
+
     // const { token, error } = await stripe.createToken(this.card);
 
     // if (error) {
@@ -109,6 +119,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   processCharge(token) {
     var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/webtask-stripe-payment';
     // var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/stripe-payment';
+
 
     let promise = new Promise((resolve, reject) => {
       const command = {
