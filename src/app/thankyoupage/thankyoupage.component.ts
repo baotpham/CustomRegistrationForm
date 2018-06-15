@@ -10,6 +10,8 @@ export class ThankyoupageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    //scrolls to top of screen
+    window.scrollTo(0, 0);
   }
 
 }
