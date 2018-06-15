@@ -97,22 +97,20 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onSubmit(form: NgForm) {
+    const { token, error } = await stripe.createToken(this.card);
 
+    if (error) {
+      console.log('Something is wrong:', error);
+    } else {
+      console.log('Success!');
+      // ...send the token to the your backend to process the charge
+      this.processCharge(token).then(
+        (success) => this.postToGoogle(),
+        (error) => console.error("Stripe process charge error", error)
+      );
 
-    // const { token, error } = await stripe.createToken(this.card);
-
-    // if (error) {
-    //   console.log('Something is wrong:', error);
-    // } else {
-    //   console.log('Success!');
-    //   // ...send the token to the your backend to process the charge
-    //   this.processCharge(token).then(
-    //     (success) => this.postToGoogle(),
-    //     (error) => console.error("Stripe process charge error", error)
-    //   );
-
-    //   this.router.navigate(['/', 'thank-you']);
-    // }
+      this.router.navigate(['/', 'thank-you']);
+    }
     this.postToGoogle();
   }
 
@@ -123,7 +121,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     let promise = new Promise((resolve, reject) => {
       const command = {
-        amount: 15500 * this.registers.length, //$155.00
+        amount: this.total_cost * 100,
         currency: 'usd',
         description: 'Registration cost for ' + this.email,
         source: token,
