@@ -14,24 +14,26 @@
 
 <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)">
   <div class="checkout">
-<!-- spacing -->
-<div style="height: 25px;"></div>
+    <!-- spacing -->
+    <div style="height: 25px;"></div>
 
-<table class="Tablecontainer">
-    <tr class="Tablerow">
-      <th class="col-md-4">Name</th>
-      <th class="col-md-2">Age</th>
-      <th class="col-md-4">Days Attending</th>
-      <th class="col-md-2">Cost</th>
-    </tr>
-    <tr *ngFor="let attendee of registers" class="Tablerow">
-      <td class="col-md-4">{{attendee.first_name}} {{attendee.last_name}} <br>Gender: {{attendee.gender}} <br>Shirt Size: {{attendee.t_shirt}}</td>
-      <td class="col-md-2">{{attendee.age}}</td>
-      <td class="col-md-4">{{attendee.days_attending}}</td>
-      <td class="col-md-2">{{attendee.cost | currency }}</td>
-  </table>
-  <!-- spacing -->
-  <div style="height: 70px;"></div>
+    <table class="Tablecontainer">
+      <tr class="Tablerow">
+        <th class="col-md-4">Name</th>
+        <th class="col-md-2">Age</th>
+        <th class="col-md-4">Days Attending</th>
+        <th class="col-md-2">Cost</th>
+      </tr>
+      <tr *ngFor="let attendee of registers" class="Tablerow">
+        <td class="col-md-4">{{attendee.first_name}} {{attendee.last_name}}
+          <br>Gender: {{attendee.gender}}
+          <br>Shirt Size: {{attendee.t_shirt}}</td>
+        <td class="col-md-2">{{attendee.age}}</td>
+        <td class="col-md-4">{{attendee.days_attending}}</td>
+        <td class="col-md-2">{{attendee.cost | currency }}</td>
+    </table>
+    <!-- spacing -->
+    <div style="height: 70px;"></div>
 
 
     <label for="card-info" id="card-title">Card Information</label>
@@ -44,15 +46,16 @@
     <label class="email-info">Email For Receipt</label>
     <div class='CardRow row'>
       <div class="EmailGroup">
-          <input #email (keyup)="onKey(email.value)" id="email" name="email" class="field" placeholder="jane.doe@example.com" ngModel email required/>
+        <input #email (keyup)="onKey(email.value)" id="email" name="email" class="field" placeholder="jane.doe@example.com" ngModel
+          email required/>
       </div>
     </div>
 
 
 
-  <!-- spacing -->
-  <div style="height: 70px;"></div>
-</div>
+    <!-- spacing -->
+    <div style="height: 70px;"></div>
+  </div>
 
 
   <button [disabled]='isDisabled()' class="primary-button pay-button" type="submit">Pay {{total_cost | currency}}</button>
