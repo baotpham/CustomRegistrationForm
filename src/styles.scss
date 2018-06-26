@@ -352,6 +352,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .CardRow {
     @extend .col-md-12;
+    
 }
 
 #card-title {
@@ -424,12 +425,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 //Review page table 
 
-th, td {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1pt solid $teal; 
-}
-.reviewtable {
+.Tablecontainer {
     @extend .col-md-12;
-    table-layout:fixed;
+}
+.Tablerow {
+    padding: 10px 0px;
+    border-bottom: 1pt solid $teal; 
+    word-wrap: break-word;
 }

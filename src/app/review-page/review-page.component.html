@@ -17,31 +17,22 @@
 <!-- spacing -->
 <div style="height: 25px;"></div>
 
-
-  <table class="reviewtable">
-    <tr>
-      <th class="col-md-2">Name</th>
-      <th class="col-md-2">Days Attending</th>
-      <th class="col-md-2">Cost</th>
+<table class="Tablecontainer">
+    <tr class="Tablerow">
+      <th class="col-md-4">Name</th>
       <th class="col-md-2">Age</th>
-      <th class="col-md-2">Gender</th>
-      <th class="col-md-2">Shirt Size</th>
+      <th class="col-md-4">Days Attending</th>
+      <th class="col-md-2">Cost</th>
     </tr>
-    <tr *ngFor="let attendee of registers">
-      <td class="col-md-2">{{attendee.first_name}} {{attendee.last_name}}</td>
-      <td class="col-md-2">{{attendee.days_attending}}</td>
-      <td class="col-md-2">{{attendee.cost | currency }}</td>
+    <tr *ngFor="let attendee of registers" class="Tablerow">
+      <td class="col-md-4">{{attendee.first_name}} {{attendee.last_name}} <br>Gender: {{attendee.gender}} <br>Shirt Size: {{attendee.t_shirt}}</td>
       <td class="col-md-2">{{attendee.age}}</td>
-      <td class="col-md-2">{{attendee.gender}}</td>
-      <td class="col-md-2">{{attendee.t_shirt}}</td>
-    </tr>
+      <td class="col-md-4">{{attendee.days_attending}}</td>
+      <td class="col-md-2">{{attendee.cost | currency }}</td>
   </table>
-
   <!-- spacing -->
   <div style="height: 70px;"></div>
 
-
-  <div>
 
     <label for="card-info" id="card-title">Card Information</label>
     <div class="CardRow">
@@ -56,7 +47,8 @@
           <input #email (keyup)="onKey(email.value)" id="email" name="email" class="field" placeholder="jane.doe@example.com" ngModel email required/>
       </div>
     </div>
-  </div>
+
+
 
   <!-- spacing -->
   <div style="height: 70px;"></div>
