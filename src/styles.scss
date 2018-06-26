@@ -424,11 +424,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 //Review page table 
 
-tr {
-    border-bottom: 1pt solid $teal;
-}
-
 th, td {
     padding-top: 10px;
     padding-bottom: 10px;
+    border-bottom: 1pt solid $teal; 
+}
+.reviewtable {
+    @extend .col-md-12;
+    table-layout:fixed;
 }

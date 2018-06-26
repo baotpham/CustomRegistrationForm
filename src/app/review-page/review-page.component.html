@@ -17,22 +17,23 @@
 <!-- spacing -->
 <div style="height: 25px;"></div>
 
-  <table>
+
+  <table class="reviewtable">
     <tr>
-      <th class="col-md-6">Name</th>
-      <th class="col-md-6">Days Attending</th>
-      <th class="col-md-4">Cost</th>
-      <th class="col-md-4">Age</th>
-      <th class="col-md-4">Gender</th>
-      <th class="col-md-4">Shirt Size</th>
+      <th class="col-md-2">Name</th>
+      <th class="col-md-2">Days Attending</th>
+      <th class="col-md-2">Cost</th>
+      <th class="col-md-2">Age</th>
+      <th class="col-md-2">Gender</th>
+      <th class="col-md-2">Shirt Size</th>
     </tr>
     <tr *ngFor="let attendee of registers">
-      <td class="col-md-6">{{attendee.first_name}} {{attendee.last_name}}</td>
-      <td class="col-md-6">{{attendee.days_attending}}</td>
-      <td class="col-md-4">{{attendee.cost | currency }}</td>
-      <td class="col-md-4">{{attendee.age}}</td>
-      <td class="col-md-4">{{attendee.gender}}</td>
-      <td class="col-md-4">{{attendee.t_shirt}}</td>
+      <td class="col-md-2">{{attendee.first_name}} {{attendee.last_name}}</td>
+      <td class="col-md-2">{{attendee.days_attending}}</td>
+      <td class="col-md-2">{{attendee.cost | currency }}</td>
+      <td class="col-md-2">{{attendee.age}}</td>
+      <td class="col-md-2">{{attendee.gender}}</td>
+      <td class="col-md-2">{{attendee.t_shirt}}</td>
     </tr>
   </table>
 
