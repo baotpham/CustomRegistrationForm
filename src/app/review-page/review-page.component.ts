@@ -39,6 +39,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   email = '';
   total_cost = 0;
+  original_cost = 0;
+  cost_diff = 0;
   button_disabled = false;
 
   constructor(private cd: ChangeDetectorRef, private userService: UserService,
@@ -55,6 +57,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //Calculates total for registers
     this.total_cost = this.registers.length * 155;
+    this.original_cost = this.registers.length * 155;
 
     // for(var i = 0; i<this.registers.length; i++){
     //   console.log("Old total is: " + this.total_cost);
@@ -159,6 +162,16 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   isDisabled(){
     return this.button_disabled;
+  }
+
+  checkDiscount(discount: string){
+    if(discount=="poop"){
+      this.total_cost = this.registers.length * 50;
+      this.cost_diff = this.original_cost - this.total_cost;
+    }
+    else{
+      this.total_cost = this.registers.length * 150;
+    }
   }
 
 }

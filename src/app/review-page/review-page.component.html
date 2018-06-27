@@ -57,6 +57,27 @@
     <div style="height: 70px;"></div>
   </div>
 
+  <div class="total-info">
+
+    <div class="FormFieldContainer">
+      <label class="control-label">Discount Code</label>
+      <input #discount class="discount non-required" id="discount" type="text" placeholder="Enter Promo Code" name="discount" (keyup)="checkDiscount(discount.value)">
+    </div>
+
+    Order Summary:
+    <br>
+    <div class="">Original Cost: {{original_cost}}</div>
+    <br>
+    <div class="">Savings: {{cost_diff}}</div>
+    <br>
+    <div class="">New Total: {{total_cost}}</div>
+    <span *ngIf="registers.length != undefined">{{registers.length}}</span>
+    <span *ngIf="registers.length == undefined">0</span>
+
+    <div class=""></div>
+
+  </div>
+
 
   <button [disabled]='isDisabled()' class="primary-button pay-button" type="submit">Pay {{total_cost | currency}}</button>
 
