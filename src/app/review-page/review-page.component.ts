@@ -43,6 +43,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   cost_diff = 0;
   button_disabled = false;
 
+  dataObj: any;
+
   constructor(private cd: ChangeDetectorRef, private userService: UserService,
     private http: HttpClient, private googleService: GoogleService,
     private router: Router) { }
@@ -165,13 +167,22 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   checkDiscount(discount: string){
-    if(discount=="poop"){
-      this.total_cost = this.registers.length * 50;
-      this.cost_diff = this.original_cost - this.total_cost;
-    }
-    else{
-      this.total_cost = this.registers.length * 150;
-    }
-  }
+    var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/handle-discount';
 
+    let promise = new Promise((resolve, reject) => {
+      const command = {
+        code: discount
+      };
+
+      this.http.post(task_url, command).subscribe(
+        (data) => {
+          this.dataObj = data;
+          this.total_cost = this.dataObj.newCost * this.registers.length;
+          this.original_cost = 155 * this.registers.length;
+          this.cost_diff = this.original_cost - this.total_cost;
+        },
+        (error) => reject(error)
+      );
+    });
+  }
 }
