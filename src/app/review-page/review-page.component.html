@@ -35,7 +35,7 @@
    
       <div class="FormFieldContainer">
         <label class="discount-label">Discount Code</label>
-        <input #discount class="discount non-required" id="discount" type="text" placeholder="Enter Promo Code" name="discount" (keyup)="checkDiscount(discount.value)">
+        <input #discount class="discount" id="discount" type="text" placeholder="Enter Promo Code" name="discount" (keyup)="checkDiscount(discount.value)">
        </div>    
       <div class="cost-info">Sub-Total: ${{original_cost}}</div>
       <div class="cost-info">Discount: - ${{cost_diff}}</div>
