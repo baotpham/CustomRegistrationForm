@@ -32,10 +32,23 @@
         <td class="col-md-4">{{attendee.days_attending}}</td>
         <td class="col-md-2">{{attendee.cost | currency }}</td>
     </table>
-    <!-- spacing -->
-    <div style="height: 70px;"></div>
+   
+      <div class="FormFieldContainer">
+        <label class="discount-label">Discount Code</label>
+        <input #discount class="discount non-required" id="discount" type="text" placeholder="Enter Promo Code" name="discount" (keyup)="checkDiscount(discount.value)">
+       </div>    
+      <div class="cost-info">Sub-Total: ${{original_cost}}</div>
+      <div class="cost-info">Discount: - ${{cost_diff}}</div>
+      <div class="cost-info">Total: ${{total_cost}}</div>
+  </div>
+
+      <!-- spacing  -->
+      <div style="height: 30px;"></div>
+  <div class="payment-title">Payment</div>
 
 
+  <div class="checkout">
+    <div style="height: 20px;"></div>
     <label for="card-info" id="card-title">Card Information</label>
     <div class="CardRow">
       <div id="card-info" #cardInfo></div>
@@ -50,34 +63,8 @@
           email required/>
       </div>
     </div>
-
-
-
-    <!-- spacing -->
-    <div style="height: 70px;"></div>
+    <div style="height: 30px;"></div>
   </div>
-
-  <div class="total-info">
-
-    <div class="FormFieldContainer">
-      <label class="control-label">Discount Code</label>
-      <input #discount class="discount non-required" id="discount" type="text" placeholder="Enter Promo Code" name="discount" (keyup)="checkDiscount(discount.value)">
-    </div>
-
-    Order Summary:
-    <br>
-    <div class="">Original Cost: {{original_cost}}</div>
-    <br>
-    <div class="">Savings: {{cost_diff}}</div>
-    <br>
-    <div class="">New Total: {{total_cost}}</div>
-    <span *ngIf="registers.length != undefined">{{registers.length}}</span>
-    <span *ngIf="registers.length == undefined">0</span>
-
-    <div class=""></div>
-
-  </div>
-
 
   <button [disabled]='isDisabled()' class="primary-button pay-button" type="submit">Pay {{total_cost | currency}}</button>
 
