@@ -53,14 +53,14 @@
       </div>
       <div class="SmallFormFieldContainer">
         <label class="control-label">Age</label>
-        <input class="form-control" type="number" formControlName="age" placeholder="12" (change)="addAttendee()" required>
+        <input class="form-control" type="number" formControlName="age" placeholder="Age" (change)="addAttendee()" required>
         <!-- <div [hidden]="age.valid || age.pristine" class="alert alert-danger">Age is required</div> -->
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label">Medical Issues/Allergies</label>
-        <textarea class="form-control" type="text" formControlName="medical" placeholder="N/A" rows="5" (change)="addAttendee()"
+        <textarea class="form-control" type="text" formControlName="medical" placeholder="Put N/A if no medical issue" rows="5" (change)="addAttendee()"
           required></textarea>
         <!-- <div [hidden]="medical.valid || medical.pristine" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div> -->
       </div>
@@ -75,7 +75,7 @@
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label">Address 2</label>
-        <input class="form-control non-required" type="text" placeholder="N/A" name="address_2" formControlName="address_2" (change)="addAttendee()">
+        <input class="form-control non-required" type="text" placeholder="N/A if not applicable" name="address_2" formControlName="address_2" (change)="addAttendee()">
       </div>
     </div>
     <div class="FormRow">
@@ -102,7 +102,7 @@
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="email">Email</label>
-        <input class="form-control non-required" type="email" placeholder="Enter Your Email If You Have One" name="email" formControlName="email"
+        <input class="form-control non-required" type="email" placeholder="Enter your email if applicable" name="email" formControlName="email"
           (change)="addAttendee()">
       </div>
     </div>
