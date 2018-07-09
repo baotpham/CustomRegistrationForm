@@ -40,6 +40,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   email = '';
   total_cost = 0;
   original_cost = 0;
+  new_cost = 0;
   cost_diff = 0;
   button_disabled = false;
 
@@ -158,7 +159,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //google sheet response is html, but for some reason, http tries to parse json.
     //this project will reject the html. I think it has to do with http header.
-    this.googleService.post(this.registers).then(
+    this.googleService.post(this.registers, this.new_cost).then(
       () => { this.loading = false },
       () => { this.loading = false });
   }
@@ -177,6 +178,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.http.post(task_url, command).subscribe(
         (data) => {
           this.dataObj = data;
+          this.new_cost = this.dataObj.newCost;
           this.total_cost = this.dataObj.newCost * this.registers.length;
           this.original_cost = 155 * this.registers.length;
           this.cost_diff = this.original_cost - this.total_cost;
