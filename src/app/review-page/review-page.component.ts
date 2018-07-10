@@ -116,10 +116,17 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       console.log('Success!');
       // ...send the token to the your backend to process the charge
-      this.processCharge(token).then(
-        (success) => this.postToGoogle(),
-        (error) => console.error("Stripe process charge error", error)
-      );
+
+      if(this.new_cost=0){
+        this.postToGoogle();
+      }
+      else{
+        this.processCharge(token).then(
+          (success) => this.postToGoogle(),
+          (error) => console.error("Stripe process charge error", error)
+        );
+      }
+      
 
       this.router.navigate(['/', 'thank-you']);
     }
@@ -186,5 +193,9 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
         (error) => reject(error)
       );
     });
+
+    if(this.new_cost = 0){
+      this.button_disabled = false;
+    }
   }
 }
