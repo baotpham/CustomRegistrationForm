@@ -53,9 +53,9 @@ export class AttendeeFormComponent implements OnInit {
   cost = 0;
   days_attending = "";
   people = [];
-  sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-  genders = ['Male', 'Female'];
-  states = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "FL", "GA", "HI",
+  sizes = ['Select Size','S', 'M', 'L', 'XL', 'XXL'];
+  genders = ['Select Gender','Male', 'Female'];
+  states = ["Select State","AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "FL", "GA", "HI",
     "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI",
     "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV",
     "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT",
