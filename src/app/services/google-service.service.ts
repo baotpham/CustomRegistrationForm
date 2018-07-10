@@ -14,7 +14,7 @@ export class GoogleService {
 
 
 
-  post(registers, cost){
+  post(registers){
 
     let promise = new Promise((resolve, reject) => {
 
@@ -42,7 +42,7 @@ export class GoogleService {
                     `&entry.516070659=${registers[i].emergency_contact_relationship}`+
 
                     `&entry.1868024724=${registers[i].days_attending}`+
-                    `&entry.345154263=${cost}`+
+                    `&entry.345154263=${registers[i].cost}`+
                     `&entry.1114223182=Yes`;
 
         this.http.post(this.url, body,

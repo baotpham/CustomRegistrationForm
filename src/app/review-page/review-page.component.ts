@@ -126,9 +126,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
           (error) => console.error("Stripe process charge error", error)
         );
       }
-      
 
-      this.router.navigate(['/', 'thank-you']);
+      //this.router.navigate(['/', 'thank-you']); //this needs to be moved to the onsuccess part of PostToGoogle
     }
   }
 
@@ -164,11 +163,14 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log("posting to google: ", this.registers);
     this.loading = true;
 
+    for(var i in this.registers){
+      this.registers[i].cost = this.new_cost;
+    }
     //google sheet response is html, but for some reason, http tries to parse json.
     //this project will reject the html. I think it has to do with http header.
-    this.googleService.post(this.registers, this.new_cost).then(
-      () => { this.loading = false },
-      () => { this.loading = false });
+    this.googleService.post(this.registers).then(
+      (success) => { this.router.navigate(['/', 'thank-you']); this.loading = false; },
+      (error) => { this.loading = false });
   }
   isDisabled(){
     return this.button_disabled;
