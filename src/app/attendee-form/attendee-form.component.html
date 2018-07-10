@@ -27,13 +27,13 @@
         <label class="control-label">First Name</label>
         <input class="form-control" type="text" formControlName="first_name" placeholder="Enter Your First Name" (change)="addAttendee()"
           required>
-        <!-- <div [hidden]="first_name.valid || first_name.pristine" class="alert alert-danger">First Name is required</div> -->
+        <div [hidden]="first_name.valid || first_name.pristine" class="alert alert-danger">First Name is required</div>
       </div>
       <div class="MediumFormFieldContainer">
         <label class="control-label">Last Name</label>
         <input class="form-control" type="text" formControlName="last_name" placeholder="Enter Your Last Name" (change)="addAttendee()"
           required>
-        <!-- <div [hidden]="last_name.valid || last_name.pristine" class="alert alert-danger">Last Name is required</div> -->
+        <div [hidden]="last_name.valid || last_name.pristine" class="alert alert-danger">Last Name is required</div> 
       </div>
     </div>
     <div class="FormRow">
@@ -42,19 +42,19 @@
         <select class="form-control" formControlName="t_shirt" (change)="addAttendee()" required>
           <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
         </select>
-        <!-- <div [hidden]="t_shirt.valid || t_shirt.pristine" class="alert alert-danger">T-shirt size is required</div> -->
+       <!-- <div [hidden]="t_shirt.valid || t_shirt.pristine" class="alert alert-danger">T-shirt size is required</div>-->
       </div>
       <div class="SmallFormFieldContainer">
         <label class="control-label">Gender</label>
         <select class="form-control" formControlName="gender" (change)="addAttendee()" required>
           <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
         </select>
-        <!-- <div [hidden]="gender.valid || gender.pristine" class="alert alert-danger">Gender is required</div> -->
+        <!--<div [hidden]="gender.valid || gender.pristine" class="alert alert-danger">Gender is required</div>-->
       </div>
       <div class="SmallFormFieldContainer">
         <label class="control-label">Age</label>
         <input class="form-control" type="number" formControlName="age" placeholder="Age" (change)="addAttendee()" required>
-        <!-- <div [hidden]="age.valid || age.pristine" class="alert alert-danger">Age is required</div> -->
+        <div [hidden]="age.valid || age.pristine" class="alert alert-danger">Age is required</div>
       </div>
     </div>
     <div class="FormRow">
@@ -62,7 +62,7 @@
         <label class="control-label">Medical Issues/Allergies</label>
         <textarea class="form-control" type="text" formControlName="medical" placeholder="Put N/A if no medical issue" rows="5" (change)="addAttendee()"
           required></textarea>
-        <!-- <div [hidden]="medical.valid || medical.pristine" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div> -->
+        <div [hidden]="medical.valid || medical.pristine" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div> 
       </div>
     </div>
     <div class="FormRow">
@@ -70,6 +70,7 @@
         <label class="control-label">Address</label>
         <input class="form-control" type="text" placeholder="Enter Your Address" formControlName="address" (change)="addAttendee()"
           required>
+          <div [hidden]="address.valid || address.pristine" class="alert alert-danger">Address is required</div>
       </div>
     </div>
     <div class="FormRow">
@@ -83,6 +84,7 @@
         <label class="control-label" for="city">City</label>
         <input class="form-control" type="text" placeholder="Enter Your City" name="city" formControlName="city" (change)="addAttendee()"
           required>
+          <div [hidden]="city.valid || city.pristine" class="alert alert-danger">City is required</div>
       </div>
     </div>
     <div class="FormRow">
@@ -97,6 +99,7 @@
         <label class="control-label" for="zip">Zip Code</label>
         <input class="form-control" type="number" placeholder=" Enter Your Zip Code" name="zip_code" formControlName="zip_code" (change)="addAttendee()"
           required>
+        <div [hidden]="zip_code.valid || zip_code.pristine" class="alert alert-danger">Zip code is required</div>
       </div>
     </div>
     <div class="FormRow">
@@ -113,11 +116,13 @@
         <label class="control-label" for="emergency_contact_first_name">First Name</label>
         <input class="form-control" type="text" placeholder="Enter First Name" name="emergency_contact_first_name" formControlName="emergency_contact_first_name"
           (change)="addAttendee()" required>
+        <div [hidden]="emergency_contact_first_name.valid || emergency_contact_first_name.pristine" class="alert alert-danger">Emergency contact first name is required</div>
       </div>
       <div class="FormFieldContainer">
         <label class="control-label" for="emergency_contact_last_name">Last Name</label>
         <input class="form-control" type="text" placeholder="Enter Last Name" name="emergency_contact_last_name" formControlName="emergency_contact_last_name"
           (change)="addAttendee()" required>
+          <div [hidden]="emergency_contact_last_name.valid || emergency_contact_last_name.pristine" class="alert alert-danger">Emergency contact last name is required</div>
       </div>
     </div>
     <div class="FormRow">
@@ -125,6 +130,7 @@
         <label class="control-label" for="emergency_contact_phone_number">Phone Number</label>
         <input class="form-control" type="number" placeholder="Enter Phone Number" name="emergency_contact_phone_number" formControlName="emergency_contact_phone_number"
           (change)="addAttendee()" required>
+        <div [hidden]="emergency_contact_phone_number.valid || emergency_contact_phone_number.pristine" class="alert alert-danger">Emergency contact phone number is required</div>
       </div>
     </div>
     <div class="FormRow">
@@ -132,6 +138,7 @@
         <label class="control-label" for="emergency_contact_relationship">Relationship</label>
         <input class="form-control" type="text" placeholder="Relationship" name="emergency_contact_relationship" formControlName="emergency_contact_relationship"
           (change)="addAttendee()" required>
+          <div [hidden]="emergency_contact_relationship.valid || emergency_contact_relationship.pristine" class="alert alert-danger">Emergency contact relationship is required</div>
       </div>
     </div>
 
