@@ -40,7 +40,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   email = '';
   total_cost = 0;
   original_cost = 0;
-  new_cost = 0;
+  new_cost = 155;
   cost_diff = 0;
   button_disabled = false;
 
@@ -117,7 +117,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log('Success!');
       // ...send the token to the your backend to process the charge
 
-      if(this.new_cost=0){
+      if(this.new_cost==0){
         this.postToGoogle();
       }
       else{
