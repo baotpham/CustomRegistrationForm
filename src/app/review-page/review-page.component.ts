@@ -127,7 +127,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
         );
       }
 
-      //this.router.navigate(['/', 'thank-you']); //this needs to be moved to the onsuccess part of PostToGoogle
+      this.router.navigate(['/', 'thank-you']); //this needs to be moved to the onsuccess part of PostToGoogle
     }
   }
 
@@ -169,8 +169,9 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //google sheet response is html, but for some reason, http tries to parse json.
     //this project will reject the html. I think it has to do with http header.
     this.googleService.post(this.registers).then(
-      (success) => { this.router.navigate(['/', 'thank-you']); this.loading = false; },
-      (error) => { this.loading = false });
+      // (success) => { this.router.navigate(['/', 'thank-you']); this.loading = false; },
+      () => { this.loading = false },
+      () => { this.loading = false });
   }
   isDisabled(){
     return this.button_disabled;
