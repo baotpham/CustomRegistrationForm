@@ -208,6 +208,26 @@
         <!-- </li> -->
       </ul>
     </div>
+
+    <h3 style="margin-top:20px;" [hidden]="attendeeForm.valid">Fields Required To Move On</h3>
+    <div class="FormFieldContainer">
+      <div [hidden]="first_name.valid">First Name is required</div>
+      <div [hidden]="last_name.valid">Last Name is required</div> 
+      <div [hidden]="t_shirt.valid">T-shirt size is required</div>
+      <div [hidden]="gender.valid">Gender is required</div>
+      <div [hidden]="age.valid">Age is required</div>
+      <div [hidden]="medical.valid">Medical Information is required. Put N/A if you have none.</div> 
+      
+      <div [hidden]="address.valid">Address is required</div>
+      <div [hidden]="city.valid">City is required</div>
+      <div [hidden]="state.valid">State is required</div>
+      <div [hidden]="zip_code.valid">Zip code is required</div>
+
+      <div [hidden]="emergency_contact_first_name.valid">Emergency contact first name is required</div>
+      <div [hidden]="emergency_contact_last_name.valid">Emergency contact last name is required</div>
+      <div [hidden]="emergency_contact_phone_number.valid">Emergency contact phone number is required</div>
+      <div [hidden]="emergency_contact_relationship.valid">Emergency contact relationship is required</div>
+    </div>
   </div>
 
 
