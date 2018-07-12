@@ -33,7 +33,7 @@
         <label class="control-label">Last Name</label>
         <input class="form-control" type="text" formControlName="last_name" placeholder="Enter Your Last Name" (change)="addAttendee()"
           required>
-        <div [hidden]="last_name.valid || last_name.untouched" class="alert alert-danger">Last Name is required</div> 
+        <div [hidden]="last_name.valid || last_name.untouched" class="alert alert-danger">Last Name is required</div>
 
       </div>
     </div>
@@ -41,6 +41,7 @@
       <div class="SmallFormFieldContainer">
         <label class="control-label">T-Shirt Size</label>
         <select class="form-control" formControlName="t_shirt" (change)="addAttendee()" required>
+          <option disabled selected value> --Select-- </option>
           <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
         </select>
         <div [hidden]="t_shirt.valid || t_shirt.untouched" class="alert alert-danger">T-shirt size is required</div>
@@ -48,6 +49,7 @@
       <div class="SmallFormFieldContainer">
         <label class="control-label">Gender</label>
         <select class="form-control" formControlName="gender" (change)="addAttendee()" required>
+          <option disabled selected value> --Select-- </option>
           <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
         </select>
         <div [hidden]="gender.valid || gender.untouched" class="alert alert-danger">Gender is required</div>
@@ -63,7 +65,7 @@
         <label class="control-label">Medical Issues/Allergies</label>
         <textarea class="form-control" type="text" formControlName="medical" placeholder="Put N/A if no medical issue" rows="5" (change)="addAttendee()"
           required></textarea>
-        <div [hidden]="medical.valid || medical.untouched" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div> 
+        <div [hidden]="medical.valid || medical.untouched" class="alert alert-danger">Medical Information is required. Put N/A if you have none.</div>
       </div>
     </div>
     <div class="FormRow">
@@ -71,13 +73,14 @@
         <label class="control-label">Address</label>
         <input class="form-control" type="text" placeholder="Enter Your Address" formControlName="address" (change)="addAttendee()"
           required>
-          <div [hidden]="address.valid || address.untouched" class="alert alert-danger">Address is required</div>
+        <div [hidden]="address.valid || address.untouched" class="alert alert-danger">Address is required</div>
       </div>
     </div>
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label">Address 2</label>
-        <input class="form-control non-required" type="text" placeholder="N/A if not applicable" name="address_2" formControlName="address_2" (change)="addAttendee()">
+        <input class="form-control non-required" type="text" placeholder="N/A if not applicable" name="address_2" formControlName="address_2"
+          (change)="addAttendee()">
       </div>
     </div>
     <div class="FormRow">
@@ -85,7 +88,7 @@
         <label class="control-label" for="city">City</label>
         <input class="form-control" type="text" placeholder="Enter Your City" name="city" formControlName="city" (change)="addAttendee()"
           required>
-          <div [hidden]="city.valid || city.untouched" class="alert alert-danger">City is required</div>
+        <div [hidden]="city.valid || city.untouched" class="alert alert-danger">City is required</div>
       </div>
     </div>
     <div class="FormRow">
@@ -93,6 +96,7 @@
         <label class="control-label" for="state">State</label>
         <!-- <input class="form-control" type="text" placeholder="Enter Your State" name="state" formControlName="state" required> -->
         <select class="form-control" formControlName="state" (change)="addAttendee()" required>
+          <option disabled selected value> --Select-- </option>
           <option *ngFor="let state of states" [value]="state">{{state}}</option>
         </select>
         <div [hidden]="state.valid || state.untouched" class="alert alert-danger">State is required</div>
@@ -124,7 +128,7 @@
         <label class="control-label" for="emergency_contact_last_name">Last Name</label>
         <input class="form-control" type="text" placeholder="Enter Last Name" name="emergency_contact_last_name" formControlName="emergency_contact_last_name"
           (change)="addAttendee()" required>
-          <div [hidden]="emergency_contact_last_name.valid || emergency_contact_last_name.untouched" class="alert alert-danger">Emergency contact last name is required</div>
+        <div [hidden]="emergency_contact_last_name.valid || emergency_contact_last_name.untouched" class="alert alert-danger">Emergency contact last name is required</div>
       </div>
     </div>
     <div class="FormRow">
@@ -140,7 +144,7 @@
         <label class="control-label" for="emergency_contact_relationship">Relationship</label>
         <input class="form-control" type="text" placeholder="Relationship" name="emergency_contact_relationship" formControlName="emergency_contact_relationship"
           (change)="addAttendee()" required>
-          <div [hidden]="emergency_contact_relationship.valid || emergency_contact_relationship.untouched" class="alert alert-danger">Emergency contact relationship is required</div>
+        <div [hidden]="emergency_contact_relationship.valid || emergency_contact_relationship.untouched" class="alert alert-danger">Emergency contact relationship is required</div>
       </div>
     </div>
 
@@ -187,7 +191,7 @@
         </div>
       </div>
     </div>
-    
+
     <hr>
     <div class="FormFieldContainer">
       <ul class="pagination">
@@ -212,12 +216,12 @@
     <h3 style="margin-top:20px;" [hidden]="attendeeForm.valid">Fields Required To Move On</h3>
     <div class="FormFieldContainer">
       <div [hidden]="first_name.valid">First Name is required</div>
-      <div [hidden]="last_name.valid">Last Name is required</div> 
+      <div [hidden]="last_name.valid">Last Name is required</div>
       <div [hidden]="t_shirt.valid">T-shirt size is required</div>
       <div [hidden]="gender.valid">Gender is required</div>
       <div [hidden]="age.valid">Age is required</div>
-      <div [hidden]="medical.valid">Medical Information is required. Put N/A if you have none.</div> 
-      
+      <div [hidden]="medical.valid">Medical Information is required. Put N/A if you have none.</div>
+
       <div [hidden]="address.valid">Address is required</div>
       <div [hidden]="city.valid">City is required</div>
       <div [hidden]="state.valid">State is required</div>
