@@ -163,6 +163,9 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log("posting to google: ", this.registers);
     this.loading = true;
 
+    if(this.new_cost==0){
+      this.new_cost=1;
+    }
     for(var i in this.registers){
       this.registers[i].cost = this.new_cost;
     }
@@ -197,8 +200,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
       );
     });
 
-    if(this.new_cost = 0){
-      this.button_disabled = false;
-    }
+    // if(this.new_cost = 0){
+    //   this.button_disabled = false;
+    // }
   }
 }
