@@ -193,7 +193,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
           this.dataObj = data;
           this.new_cost = this.dataObj.newCost;
           this.total_cost = this.dataObj.newCost * this.registers.length;
-          this.original_cost = 155 * this.registers.length;
+          this.original_cost = 165 * this.registers.length;
           this.cost_diff = this.original_cost - this.total_cost;
         },
         (error) => reject(error)
