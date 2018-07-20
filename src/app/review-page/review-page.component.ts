@@ -39,8 +39,9 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   email = '';
   total_cost = 0;
+  base_price = 165;
   original_cost = 0;
-  new_cost = 155;
+  new_cost = 165;
   cost_diff = 0;
   button_disabled = false;
 
@@ -59,8 +60,8 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     window.scrollTo(0, 0);
 
     //Calculates total for registers
-    this.total_cost = this.registers.length * 155;
-    this.original_cost = this.registers.length * 155;
+    this.total_cost = this.registers.length * this.base_price;
+    this.original_cost = this.registers.length * this.base_price;
 
     // for(var i = 0; i<this.registers.length; i++){
     //   console.log("Old total is: " + this.total_cost);
@@ -193,7 +194,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
           this.dataObj = data;
           this.new_cost = this.dataObj.newCost;
           this.total_cost = this.dataObj.newCost * this.registers.length;
-          this.original_cost = 165 * this.registers.length;
+          this.original_cost = this.base_price * this.registers.length;
           this.cost_diff = this.original_cost - this.total_cost;
         },
         (error) => reject(error)
