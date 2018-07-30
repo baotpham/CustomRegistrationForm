@@ -1,24 +1,38 @@
-<div class="title-container">
-  <div class="title">
-    Registration Info
-  </div>
+
+<div class="ClosedRegistrationContainer">
+    <div class="ClosedRegistration">Registration is officially closed.</div>
+    <div class="ClosedRegistration">Please put your information into our waiting list on our website if you would still like to come.</div>
 </div>
+<div class="LinkContainer h4">
+    <div class="row">
+      <div class="MediumFormFieldContainer">
+        <a class="LinkButton" href="https://www.facebook.com/cvcfministry/">
+          Check out our Facebook
+        </a>
+      </div>
+      <div class="MediumFormFieldContainer">
+        <a class="LinkButton" href="https://www.cvcfministry.org/registration-is-closed">
+          Return to CVCF Website
+        </a>
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="title-container">
+  <div class="title">
+      Registration Info
+  </div>
+</div> -->
 
 
-<div class="total-info">
+<!-- <div class="total-info">
   Total Registers:
   <span *ngIf="people.length != undefined">{{people.length}}</span>
   <span *ngIf="people.length == undefined">0</span>
-</div>
+</div> -->
 
 <!-- Attendee Forms -->
-<form [formGroup]="attendeeForm" #checkout="ngForm" class="checkout">
-
-  <!-- <button type="button" (click)="partialUpdate()">Partial Update</button>
-  <button type="button" (click)="fullUpdate()">Full Update</button>
-  <button type="button" (click)="check()">Check</button>
-  <button type="button" (click)="lazyOne()">Lazy One</button>
-  <button type="button" (click)="lazyTwo()">Lazy Two</button> -->
+<!-- <form [formGroup]="attendeeForm" #checkout="ngForm" class="checkout">
   <div class="form-control">
     <h3>Personal Info</h3>
 
@@ -94,7 +108,6 @@
     <div class="FormRow">
       <div class="MediumFormFieldContainer">
         <label class="control-label" for="state">State</label>
-        <!-- <input class="form-control" type="text" placeholder="Enter Your State" name="state" formControlName="state" required> -->
         <select class="form-control" formControlName="state" (change)="addAttendee()" required>
           <option disabled selected value> --Select-- </option>
           <option *ngFor="let state of states" [value]="state">{{state}}</option>
@@ -152,7 +165,6 @@
     <div class="FormRow">
       <div class="FormFieldContainer">
         <label class="control-label" for="your_churches">Your Church</label>
-        <!-- <input class="form-control" type="text" placeholder="Enter Your State" name="state" formControlName="state" required> -->
         <select class="form-control" formControlName="your_churches" (change)="addAttendee()" required>
           <option *ngFor="let your_churches of church_list" [value]="your_churches">{{your_churches}}</option>
         </select>
@@ -195,9 +207,6 @@
     <hr>
     <div class="FormFieldContainer">
       <ul class="pagination">
-        <!-- <li class="active"> -->
-        <!-- <a href="#">PREV</a> -->
-        <!-- </li> -->
         <li class="user-entry" *ngFor="let person of people; let i = index" [ngClass]="{'active': currentAttendee === person}" (click)="loadAttendee(person, i);">
           <button type="button" *ngIf="people.length > 1" class="DeleteButton" (click)="deleteAttendee(i)">-</button>
           <div class="pagination-button">{{i+1}}</div>
@@ -207,13 +216,9 @@
             <i class="fa fa-plus fa-2x add-entry"></i>
           </a>
         </li>
-        <!-- <li class="active"> -->
-        <!-- <a href="#">NEXT</a> -->
-        <!-- </li> -->
       </ul>
     </div>
 
-    <!--<h3 style="margin-top:20px;" [hidden]="attendeeForm.valid">Fields Required To Move On</h3>-->
     <div style = "color: #a94442" class="FormFieldContainer">
       <div [hidden]="first_name.valid">First Name is required</div>
       <div [hidden]="last_name.valid">Last Name is required</div>
@@ -233,64 +238,11 @@
       <div [hidden]="emergency_contact_relationship.valid">Emergency contact relationship is required</div>
     </div>
   </div>
-
-
-  <!-- <div style="height: 70px;"></div> -->
-
-  <!-- <div class="title-container">
-    <div class="title"> -->
-  <!-- Church Contact -->
-  <!-- Church Contact
-    </div>
-  </div> -->
-
-  <!-- <div style="height: 40px;"></div> -->
-
-  <!-- <div class="form-control">
-    <div class="FormRow">
-      <div class="FormFieldContainer">
-        <label class="control-label" for="your_church">Your Church</label>
-        <input class="form-control" type="text" placeholder="Enter Your Church Name" name="your_church" formControlName="your_church" (change)="addAttendee()" required>
-      </div>
-    </div>
-    <div class="FormRow">
-      <div class="FormFieldContainer">
-        <label class="control-label" for="your_church_point_of_contact_name">Your Church Point of Contact Name</label>
-        <input class="form-control" type="text" placeholder="Enter Your Church Point of Contact Name" name="your_church_point_of_contact_name" formControlName="your_church_point_of_contact_name" (change)="addAttendee()" required>
-      </div>
-    </div>
-    <div class="FormRow">
-      <div class="FormFieldContainer">
-        <label class="control-label" for="your_church_point_of_contact_number">Your Church Point of Contact Number</label>
-        <input class="form-control" type="number" placeholder="Enter Your Church Point of Contact Phone Number" name="your_church_point_of_contact_number" formControlName="your_church_point_of_contact_number" (change)="addAttendee()" required>
-      </div>
-    </div>
-  </div> -->
-
-
-
-  <!-- <div class="title-container">
-    <div class="title">
-      Payment
-    </div>
-  </div> -->
-
-  <!-- <div class="page-border">
-    <div class="form-control">
-
-      <label for="card-info" id="card-title">Card Information</label>
-      <div class="CardRow">
-        <div id="card-info" #cardInfo></div>
-
-        <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
-      </div>
-    </div>
-  </div> -->
-</form>
+</form> -->
 
 <!-- spacing -->
-<div style="height: 30px;"></div>
+<!-- <div style="height: 30px;"></div> -->
 
 <!-- next button -->
-<div class="nav-buttons">
-  <button class="nav-button next-button" [disabled]="!checkout.form.valid" routerLink="/review">Next</button>
+<!-- <div class="nav-buttons">
+  <button class="nav-button next-button" [disabled]="!checkout.form.valid" routerLink="/review">Next</button> -->

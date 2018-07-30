@@ -15,6 +15,15 @@ $red: #a94442;
     font-family: 'Song Myung', serif;
 }
 
+.ClosedRegistration{
+    color: $red;
+    font-size: 30px;
+    text-align: center;
+}
+.ClosedRegistrationContainer{
+    padding-top: 50px;
+}
+
 .page-border {
     @extend .offset-md-3;
     @extend .col-md-6;
