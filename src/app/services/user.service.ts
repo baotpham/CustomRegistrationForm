@@ -7,22 +7,22 @@ export class UserService {
 
   registers = [];
 
-  constructor() {}
+  constructor() { }
 
-  addAttendee(index, attendee){
+  addAttendee(index, attendee) {
     this.registers[index] = attendee;
   }
 
-  removeAttendee(index){
+  removeAttendee(index) {
     this.registers.splice(index, 1);
   }
 
-  getAllRegisters(){
+  getAllRegisters() {
     return this.registers;
   }
 
-  setAllRegisters(registers){
-    for(var i in registers){
+  setAllRegisters(registers) {
+    for (var i in registers) {
       this.registers.push(registers[i]);
     }
   }

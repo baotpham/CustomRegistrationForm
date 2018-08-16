@@ -9,7 +9,6 @@ import { UserService } from '../services/user.service';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
-    // 'Authorization': 'my-auth-token'
   })
 };
 
@@ -79,8 +78,6 @@ export class AttendeeFormComponent implements OnInit {
   currentAttendee: Attendee;
   shouldSlice: boolean = true;
 
-  //attendeeForm.get('days').value
-
   constructor(private fb: FormBuilder, private http: HttpClient, private userService: UserService) {
     this.attendeeForm = fb.group({
       "first_name": this.first_name,
@@ -96,13 +93,13 @@ export class AttendeeFormComponent implements OnInit {
       "zip_code": this.zip_code,
       "email": this.email,
 
-
       //emergency info
       "emergency_contact_first_name": this.emergency_contact_first_name,
       "emergency_contact_last_name": this.emergency_contact_last_name,
       "emergency_contact_phone_number": this.emergency_contact_phone_number,
       "emergency_contact_relationship": this.emergency_contact_relationship,
 
+      //church info
       "your_churches": this.your_churches,
       "your_church": this.your_church,
       "your_church_point_of_contact_name": this.your_church_point_of_contact_name,
@@ -151,8 +148,6 @@ export class AttendeeFormComponent implements OnInit {
       attendee.days_attending = this.days_attending;
       attendee.cost = this.cost;
 
-
-      console.log("attendee", attendee);
       this.userService.addAttendee(this.current_index, attendee);
 
       this.currentAttendee = attendee;
@@ -160,8 +155,6 @@ export class AttendeeFormComponent implements OnInit {
       if (this.shouldSlice) this.people.splice(this.max_index, 1);
 
       this.people[this.current_index] = attendee;
-
-      console.log("people", this.people);
     }
   }
 
@@ -191,7 +184,6 @@ export class AttendeeFormComponent implements OnInit {
       //bind to UI
       this.bindListToForm();
       this.your_churches.setValue("Other");
-
 
       //scroll to top of page
       this.scroll();
@@ -232,14 +224,9 @@ export class AttendeeFormComponent implements OnInit {
   // Must navigate to specific attendee and update active pagination
   loadAttendee(attendee: Attendee, new_index: number) {
 
-    console.log("saving old attendee data before moving on");
-    //Save current attendee before moving on
-    // this.bindFormToList(this.current_index);
-
     //Sets new current attendee for active setting
     this.currentAttendee = attendee;
 
-    console.log("pulls in target attendee data into form");
     //Pull in target attendee data and put into form
     this.bindListToForm();
 
@@ -251,8 +238,6 @@ export class AttendeeFormComponent implements OnInit {
     //make sure the last index should not be deleted
     this.shouldSlice = false;
   }
-
-
 
   //Deletes attendee from current list
   deleteAttendee(index) {
@@ -267,14 +252,11 @@ export class AttendeeFormComponent implements OnInit {
       this.current_index = index - 1;
       this.currentAttendee = this.people[this.current_index];
       this.bindListToForm();
-
     }
     else {
       console.log("Cannot delete first index.");
     }
   }
-
-
 
   //Checks if Other or N/A church is selected
   checkChurch() {
@@ -288,8 +270,6 @@ export class AttendeeFormComponent implements OnInit {
     //If not, then is set to Other
     if(this.church_list.includes(this.your_church.value, 0)){
       this.your_churches.setValue(this.your_church.value);
-      console.log(this.your_churches.value);
-      console.log(this.your_church.value);
     }
     if(this.your_churches.value == "" || this.your_churches.value == null){
       this.your_churches.setValue("Other");
@@ -298,46 +278,35 @@ export class AttendeeFormComponent implements OnInit {
 
   numDaysCheck(){
     var dates = this.attendeeForm.get('days').value;
-    // this.cost = 0;
+
     this.cost = 155;
     this.days_attending = "";
 
     if(dates[0]){
-      // this.cost += 25; //Price for attending Friday
       this.days_attending += "Friday, ";
     }
     if(dates[1]){
-      // this.cost += 52.5; //Price for attending Saturday
       this.days_attending += "Saturday, ";
     }
     if(dates[2]){
-      // this.cost += 52.5; //Price for attending Sunday
       this.days_attending += "Sunday, ";
     }
     if(dates[3]){
-      // this.cost += 25; //Price for attending Monday
       this.days_attending += "Monday";
     }
-    console.log(this.cost);
-    console.log(this.days_attending);
   }
 
   rebindDaysCheck(){
-    console.log(this.currentAttendee.days_attending.includes("Friday"));
-    console.log(this.currentAttendee.days_attending.includes("Saturday"));
-    console.log(this.currentAttendee.days_attending.includes("Sunday"));
-    console.log(this.currentAttendee.days_attending.includes("Monday"));
     this.attendeeForm.setControl('days', this.fb.array([
       this.currentAttendee.days_attending.includes("Friday"), 
       this.currentAttendee.days_attending.includes("Saturday"),
       this.currentAttendee.days_attending.includes("Sunday"),
       this.currentAttendee.days_attending.includes("Monday")
     ]));
-    // this.attendeeForm.setControl('days', this.fb.array(this.days_bool));
   }
-  //Scrolls to top of page when adding new attendee
+
+  //Scrolls to top of page after adding new attendee
   scroll() {
-    console.log("Scrolling to the top");
     let scrollToTop = window.setInterval(() => {
       let pos = window.pageYOffset;
       if (pos > 0) {
@@ -346,33 +315,9 @@ export class AttendeeFormComponent implements OnInit {
         window.clearInterval(scrollToTop);
       }
     }, 16);
-    console.log("Done scrolling to the top");
   }
-
 
   //Binding
-  //Updates the list's values with the contents of the form
-  bindFormToList(index: number) {
-    this.people[index].first_name = this.first_name.value;
-    this.people[index].last_name = this.last_name.value;
-    this.people[index].t_shirt = this.t_shirt.value;
-    this.people[index].gender = this.gender.value;
-    this.people[index].age = this.age.value;
-    this.people[index].medical = this.medical.value;
-    this.people[index].address = this.address.value;
-    this.people[index].address_2 = this.address_2.value;
-    this.people[index].city = this.city.value;
-    this.people[index].state = this.state.value;
-    this.people[index].zip_code = this.zip_code.value;
-    this.people[index].email = this.email.value;
-    this.people[index].emergency_contact_first_name = this.emergency_contact_first_name.value;
-    this.people[index].emergency_contact_last_name = this.emergency_contact_last_name.value;
-    this.people[index].emergency_contact_phone_number = this.emergency_contact_phone_number.value;
-    this.people[index].emergency_contact_relationship = this.emergency_contact_relationship.value;
-    this.people[index].days_attending = this.days_attending;
-    this.people[index].cost = this.cost;
-  }
-
   //Updates the form's values with the contents from the list
   bindListToForm() {
     this.checkChurch();
@@ -396,26 +341,6 @@ export class AttendeeFormComponent implements OnInit {
     this.your_church_point_of_contact_name.setValue(this.currentAttendee.your_church_point_of_contact_name);
     this.your_church_point_of_contact_number.setValue(this.currentAttendee.your_church_point_of_contact_number);
     this.rebindDaysCheck();
-  }
-
-  //updates malleable model to target attendee info
-  bindToTarget(attendee: Attendee) {
-    this.model.first_name = attendee.first_name;
-    this.model.last_name = attendee.last_name;
-    this.model.t_shirt = attendee.t_shirt;
-    this.model.gender = attendee.gender;
-    this.model.age = attendee.age;
-    this.model.medical = attendee.medical;
-    this.model.address = attendee.address;
-    this.model.address_2 = attendee.address_2;
-    this.model.city = attendee.city;
-    this.model.state = attendee.state;
-    this.model.zip_code = attendee.zip_code;
-    this.model.email = attendee.email;
-    this.model.emergency_contact_first_name = attendee.emergency_contact_first_name;
-    this.model.emergency_contact_last_name = attendee.emergency_contact_last_name;
-    this.model.emergency_contact_phone_number = attendee.emergency_contact_phone_number;
-    this.model.emergency_contact_relationship = attendee.emergency_contact_relationship;
   }
 
   //Helper buttons

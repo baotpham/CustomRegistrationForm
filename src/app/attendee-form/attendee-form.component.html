@@ -1,5 +1,5 @@
-
-<div class="ClosedRegistrationContainer">
+<!-- To be uncommented whenever registration is closed -->
+<!-- <div class="ClosedRegistrationContainer">
     <div class="ClosedRegistration">Registration is officially closed.</div>
     <div class="ClosedRegistration">Please put your information into our waiting list on our website if you would still like to come.</div>
 </div>
@@ -16,23 +16,23 @@
         </a>
       </div>
     </div>
-  </div>
+  </div> -->
 
-<!-- <div class="title-container">
+<div class="title-container">
   <div class="title">
       Registration Info
   </div>
-</div> -->
+</div>
 
 
-<!-- <div class="total-info">
+<div class="total-info">
   Total Registers:
   <span *ngIf="people.length != undefined">{{people.length}}</span>
   <span *ngIf="people.length == undefined">0</span>
-</div> -->
+</div>
 
 <!-- Attendee Forms -->
-<!-- <form [formGroup]="attendeeForm" #checkout="ngForm" class="checkout">
+<form [formGroup]="attendeeForm" #checkout="ngForm" class="checkout">
   <div class="form-control">
     <h3>Personal Info</h3>
 
@@ -238,11 +238,11 @@
       <div [hidden]="emergency_contact_relationship.valid">Emergency contact relationship is required</div>
     </div>
   </div>
-</form> -->
+</form>
 
 <!-- spacing -->
-<!-- <div style="height: 30px;"></div> -->
+<div style="height: 30px;"></div>
 
 <!-- next button -->
-<!-- <div class="nav-buttons">
-  <button class="nav-button next-button" [disabled]="!checkout.form.valid" routerLink="/review">Next</button> -->
+<div class="nav-buttons">
+  <button class="nav-button next-button" [disabled]="!checkout.form.valid" routerLink="/review">Next</button>

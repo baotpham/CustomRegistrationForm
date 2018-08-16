@@ -15,12 +15,13 @@ $red: #a94442;
     font-family: 'Song Myung', serif;
 }
 
-.ClosedRegistration{
+.ClosedRegistration {
     color: $red;
     font-size: 30px;
     text-align: center;
 }
-.ClosedRegistrationContainer{
+
+.ClosedRegistrationContainer {
     padding-top: 50px;
 }
 
@@ -123,7 +124,7 @@ $red: #a94442;
     margin-top: 30px;
 }
 
-.primary-button{
+.primary-button {
     padding: 9px 16px;
     margin-right: 10px;
     line-height: 1.42857143;
@@ -136,6 +137,7 @@ $red: #a94442;
     font-weight: bold;
     color: black;
 }
+
 .primary-button:disabled,
 .primary-button[disabled],
 .primary-button[disabled]:hover {
@@ -178,7 +180,7 @@ $red: #a94442;
     font-size: 1.3rem;
     margin-right: unset;
     .LinkButton:hover {
-        @extend .primary-button:hover;
+        @extend .primary-button: hover;
     }
 }
 
@@ -329,20 +331,16 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
-.discount{
+.discount {
     padding-left: 5px;
     line-height: 1.42857143;
     border-radius: 10px;
     font-size: 1rem;
-    border-color: $teal;
-    // background-color: $lightest-teal;
+    border-color: $teal; // background-color: $lightest-teal;
     float: left;
     clear: left;
     font-weight: bold;
     color: black;
-    
-    
-
     .ng-valid[required],
     .ng-valid.required {
         border-left: 5px solid $green !important;
@@ -393,7 +391,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 .CardRow {
     @extend .col-md-12;
-    
 }
 
 #card-title {
@@ -465,13 +462,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 //Review page table 
-
 .Tablecontainer {
     @extend .col-md-12;
 }
+
 .Tablerow {
     padding: 10px 0px;
-    border-bottom: 1pt solid $teal; 
+    border-bottom: 1pt solid $teal;
     word-wrap: break-word;
 }
 

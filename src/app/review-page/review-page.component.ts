@@ -16,8 +16,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { GoogleService } from '../services/google-service.service';
 
-
-
 @Component({
   selector: 'app-review-page',
   templateUrl: './review-page.component.html',
@@ -34,7 +32,6 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   error: string;
 
   registers: any;
-
   loading: boolean = false;
 
   email = '';
@@ -62,14 +59,6 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //Calculates total for registers
     this.total_cost = this.registers.length * this.base_price;
     this.original_cost = this.registers.length * this.base_price;
-
-    // for(var i = 0; i<this.registers.length; i++){
-    //   console.log("Old total is: " + this.total_cost);
-    //   console.log("Adding " + this.registers[i].cost);
-    //   this.total_cost += this.registers[i].cost;
-    //   console.log("New total is: " + this.total_cost);
-    // }
-    // console.log(this.total_cost);
 
     this.button_disabled = false;
   }
@@ -134,8 +123,6 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   processCharge(token) {
     var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/webtask-stripe-payment';
-    // var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/stripe-payment';
-
 
     let promise = new Promise((resolve, reject) => {
       const command = {
@@ -159,13 +146,12 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.email = value;
   }
 
-
   postToGoogle() {
     console.log("posting to google: ", this.registers);
     this.loading = true;
 
-    if(this.new_cost==0){
-      this.new_cost=1;
+    if(this.new_cost == 0){
+      this.new_cost = 1;
     }
     for(var i in this.registers){
       this.registers[i].cost = this.new_cost;
@@ -173,7 +159,6 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     //google sheet response is html, but for some reason, http tries to parse json.
     //this project will reject the html. I think it has to do with http header.
     this.googleService.post(this.registers).then(
-      // (success) => { this.router.navigate(['/', 'thank-you']); this.loading = false; },
       () => { this.loading = false },
       () => { this.loading = false });
   }
@@ -200,9 +185,5 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
         (error) => reject(error)
       );
     });
-
-    // if(this.new_cost = 0){
-    //   this.button_disabled = false;
-    // }
   }
 }

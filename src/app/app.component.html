@@ -1,8 +1,3 @@
-<!-- <nav>
-    <a routerLink="" routerLinkActive="active">Crisis Center</a>
-    <a routerLink="/thank-you" routerLinkActive="active">Heroes</a>
-  </nav> -->
-<!-- <router-outlet></router-outlet> -->
 <style>
   @import url('https://fonts.googleapis.com/css?family=Merienda');
 </style>
@@ -12,54 +7,16 @@
     <h1>{{titleTwo}}</h1>
     <img src="../assets/logo.png">
     <p style="font-family: 'Merienda', cursive">
-<i>"And walk in love, as Christ loved us and gave himself up for us, a fragrant offering and sacrifice to God." ~ Ephesians
+      <i>"And walk in love, as Christ loved us and gave himself up for us, a fragrant offering and sacrifice to God." ~ Ephesians
         5:2
       </i>
-</p>
-    <!-- <h1>Tutorial Registration Page Here</h1> -->
+    </p>
   </div>
 
 </div>
 
 <div class="page-border">
-
-
-  <!-- <div style="height: 100px;"></div> -->
-
-  <!-- <div class="nav-buttons" style="text-align: left;" *ngIf="page == 'reviewPage'">
-    <button class="nav-button" [class.nav-button-active]="page == 'attendeesFormPage'" (click)="switchPage('attendeesFormPage')" routerLink="/form">Edit</button>
-  </div> -->
-
   <router-outlet>
-    <!-- previous button -->
-
-    <!-- page content -->
-    <!-- <div [ngSwitch]="page">
-      <div *ngSwitchCase="'attendeesFormPage'">
-        <app-attendee-form></app-attendee-form>
-      </div>
-
-      <div *ngSwitchCase="'reviewPage'">
-        <app-review-page></app-review-page>
-      </div>
-
-      <div *ngSwitchCase="'thankYouPage'" (completed)="onCompleted($event)">
-        <app-thankyoupage></app-thankyoupage>
-      </div>
-    </div> -->
-
-
-
-    <!-- spacing -->
-    <!-- <div style="height: 30px;"></div> -->
-
-    <!-- spacing -->
-    <!-- <div style="height: 200px;"></div> -->
+    
   </router-outlet>
-
-  <!-- next button -->
-  <!-- <div class="nav-buttons" *ngIf="page == 'attendeesFormPage'">
-  <button class="nav-button" [class.nav-button-active]="page == 'reviewPage'" (click)="switchPage('reviewPage')" routerLink="/review">Next</button>
-</div> -->
 </div>
-<!-- <app-info-form></app-info-form> -->

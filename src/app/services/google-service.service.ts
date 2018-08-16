@@ -12,8 +12,6 @@ export class GoogleService {
   constructor(private http: HttpClient){
   }
 
-
-
   post(registers){
 
     let promise = new Promise((resolve, reject) => {
