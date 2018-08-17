@@ -18,6 +18,14 @@ const httpOptions = {
   styleUrls: ['./attendee-form.component.scss']
 })
 
+//Consider using AppSheet with Google Forms
+//https://chrome.google.com/webstore/detail/appsheet/hmmicpkfdjjchdajlldfckjaanfobjob?hl=en-US
+
+//But also
+//https://www.qrstuff.com/
+
+//Google API doe
+//https://chart.googleapis.com/chart?cht=qr&chs=160x160&chl=HelloWorld&choe=UTF-8
 
 export class AttendeeFormComponent implements OnInit {
   attendeeForm: FormGroup;
