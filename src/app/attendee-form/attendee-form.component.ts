@@ -351,15 +351,17 @@ export class AttendeeFormComponent implements OnInit {
     this.rebindDaysCheck();
   }
 
-  //Helper buttons
+  //Helper buttons for testing
   fullUpdate() {
     this.attendeeForm.setValue({
       first_name: 'Partial', last_name: 'monkey', t_shirt: 'M', gender: 'Male',
-      age: 12, medical: 'yes', address: '123 Adams Ave', address_2: "N/A", city: "Phila",
-      state: "PA", zip_code: "12312312", email: "test@test.com", emergency_contact_first_name: "Test",
+      age: 12, medical: 'yes', address: '123 Adams Ave', address_2: "N/A", city: "Philadelphia",
+      state: "PA", zip_code: "12312", email: "test@test.com", emergency_contact_first_name: "Test",
       emergency_contact_last_name: "Testest", emergency_contact_phone_number: "12312312", emergency_contact_relationship: "asdfasd",
-      your_church: "Bapist", your_church_point_of_contact_name: "asdafsdfasdfa", your_church_point_of_contact_number: "1231231232"
+      your_churches: "Other", your_church: "Bapist", your_church_point_of_contact_name: "asdafsdfasdfa", 
+      your_church_point_of_contact_number: "1231231232", days: this.days_bool
     });
+    this.addAttendee();
   }
   lazyOne() {
     this.attendeeForm.setValue({
