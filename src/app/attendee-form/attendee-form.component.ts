@@ -30,6 +30,7 @@ const httpOptions = {
 export class AttendeeFormComponent implements OnInit {
   attendeeForm: FormGroup;
 
+  // Basic Information
   first_name = new FormControl("", Validators.required);
   last_name = new FormControl("", Validators.required);
   t_shirt = new FormControl("", Validators.required);
@@ -43,22 +44,29 @@ export class AttendeeFormComponent implements OnInit {
   zip_code = new FormControl("", Validators.required);
   email = new FormControl("");
 
-  //emergency info
+  // Emergency Information
   emergency_contact_first_name = new FormControl("", Validators.required);
   emergency_contact_last_name = new FormControl("", Validators.required);
   emergency_contact_phone_number = new FormControl("", Validators.required);
   emergency_contact_relationship = new FormControl("", Validators.required);
 
-  //church info
+  // Church Information
   your_churches = new FormControl("", Validators.required);
   your_church = new FormControl("");
   your_church_point_of_contact_name = new FormControl("");
   your_church_point_of_contact_number = new FormControl("");
 
+  // Basic Values
   max_index = 0;
   current_index = 0;
   cost = 0;
   days_attending = "";
+
+  currentAttendee: Attendee;
+  shouldSlice: boolean = true;
+  model = new Attendee("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null);
+
+  // Lists
   people = [];
   sizes = ['S', 'M', 'L', 'XL', 'XXL'];
   genders = ['Male', 'Female'];
@@ -71,7 +79,6 @@ export class AttendeeFormComponent implements OnInit {
     "PA - Philadelphia", "PA - Pittsburgh", "VA - Grace", "VA - Hyvong",
     "VA - Methodist Church", "FL - Orlando", "KY - Kentucky", "NC - North Carolina",
     "N/A"];
-
   days_chosen = [
     { name: 'Friday', selected: true, id: 1 },
     { name: 'Saturday', selected: true, id: 2 },
@@ -82,12 +89,11 @@ export class AttendeeFormComponent implements OnInit {
     true, true, true, true
   ];
 
-  model = new Attendee("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null);
-  currentAttendee: Attendee;
-  shouldSlice: boolean = true;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private userService: UserService) {
     this.attendeeForm = fb.group({
+
+      // Basic Information
       "first_name": this.first_name,
       "last_name": this.last_name,
       "t_shirt": this.t_shirt,
@@ -101,13 +107,13 @@ export class AttendeeFormComponent implements OnInit {
       "zip_code": this.zip_code,
       "email": this.email,
 
-      //emergency info
+      // Emergency Information
       "emergency_contact_first_name": this.emergency_contact_first_name,
       "emergency_contact_last_name": this.emergency_contact_last_name,
       "emergency_contact_phone_number": this.emergency_contact_phone_number,
       "emergency_contact_relationship": this.emergency_contact_relationship,
 
-      //church info
+      // Church Information
       "your_churches": this.your_churches,
       "your_church": this.your_church,
       "your_church_point_of_contact_name": this.your_church_point_of_contact_name,
@@ -129,10 +135,14 @@ export class AttendeeFormComponent implements OnInit {
   addAttendee() {
     console.log("is form valid? ", this.attendeeForm.valid);
 
+    // Check if church value is set to standard value or Other, and updates the form properly
     this.checkChurch();
+
+    // If the form is valid, updates the service with the new value
     if (this.attendeeForm.valid) {
       var attendee = new Attendee("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null);
 
+      // Update attendee fields when valid form
       attendee.first_name = this.first_name.value;
       attendee.last_name = this.last_name.value;
       attendee.t_shirt = this.t_shirt.value;
@@ -152,10 +162,13 @@ export class AttendeeFormComponent implements OnInit {
       attendee.your_church = this.your_church.value;
       attendee.your_church_point_of_contact_name = this.your_church_point_of_contact_name.value;
       attendee.your_church_point_of_contact_number = this.your_church_point_of_contact_number.value;
-      this.numDaysCheck(); //updates days attending and cost before pushing change
+
+      // Updates days attending and cost before pushing change
+      this.numDaysCheck(); 
       attendee.days_attending = this.days_attending;
       attendee.cost = this.cost;
 
+      // Updates the attendee to the service when the form is valid
       this.userService.addAttendee(this.current_index, attendee);
 
       this.currentAttendee = attendee;
@@ -166,8 +179,10 @@ export class AttendeeFormComponent implements OnInit {
     }
   }
 
-
+  // When a user clicks to add a new attendee, updates list of registers and create clean form
   createNewAttendee() {
+
+    // If the form is valid, add attendee to people list, then set the current attendee the new person in people list
     if (this.attendeeForm.valid) {
       this.people.push(new Attendee("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Friday, Saturday, Sunday, Monday", null));
       console.log(this.people);
@@ -175,37 +190,39 @@ export class AttendeeFormComponent implements OnInit {
       this.max_index++;
       this.current_index = this.max_index;
 
-      //Fills in checkboxes to attend everyday
+      // Fills in checkboxes to attend everyday
       this.attendeeForm.setControl('days', this.fb.array(this.days_bool));
 
-      //copy church info to every other register. save work for leaders
+      // Copy church info to every other register. save work for leaders
       this.people[this.max_index].your_church = this.your_church.value;
       this.people[this.max_index].your_church_point_of_contact_name = this.your_church_point_of_contact_name.value;
       this.people[this.max_index].your_church_point_of_contact_number = this.your_church_point_of_contact_number.value;
 
-      //update current attendee
+      // Update current attendee
       this.currentAttendee = this.people[this.max_index];
 
-      //make sure the last index should be deleted since we just added an empty object into people
+      // Make sure the last index should be deleted since we just added an empty object into people
       this.shouldSlice = true;
 
-      //bind to UI
+      // Bind to UI
       this.bindListToForm();
       this.your_churches.setValue("Other");
 
-      //scroll to top of page
+      // sScroll to top of page
       this.scroll();
     }
   }
 
-
+  // Loads list of attendees from service 
   loadAttendees() {
+    // Grabs attendees from the service
     var attendees = this.userService.getAllRegisters();
-    console.log(attendees);
 
+    // If attendees exist, loads attendees, otherwise create new attendee and add to people list
     if (attendees.length > 0) {
       this.people = attendees;
-
+      
+      // Updates indices to correct attendee.
       this.max_index = this.people.length - 1;
       this.current_index = this.max_index;
 
@@ -213,31 +230,31 @@ export class AttendeeFormComponent implements OnInit {
 
       this.attendeeForm.reset();
 
-      //make sure the last index should not be deleted
+      // Make sure the last index should not be deleted
       this.shouldSlice = false;
 
+      // Puts attendee values to form after resetting.
       this.bindListToForm();
 
-      console.log("yes people", this.people);
     } else {
+      // Create new attendee and add to the current empty people list
       this.people.push(new Attendee("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null));
       this.currentAttendee = this.people[0];
       this.max_index = 0;
       this.current_index = 0;
-      console.log("no people");
     }
   }
-
 
   // Must navigate to specific attendee and update active pagination
   loadAttendee(attendee: Attendee, new_index: number) {
 
-    //Sets new current attendee for active setting
+    // Set new current attendee for active setting
     this.currentAttendee = attendee;
 
-    //Pull in target attendee data and put into form
+    // Pull in target attendee data and put into form
     this.bindListToForm();
 
+    // Make sure to update days attending when switching
     this.rebindDaysCheck()
 
     //Updates current index to the attendee we're loading
@@ -247,16 +264,16 @@ export class AttendeeFormComponent implements OnInit {
     this.shouldSlice = false;
   }
 
-  //Deletes attendee from current list
+  // Deletes attendee from current list
   deleteAttendee(index) {
     console.log("current index is: " + index);
     if (index >= 0) {
 
-      //Deletes Attendee from list
+      // Deletes Attendee from list
       this.people.splice(index, 1);
       this.max_index--;
 
-      //Resets current attendee and index to the first one
+      // Resets current attendee and index to the first one
       this.current_index = index - 1;
       this.currentAttendee = this.people[this.current_index];
       this.bindListToForm();
@@ -266,7 +283,7 @@ export class AttendeeFormComponent implements OnInit {
     }
   }
 
-  //Checks if Other or N/A church is selected
+  // Checks if Other or N/A church is selected
   checkChurch() {
     if (this.your_churches.value == 'N/A') {
       this.your_church.setValue("");
@@ -274,8 +291,9 @@ export class AttendeeFormComponent implements OnInit {
     else if (!(this.your_churches.value == 'Other')) {
       this.your_church.setValue(this.your_churches.value);
     }
-    //Makes sure the list is always set to what's in the Church Name box
-    //If not, then is set to Other
+
+    // Makes sure the list is always set to what's in the Church Name box
+    // If not, then is set to Other
     if(this.church_list.includes(this.your_church.value, 0)){
       this.your_churches.setValue(this.your_church.value);
     }
@@ -284,6 +302,7 @@ export class AttendeeFormComponent implements OnInit {
     }
   }
 
+  // Makes sure to set value of the days attending string based on the checked boxes
   numDaysCheck(){
     var dates = this.attendeeForm.get('days').value;
 
@@ -304,6 +323,7 @@ export class AttendeeFormComponent implements OnInit {
     }
   }
 
+  // Checks if the days are binded properly.
   rebindDaysCheck(){
     this.attendeeForm.setControl('days', this.fb.array([
       this.currentAttendee.days_attending.includes("Friday"), 
@@ -313,12 +333,13 @@ export class AttendeeFormComponent implements OnInit {
     ]));
   }
 
-  //Scrolls to top of page after adding new attendee
+  // Scrolls to top of page
   scroll() {
     let scrollToTop = window.setInterval(() => {
       let pos = window.pageYOffset;
       if (pos > 0) {
-        window.scrollTo(0, pos - 40); // how far to scroll on each step
+        // How far to scroll on each step
+        window.scrollTo(0, pos - 40); 
       } else {
         window.clearInterval(scrollToTop);
       }
@@ -326,7 +347,7 @@ export class AttendeeFormComponent implements OnInit {
   }
 
   //Binding
-  //Updates the form's values with the contents from the list
+  // Updates the form's values with the contents from the list
   bindListToForm() {
     this.checkChurch();
     this.first_name.setValue(this.currentAttendee.first_name);
