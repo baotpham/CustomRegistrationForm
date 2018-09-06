@@ -27,21 +27,27 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Output() completed = new EventEmitter<string>();
 
+  // Card variables pertaining to Stripe
   card: any;
   cardHandler = this.onChange.bind(this);
   error: string;
 
+  // Generic variables
   registers: any;
   loading: boolean = false;
-
   email = '';
+
+  // Cost calculation variables
   total_cost = 0;
   base_price = 165;
   original_cost = 0;
   new_cost = 165;
   cost_diff = 0;
+
+  // Submit button disabled
   button_disabled = false;
 
+  // Generic data object for incoming value from webtask.io
   dataObj: any;
 
   constructor(private cd: ChangeDetectorRef, private userService: UserService,
@@ -49,14 +55,14 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router) { }
 
   ngOnInit() {
-    //get data from form registrations
+    // Get data from form registrations
     this.registers = this.userService.getAllRegisters();
     console.log("Registers: ", this.registers);
 
-    //scrolls to top of screen
+    // Scrolls to top of screen
     window.scrollTo(0, 0);
 
-    //Calculates total for registers
+    // Calculates total for registers
     this.total_cost = this.registers.length * this.base_price;
     this.original_cost = this.registers.length * this.base_price;
 
@@ -76,6 +82,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     };
 
+    // Create Stripe card element
     this.card = elements.create('card');
     this.card.mount(this.cardInfo.nativeElement);
 
@@ -97,30 +104,45 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onSubmit(form: NgForm) {
+    // Disable button when submitting form to prevent multiple submissions
     this.button_disabled = true;
+
+    // Attempt to create stripe token from card information
     const { token, error } = await stripe.createToken(this.card);
 
     if (error) {
+      // Reenables the button to allow the user to resubmit
       console.log('Something is wrong:', error);
       this.button_disabled = false;
     } else {
       console.log('Success!');
-      // ...send the token to the your backend to process the charge
 
+      // If the cost is 0, due to some discount, automatically post to Google sheets
+      // On success, charge the person and post to Google sheets
       if(this.new_cost==0){
         this.postToGoogle();
       }
       else{
+      // Send the token to the your backend to process the charge
         this.processCharge(token).then(
           (success) => this.postToGoogle(),
           (error) => console.error("Stripe process charge error", error)
         );
+
+        // TODO: Figure out why postToGoogle is here twice, once from process charge success, and once here.
+        this.postToGoogle().then(
+          (success) => this.processCharge(token).then(
+            (success) => this.router.navigate(['/', 'thank-you']), //this needs to be moved to the onsuccess part of PostToGoogle
+            (error) => console.error("Creating charge error", error)
+          ),
+          (error) => console.error("Posting to Google error", error)
+        );
       }
 
-      this.router.navigate(['/', 'thank-you']); //this needs to be moved to the onsuccess part of PostToGoogle
     }
   }
 
+  // Processes charge through Webtask.io and Stripe
   processCharge(token) {
     var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/webtask-stripe-payment';
 
@@ -142,30 +164,43 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
     return promise;
   }
 
+  // Monitor email value and set it here.
   onKey(value: string) {
     this.email = value;
   }
 
+  // Post list of registers to Google Forms connected to Google Sheets
   postToGoogle() {
     console.log("posting to google: ", this.registers);
     this.loading = true;
 
+    //Because passing 0 to Google doesn't work for some reason.
     if(this.new_cost == 0){
-      this.new_cost = 1;
+      this.new_cost = 1; 
     }
+
+    //Fix cost for all registers
     for(var i in this.registers){
       this.registers[i].cost = this.new_cost;
     }
+
     //google sheet response is html, but for some reason, http tries to parse json.
     //this project will reject the html. I think it has to do with http header.
-    this.googleService.post(this.registers).then(
-      () => { this.loading = false },
-      () => { this.loading = false });
+    let promise = new Promise((resolve, reject) => 
+      this.googleService.post(this.registers).then(
+        () => { this.loading = false },
+        () => { this.loading = false })
+    );
+    
+    return promise;
   }
+
+  // Disables submit button after submit
   isDisabled(){
     return this.button_disabled;
   }
 
+  // Updates registration cost based on discounts defined in Webtask.io
   checkDiscount(discount: string){
     var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/handle-discount';
 
