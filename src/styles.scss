@@ -1,20 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-
 @import "~bootstrap/scss/bootstrap";
 @import "~bootflat/bootflat/scss/bootflat";
-// Colors
-$disabled-color-bg: #fff5f0;
-$disabled-color-text: rgb(138, 138, 138);
-$lightest-bg-color: #fff0e8;
-$light-bg-color: #ffdac4;
-$bg-color: #f36f24;
-$white: #fff;
-$green: #42A948;
-$red: #a94442;
+@import "colors.scss";
+@import "app/attendee-form/attendee-form.component.scss";
+@import "app/review-page/review-page.component.scss";
+@import "app/thankyoupage//thankyoupage.component.scss";
+
 * {
     font-family: 'Song Myung', serif;
 }
 
+// Closed Registration Styles
 .ClosedRegistration {
     color: $red;
     font-size: 30px;
@@ -25,6 +21,7 @@ $red: #a94442;
     padding-top: 50px;
 }
 
+// Generic page styling
 .page-border {
     @extend .offset-md-3;
     @extend .col-md-6;
@@ -57,34 +54,6 @@ $red: #a94442;
     border-image: initial;
 }
 
-.form-control {
-    background-color: $light-bg-color !important;
-    input,
-    select,
-    textarea {
-        background-color: $lightest-bg-color !important;
-    }
-    border: 0 !important;
-    .ng-valid[required],
-    .ng-valid.required {
-        border-left: 5px solid $green !important;
-        /* green */
-    }
-    .ng-invalid:not(form) {
-        border-left: 5px solid $red !important;
-        /* red */
-    }
-    .non-required {
-        border-left: 5px solid $green !important;
-        /* green */
-    }
-}
-
-.FormRow {
-    @extend .row;
-    background-color: $light-bg-color;
-}
-
 // Titles
 .title-container {
     margin-top: 1.75rem;
@@ -114,57 +83,10 @@ $red: #a94442;
 }
 
 // Buttons
-.submit-button-container {
+.submit-button-container { //may not be using
     text-align: right;
     margin-right: 50px;
     margin-bottom: 100px;
-}
-
-.pay-button {
-    margin-top: 30px;
-}
-
-.primary-button {
-    padding: 9px 16px;
-    margin-right: 10px;
-    line-height: 1.42857143;
-    border-radius: 30px;
-    font-size: 1.5rem;
-    border-color: $bg-color;
-    width: 200px;
-    background-color: $lightest-bg-color;
-    float: right;
-    font-weight: bold;
-    color: black;
-}
-
-.primary-button:disabled,
-.primary-button[disabled],
-.primary-button[disabled]:hover {
-    @extend .primary-button;
-    background-color: $disabled-color-bg;
-    color: $disabled-color-text;
-    border-color: $disabled-color-bg;
-}
-
-.primary-button:hover {
-    color: $white;
-    background-color: $bg-color;
-    border-color: $bg-color;
-}
-
-.DeleteButton {
-    border-radius: 50%;
-    padding: 0;
-    margin-left: -25px;
-    top: -7px;
-    position: relative;
-    z-index: 9999;
-    background-color: red;
-    color: white;
-    width: 17px;
-    height: 17px;
-    line-height: 5px;
 }
 
 .LinkButton {
@@ -200,6 +122,34 @@ $red: #a94442;
     @extend .col-md-4;
 }
 
+.form-control {
+    background-color: $light-bg-color !important;
+    input,
+    select,
+    textarea {
+        background-color: $lightest-bg-color !important;
+    }
+    border: 0 !important;
+    .ng-valid[required],
+    .ng-valid.required {
+        border-left: 5px solid $green !important;
+        /* green */
+    }
+    .ng-invalid:not(form) {
+        border-left: 5px solid $red !important;
+        /* red */
+    }
+    .non-required {
+        border-left: 5px solid $green !important;
+        /* green */
+    }
+}
+
+.FormRow {
+    @extend .row;
+    background-color: $light-bg-color;
+}
+
 .ng-valid[required],
 .ng-valid.required {
     border-left: 5px solid $green;
@@ -215,74 +165,13 @@ $red: #a94442;
     border-left: 5px solid $green !important;
     /* green */
 }
+// End of form control
 
 .icheckbox_flat {
     background-image: url("assets/check_flat/default.png") !important;
 }
 
-.checkbox {
-    padding-left: 15px;
-} //remove the up and down buttons for number fields    
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-//Pagination
-.add-entry {
-    color: $bg-color;
-}
-
-// .pagination>li:first-child>a{
-//     margin-left: 0;
-//     border-top-left-radius: 4px;
-//     border-bottom-left-radius: 4px;
-// }
-// .pagination>li:first-child>a:hover, .pagination>li:first-child>a:focus{
-//     color: $bg-color;
-//     background-color: $bg-color;
-//     border-color: $bg-color;
-// }
-// .pagination>li:last-child>a{
-//     margin-right: 0;
-//     border-top-right-radius: 4px;
-//     border-bottom-right-radius: 4px;
-// }
-.pagination>.active>.pagination-button,
-.pagination>.active>a {
-    color: $white;
-    background-color: $bg-color;
-    border-color: $bg-color;
-    border-radius: 30px;
-}
-
-.pagination>li>.pagination-button,
-.pagination>li>a {
-    position: relative;
-    float: left;
-    padding: 9px 16px;
-    margin-right: 10px;
-    line-height: 1.42857143;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    font-size: 16px;
-    border-color: $bg-color;
-    max-width: 100%;
-    z-index: 0;
-}
-
-.pagination>li>.pagination-button:hover,
-.pagination>li>.pagination-button:focus,
-.pagination>li>a:hover,
-.pagination>li>a:focus {
-    color: #fff;
-    background-color: $bg-color;
-    border-color: $bg-color;
-    cursor: pointer;
-}
-
+// Nav buttons between form and review page
 .nav-buttons {
     display: block;
     text-align: center;
@@ -321,173 +210,9 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
-.review-registers {
-    font-size: 1.4rem;
-    text-decoration: none;
-    span {
-        float: right;
-        margin-left: 20px;
-    }
-}
-
-.discount {
-    padding-left: 5px;
-    line-height: 1.42857143;
-    border-radius: 10px;
-    font-size: 1rem;
-    border-color: $bg-color; // background-color: $lightest-bg-color;
-    float: left;
-    clear: left;
-    font-weight: bold;
-    color: black;
-    .ng-valid[required],
-    .ng-valid.required {
-        border-left: 5px solid $green !important;
-        margin-left: 5px;
-        /* green */
-    }
-    .ng-invalid:not(form) {
-        border-left: 5px solid yellow !important;
-        margin-left: 5px;
-        /* red */
-    }
-    .non-required {
-        border-left: 5px solid $green !important;
-        margin-left: 5px;
-        /* green */
-    }
-}
-
-#add-entry-box {
-    background-color: $lightest-bg-color;
-    border-color: $bg-color;
-    padding: 4px 8px;
-}
-
-//Card Formatting
-.StripeElement {
-    display: block;
-    background-color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    box-shadow: 0 1px 3px 0 #212529;
-    -webkit-transition: box-shadow 150ms ease;
-    transition: box-shadow 150ms ease;
-}
-
-.StripeElement--focus {
-    box-shadow: 0 1px 3px 0 $bg-color;
-}
-
-.StripeElement--invalid {
-    border-color: #fa755a;
-}
-
-.StripeElement--webkit-autofill {
-    background-color: #fefde5 !important;
-}
-
-.CardRow {
-    @extend .col-md-12;
-}
-
-#card-title {
-    text-align: center;
-    display: block;
-    font-weight: bold;
-}
-
-// End of Card formatting 
-// Email Styling
-.email-info {
-    text-align: center;
-    display: block;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-.EmailGroup {
-    @extend .col-md-12;
-    background-color: $white !important;
-    display: inline-flex;
-    padding: 5px 12px;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    box-shadow: 0 1px 3px 0 #212529;
-    -webkit-transition: box-shadow 150ms ease;
-    transition: box-shadow 150ms ease;
-    background: transparent;
-    width: 105%;
-    margin-left: 15px;
-}
-
-.EmailGroup:focus {
-    box-shadow: 0 1px 3px 0 $bg-color;
-}
-
-.field {
-    width: 100%;
-    background: transparent;
-    font-weight: 300;
-    border: 0;
-    color: #31325F;
-    outline: none;
-    padding-right: 10px;
-    padding-left: 10px;
-    cursor: text;
-}
-
-//Thank you page
-.h3 {
-    padding-top: 200px;
-}
-
-.ty-header {
-    text-align: center;
-    padding-top: 20px;
-    font-size: 50px;
-}
-
-.ty-info {
-    text-align: center;
-    padding-top: 20px;
-}
-
+// Final container containing links after registration is complete/expired
 .LinkContainer {
     padding-top: 70px;
     padding-bottom: 150px;
     margin-left: 45px;
-}
-
-//Review page table 
-.Tablecontainer {
-    @extend .col-md-12;
-}
-
-.Tablerow {
-    padding: 10px 0px;
-    border-bottom: 1pt solid $bg-color;
-    word-wrap: break-word;
-}
-
-.discount-label {
-    text-align: left;
-    font-weight: bold;
-    float: left;
-    clear: left;
-    padding-top: 20px;
-    display: table;
-}
-
-.cost-info {
-    text-align: right;
-    font-weight: bold;
-    padding: 5px;
-}
-
-.payment-title {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
 }
