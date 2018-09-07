@@ -5,9 +5,9 @@
 // Colors
 $disabled-color-bg: #fff5f0;
 $disabled-color-text: rgb(138, 138, 138);
-$lightest-teal: #fff0e8;
-$light-teal: #ffdac4;
-$teal: #f36f24;
+$lightest-bg-color: #fff0e8;
+$light-bg-color: #ffdac4;
+$bg-color: #f36f24;
 $white: #fff;
 $green: #42A948;
 $red: #a94442;
@@ -33,7 +33,7 @@ $red: #a94442;
 
 .page-header {
     text-align: center;
-    background-color: $teal;
+    background-color: $bg-color;
     @extend .offset-md-0;
     @extend .col-md-12;
     padding-bottom: 10px;
@@ -47,22 +47,22 @@ $red: #a94442;
 }
 
 .checkout {
-    background-color: $light-teal !important;
+    background-color: $light-bg-color !important;
     border-radius: 15px;
     padding: 15px;
     margin-top: 15px;
-    border: solid $teal;
+    border: solid $bg-color;
     border-width: 2px;
     border-style: outset;
     border-image: initial;
 }
 
 .form-control {
-    background-color: $light-teal !important;
+    background-color: $light-bg-color !important;
     input,
     select,
     textarea {
-        background-color: $lightest-teal !important;
+        background-color: $lightest-bg-color !important;
     }
     border: 0 !important;
     .ng-valid[required],
@@ -82,7 +82,7 @@ $red: #a94442;
 
 .FormRow {
     @extend .row;
-    background-color: $light-teal;
+    background-color: $light-bg-color;
 }
 
 // Titles
@@ -96,7 +96,7 @@ $red: #a94442;
     font-size: 1.8rem;
     padding-left: 0;
     width: 19rem;
-    border-bottom: 4px solid $teal;
+    border-bottom: 4px solid $bg-color;
 }
 
 .total-info {
@@ -108,7 +108,7 @@ $red: #a94442;
     span {
         font-weight: 600;
         font-size: 2rem;
-        color: $teal;
+        color: $bg-color;
         margin-left: 20px;
     }
 }
@@ -130,9 +130,9 @@ $red: #a94442;
     line-height: 1.42857143;
     border-radius: 30px;
     font-size: 1.5rem;
-    border-color: $teal;
+    border-color: $bg-color;
     width: 200px;
-    background-color: $lightest-teal;
+    background-color: $lightest-bg-color;
     float: right;
     font-weight: bold;
     color: black;
@@ -149,8 +149,8 @@ $red: #a94442;
 
 .primary-button:hover {
     color: $white;
-    background-color: $teal;
-    border-color: $teal;
+    background-color: $bg-color;
+    border-color: $bg-color;
 }
 
 .DeleteButton {
@@ -173,7 +173,7 @@ $red: #a94442;
     vertical-align: middle;
     position: relative;
     font-weight: unset;
-    border: solid $teal;
+    border: solid $bg-color;
     border-width: 2px;
     border-style: outset;
     border-image: initial;
@@ -231,7 +231,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 //Pagination
 .add-entry {
-    color: $teal;
+    color: $bg-color;
 }
 
 // .pagination>li:first-child>a{
@@ -240,9 +240,9 @@ input[type=number]::-webkit-outer-spin-button {
 //     border-bottom-left-radius: 4px;
 // }
 // .pagination>li:first-child>a:hover, .pagination>li:first-child>a:focus{
-//     color: $teal;
-//     background-color: $teal;
-//     border-color: $teal;
+//     color: $bg-color;
+//     background-color: $bg-color;
+//     border-color: $bg-color;
 // }
 // .pagination>li:last-child>a{
 //     margin-right: 0;
@@ -252,8 +252,8 @@ input[type=number]::-webkit-outer-spin-button {
 .pagination>.active>.pagination-button,
 .pagination>.active>a {
     color: $white;
-    background-color: $teal;
-    border-color: $teal;
+    background-color: $bg-color;
+    border-color: $bg-color;
     border-radius: 30px;
 }
 
@@ -268,7 +268,7 @@ input[type=number]::-webkit-outer-spin-button {
     border: 1px solid #ddd;
     border-radius: 20px;
     font-size: 16px;
-    border-color: $teal;
+    border-color: $bg-color;
     max-width: 100%;
     z-index: 0;
 }
@@ -278,8 +278,8 @@ input[type=number]::-webkit-outer-spin-button {
 .pagination>li>a:hover,
 .pagination>li>a:focus {
     color: #fff;
-    background-color: $teal;
-    border-color: $teal;
+    background-color: $bg-color;
+    border-color: $bg-color;
     cursor: pointer;
 }
 
@@ -288,7 +288,7 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: center;
     .nav-button.active {
         color: $white;
-        background-color: $teal;
+        background-color: $bg-color;
         border: none;
     }
     .nav-button {
@@ -297,20 +297,20 @@ input[type=number]::-webkit-outer-spin-button {
         line-height: 1.42857143;
         border-radius: 30px;
         font-size: 16px;
-        border-color: $teal;
+        border-color: $bg-color;
         width: 200px;
-        background-color: $lightest-teal;
+        background-color: $lightest-bg-color;
     }
     .nav-button:hover,
     .nav-button:focus {
         color: $white;
-        background-color: $teal;
-        border-color: $teal;
+        background-color: $bg-color;
+        border-color: $bg-color;
     }
     .nav-button-active {
         color: $white;
-        background-color: $teal;
-        border-color: $teal;
+        background-color: $bg-color;
+        border-color: $bg-color;
     }
     .next-button {
         float: right;
@@ -335,7 +335,7 @@ input[type=number]::-webkit-outer-spin-button {
     line-height: 1.42857143;
     border-radius: 10px;
     font-size: 1rem;
-    border-color: $teal; // background-color: $lightest-teal;
+    border-color: $bg-color; // background-color: $lightest-bg-color;
     float: left;
     clear: left;
     font-weight: bold;
@@ -359,8 +359,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 #add-entry-box {
-    background-color: $lightest-teal;
-    border-color: $teal;
+    background-color: $lightest-bg-color;
+    border-color: $bg-color;
     padding: 4px 8px;
 }
 
@@ -377,7 +377,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .StripeElement--focus {
-    box-shadow: 0 1px 3px 0 $teal;
+    box-shadow: 0 1px 3px 0 $bg-color;
 }
 
 .StripeElement--invalid {
@@ -423,7 +423,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .EmailGroup:focus {
-    box-shadow: 0 1px 3px 0 $teal;
+    box-shadow: 0 1px 3px 0 $bg-color;
 }
 
 .field {
@@ -467,7 +467,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .Tablerow {
     padding: 10px 0px;
-    border-bottom: 1pt solid $teal;
+    border-bottom: 1pt solid $bg-color;
     word-wrap: break-word;
 }
 
