@@ -39,7 +39,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Cost calculation variables
   total_cost = 0;
-  base_price = 165;
+  base_price = 155;
   original_cost = 0;
   new_cost = 165;
   cost_diff = 0;
