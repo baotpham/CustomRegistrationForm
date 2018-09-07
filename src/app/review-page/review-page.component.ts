@@ -125,18 +125,20 @@ export class ReviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
       else{
       // Send the token to the your backend to process the charge
         this.processCharge(token).then(
-          (success) => this.postToGoogle(),
+          //Reenable post to Google functionality once updated
+          //(success) => this.postToGoogle(),
+          (success) => this.router.navigate(['/', 'thank-you']),
           (error) => console.error("Stripe process charge error", error)
         );
 
         // TODO: Figure out why postToGoogle is here twice, once from process charge success, and once here.
-        this.postToGoogle().then(
-          (success) => this.processCharge(token).then(
-            (success) => this.router.navigate(['/', 'thank-you']), //this needs to be moved to the onsuccess part of PostToGoogle
-            (error) => console.error("Creating charge error", error)
-          ),
-          (error) => console.error("Posting to Google error", error)
-        );
+        // this.postToGoogle().then(
+        //   (success) => this.processCharge(token).then(
+        //     (success) => this.router.navigate(['/', 'thank-you']), //this needs to be moved to the onsuccess part of PostToGoogle
+        //     (error) => console.error("Creating charge error", error)
+        //   ),
+        //   (error) => console.error("Posting to Google error", error)
+        // );
       }
 
     }
